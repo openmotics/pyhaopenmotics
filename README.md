@@ -98,8 +98,8 @@ check [the contributor's page][contributors].
 This project is licensed under the AGPLv3 License - see the LICENSE.md file for details
 
 [license-shield]: https://img.shields.io/badge/License-AGPL_v3-blue.svg
-[build-shield]: https://github.com/openmotics/pyhaopenmotics/workflows/tests.yaml/badge.svg
-[build]: https://github.com/openmotics/pyhaopenmotics/actions/tests.yaml
+[build-shield]: https://github.com/openmotics/pyhaopenmotics/actions/workflows/tests.yaml/badge.svg
+[build]: https://github.com/openmotics/pyhaopenmotics/actions/workflows/tests.yaml
 [code-quality-shield]: https://img.shields.io/lgtm/grade/python/g/openmotics/pyhaopenmotics.svg?logo=lgtm&logoWidth=18
 [code-quality]: https://lgtm.com/projects/g/openmotics/pyhaopenmotics/context:python
 [contributors]: https://github.com/openmotics/pyhaopenmotics/graphs/contributors
