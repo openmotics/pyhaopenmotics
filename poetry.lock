@@ -970,11 +970,11 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 
 [[package]]
 name = "yamllint"
-version = "1.26.3"
+version = "1.27.1"
 description = "A linter for YAML files."
 category = "dev"
 optional = false
-python-versions = ">=3.5"
+python-versions = ">=3.6"
 
 [package.dependencies]
 pathspec = ">=0.5.3"
@@ -995,7 +995,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "502c6bcfe3794a4e92f9777dd64aa4a2b94ea6fef9cd66f4d0def7f6080cdf4d"
+content-hash = "7523492fe75a406ce7c106cf475755c780b10bf3f88d805483545127ce6bd97b"
 
 [metadata.files]
 aiohttp = []
