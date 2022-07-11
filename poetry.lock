@@ -72,7 +72,7 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "atomicwrites"
-version = "1.4.0"
+version = "1.4.1"
 description = "Atomic file writes."
 category = "dev"
 optional = false
@@ -995,7 +995,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "957af3f2107e2483ecd81537cfaeae5b66a8dcadae1bb04a2b122bb10ee36e9f"
+content-hash = "aad400e3b1a6221cad9cf828a2dc73f9624919b794b51dc82b8c1a895317d034"
 
 [metadata.files]
 aiohttp = []
