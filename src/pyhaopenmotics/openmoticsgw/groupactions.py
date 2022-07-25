@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Any, Optional
+from typing import TYPE_CHECKING, Any
 
 from .models.groupaction import GroupAction
 
@@ -55,7 +55,7 @@ class OpenMoticsGroupActions:  # noqa: SIM119
     async def get_by_id(
         self,
         groupaction_id: int,
-    ) -> Optional[GroupAction]:
+    ) -> GroupAction | None:
         """Get a specified groupaction object.
 
         Args:

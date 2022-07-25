@@ -6,7 +6,7 @@ import asyncio
 import logging
 import socket
 from collections.abc import Awaitable, Callable
-from typing import Any, Optional
+from typing import Any
 
 import aiohttp
 import async_timeout
@@ -31,7 +31,7 @@ _LOGGER = logging.getLogger(__name__)
 class OpenMoticsCloud:
     """Docstring."""
 
-    _installations: Optional[list[Installation]] = None
+    _installations: list[Installation] | None
     _close_session: bool = False
 
     def __init__(
@@ -39,9 +39,9 @@ class OpenMoticsCloud:
         token: str,
         *,
         request_timeout: int = 8,
-        session: Optional[aiohttp.client.ClientSession] | None = None,
-        token_refresh_method: Optional[Callable[[], Awaitable[str]]] = None,
-        installation_id: Optional[int] = None,
+        session: aiohttp.client.ClientSession | None = None,
+        token_refresh_method: Callable[[], Awaitable[str]] | None = None,
+        installation_id: int | None = None,
         base_url: str = CLOUD_API_URL,
     ) -> None:
         """Initialize connection with the OpenMotics Cloud API.

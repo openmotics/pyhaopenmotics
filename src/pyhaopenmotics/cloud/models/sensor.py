@@ -11,9 +11,9 @@ from .location import Location
 class Status(BaseModel):
     """Class holding the status."""
 
-    humidity: Optional[float]
-    temperature: Optional[float]
-    brightness: Optional[int]
+    humidity: float | None
+    temperature: float | None
+    brightness: int | None
 
 
 class Sensor(BaseModel):
@@ -39,12 +39,12 @@ class Sensor(BaseModel):
 
     # pylint: disable=too-many-instance-attributes
     idx: int = Field(..., alias="id")
-    local_id: Optional[int]
+    local_id: int | None
     name: str
-    location: Optional[Location]
-    physical_quantity: Optional[str]
+    location: Location | None
+    physical_quantity: str | None
     status: Status
-    last_state_change: Optional[float]
+    last_state_change: float | None
     version: Optional[str] = Field(..., alias="_version")
 
     def __str__(self) -> str:

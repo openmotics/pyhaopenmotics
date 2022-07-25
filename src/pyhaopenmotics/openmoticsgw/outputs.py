@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Any, Optional
+from typing import TYPE_CHECKING, Any
 
 from pyhaopenmotics.helpers import merge_dicts
 
@@ -79,7 +79,7 @@ class OpenMoticsOutputs:  # noqa: SIM119
     async def get_by_id(
         self,
         output_id: int,
-    ) -> Optional[Output]:
+    ) -> Output | None:
         """Get output by id.
 
         Args:

@@ -7,7 +7,7 @@ import logging
 import socket
 import ssl
 import time
-from typing import Any, Optional
+from typing import Any
 
 import aiohttp
 import async_timeout
@@ -47,7 +47,7 @@ class LocalGateway:
         localgw: str,
         *,
         request_timeout: int = 8,
-        session: Optional[aiohttp.client.ClientSession] | None = None,
+        session: aiohttp.client.ClientSession | None = None,
         tls: bool = False,
         ssl_context: ssl.SSLContext | None = None,
         port: int = 443,
@@ -154,7 +154,7 @@ class LocalGateway:
             raise OpenMoticsConnectionTimeoutError(
                 "Timeout occurred while connecting to OpenMotics API"
             ) from exception
-        except (aiohttp.ClientConnectorSSLError) as exception:
+        except (aiohttp.ClientConnectorSSLError) as exception:  # pyright: ignore
             # Expired certificate / Date ISSUE
             # pylint: disable=bad-exception-context
             raise OpenMoticsConnectionSslError(

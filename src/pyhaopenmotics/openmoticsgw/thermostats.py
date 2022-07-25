@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Any, Optional
+from typing import TYPE_CHECKING, Any
 
 from pyhaopenmotics.helpers import merge_dicts
 from pyhaopenmotics.openmoticsgw.models.thermostat import (
@@ -33,7 +33,7 @@ class OpenMoticsThermostats:  # noqa: SIM119
         self.groups = OpenMoticsThermostatGroups(self._omcloud)
         self.units = OpenMoticsThermostatUnits(self._omcloud)
 
-    async def set_mode(  # pylint:disable=W9008,R0201
+    async def set_mode(  # pylint:disable=W9008
         self,
         mode: str,
     ) -> Any:
@@ -49,7 +49,7 @@ class OpenMoticsThermostats:  # noqa: SIM119
             pass
         return None
 
-    async def set_state(  # pylint:disable=W9008,R0201
+    async def set_state(  # pylint:disable=W9008
         self,
         state: str,
     ) -> Any:
@@ -134,7 +134,7 @@ class OpenMoticsThermostatGroups:  # noqa: SIM119
     async def get_by_id(
         self,
         thermostatgroup_id: int,
-    ) -> Optional[ThermostatGroup]:
+    ) -> ThermostatGroup | None:
         """Get thermostat by id.
 
         Args:
@@ -148,7 +148,7 @@ class OpenMoticsThermostatGroups:  # noqa: SIM119
                 return thermostatgroup
         return None
 
-    async def set_mode(  # pylint:disable=W9008,R0201
+    async def set_mode(  # pylint:disable=W9008
         self,
         thermostatgroup_id: int,
         mode: str,
@@ -233,7 +233,7 @@ class OpenMoticsThermostatUnits:  # noqa: SIM119
     async def get_by_id(
         self,
         thermostatunit_id: int,
-    ) -> Optional[ThermostatUnit]:
+    ) -> ThermostatUnit | None:
         """Get thermostatunit by id.
 
         Args:
@@ -247,7 +247,7 @@ class OpenMoticsThermostatUnits:  # noqa: SIM119
                 return thermostatunit
         return None
 
-    async def set_state(  # pylint:disable=W9008,R0201
+    async def set_state(  # pylint:disable=W9008
         self,
         thermostatunit_id: int,
         state: str,
@@ -265,7 +265,7 @@ class OpenMoticsThermostatUnits:  # noqa: SIM119
             pass
         return None
 
-    async def set_temperature(  # pylint:disable=W9008,R0201
+    async def set_temperature(  # pylint:disable=W9008
         self,
         thermostatunit_id: int,
         temperature: float,
@@ -283,7 +283,7 @@ class OpenMoticsThermostatUnits:  # noqa: SIM119
             pass
         return None
 
-    async def set_preset(  # pylint:disable=W9008,R0201
+    async def set_preset(  # pylint:disable=W9008
         self,
         thermostatunit_id: int,
         preset: str,
@@ -301,7 +301,7 @@ class OpenMoticsThermostatUnits:  # noqa: SIM119
             pass
         return None
 
-    async def set_preset_config(  # pylint: disable=too-many-arguments,W9008,R0201
+    async def set_preset_config(  # pylint: disable=too-many-arguments,W9008
         self,
         thermostatunit_id: int,
         heating_away_temp: float,

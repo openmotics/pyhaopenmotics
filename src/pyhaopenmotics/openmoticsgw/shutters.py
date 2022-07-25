@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Any, Optional
+from typing import TYPE_CHECKING, Any
 
 from pyhaopenmotics.helpers import merge_dicts
 
@@ -79,7 +79,7 @@ class OpenMoticsShutters:  # noqa: SIM119
     async def get_by_id(
         self,
         shutter_id: int,
-    ) -> Optional[Shutter]:
+    ) -> Shutter | None:
         """Get shutter by id.
 
         Args:

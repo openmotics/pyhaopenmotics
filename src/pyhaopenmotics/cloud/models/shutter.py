@@ -11,20 +11,20 @@ from .location import Location
 class Status(BaseModel):
     """Class holding the status."""
 
-    locked: Optional[bool]
-    manual_override: Optional[bool]
-    state: Optional[str]
-    position: Optional[int]
-    last_change: Optional[float]
-    preset_position: Optional[int]
+    locked: bool | None
+    manual_override: bool | None
+    state: str | None
+    position: int | None
+    last_change: float | None
+    preset_position: int | None
 
 
 class Attributes(BaseModel):
     """Class holding the attributes."""
 
-    azimuth: Optional[str]
-    compass_point: Optional[str]
-    surface_area: Optional[str]
+    azimuth: str | None
+    compass_point: str | None
+    surface_area: str | None
 
 
 class Shutter(BaseModel):
@@ -67,14 +67,14 @@ class Shutter(BaseModel):
 
     # pylint: disable=too-many-instance-attributes
     idx: int = Field(..., alias="id")
-    local_id: Optional[int]
+    local_id: int | None
     name: str
     shutter_type: str = Field(..., alias="type")
-    capabilities: Optional[list[Any]]
+    capabilities: list[Any] | None
     status: Status
-    location: Optional[Location]
-    attributes: Optional[Attributes]
-    metadata: Optional[str]
+    location: Location | None
+    attributes: Attributes | None
+    metadata: str | None
     version: Optional[str] = Field(..., alias="_version")
 
     def __str__(self) -> str:

@@ -12,9 +12,9 @@ class Status(BaseModel):
     """Class holding the status."""
 
     on: bool
-    locked: Optional[bool] = None
-    manual_override: Optional[bool] = None
-    value: Optional[int] = None
+    locked: bool | None
+    manual_override: bool | None
+    value: int | None
 
 
 class Light(BaseModel):
@@ -46,14 +46,14 @@ class Light(BaseModel):
 
     # pylint: disable=too-many-instance-attributes
     idx: int = Field(..., alias="id")
-    local_id: Optional[int] = None
-    name: Optional[str] = None
-    capabilities: Optional[list[Any]] = None
-    location: Optional[Location] = None
-    status: Optional[Status] = None
+    local_id: int | None
+    name: str | None
+    capabilities: list[Any] | None
+    location: Location | None
+    status: Status | None
     version: Optional[str] = Field(None, alias="_version")
 
-    _brightness: Optional[int] = None
+    _brightness: int | None
 
     def __str__(self) -> str:
         """Represent the class objects as a string.

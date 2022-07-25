@@ -28,10 +28,10 @@ class GroupAction(BaseModel):
     """
 
     idx: int = Field(..., alias="id")
-    local_id: Optional[int] = None
-    name: Optional[str] = None
-    actions: Optional[list[Any]] = None
-    location: Optional[Location] = None
+    local_id: int | None
+    name: str | None
+    actions: list[Any] | None
+    location: Location | None
     version: Optional[str] = Field(None, alias="_version")
 
     def __str__(self) -> str:

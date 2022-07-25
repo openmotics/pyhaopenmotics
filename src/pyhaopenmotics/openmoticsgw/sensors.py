@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Optional
+from typing import TYPE_CHECKING, Any
 
 from pyhaopenmotics.helpers import merge_dicts
 from pyhaopenmotics.openmoticsgw.models.sensor import Sensor
@@ -77,7 +77,7 @@ class OpenMoticsSensors:  # noqa: SIM119
     async def get_by_id(
         self,
         sensor_id: int,
-    ) -> Optional[Sensor]:
+    ) -> Sensor | None:
         """Get sensor by id.
 
         Args:
