@@ -69,11 +69,11 @@ jobs:
         steps:
             - name: ⤵️ Check out code from GitHub
               uses: actions/checkout@v3
-            - name: 🏗 Set up Python 3.9
+            - name: 🏗 Set up Python 3.10
               id: python
               uses: actions/setup-python@v3
               with:
-                  python-version: 3.9
+                  python-version: 3.10
             - name: 🏗 Read .nvmrc
               if: ${{ matrix.id == 'prettier' }}
               id: nvm
