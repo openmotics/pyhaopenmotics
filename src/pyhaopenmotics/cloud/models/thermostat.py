@@ -9,79 +9,79 @@ from pydantic import BaseModel, Field
 class GroupLocation(BaseModel):
     """Class holding the location."""
 
-    thermostat_group_id: Optional[int]
-    installation_id: Optional[int]
-    room_id: Optional[int]
+    thermostat_group_id: int | None
+    installation_id: int | None
+    room_id: int | None
 
 
 class UnitLocation(BaseModel):
     """Class holding the location."""
 
-    thermostat_group_id: Optional[int]
-    installation_id: Optional[int]
-    room_id: Optional[int]
+    thermostat_group_id: int | None
+    installation_id: int | None
+    room_id: int | None
 
 
 class GroupStatus(BaseModel):
     """Class holding the status."""
 
-    mode: Optional[str]
-    state: Optional[bool]
+    mode: str | None
+    state: bool | None
 
 
 class UnitStatus(BaseModel):
     """Class holding the status."""
 
-    actual_temperature: Optional[float]
-    current_setpoint: Optional[float]
-    output_0: Optional[str]
-    output_1: Optional[str]
-    preset: Optional[str]
+    actual_temperature: float | None
+    current_setpoint: float | None
+    output_0: str | None
+    output_1: str | None
+    preset: str | None
 
 
 class Presets(BaseModel):
     """Class holding the status."""
 
-    away: Optional[str]
-    party: Optional[str]
-    vacation: Optional[str]
+    away: str | None
+    party: str | None
+    vacation: str | None
 
 
 class Schedule(BaseModel):
     """Class holding the schedule."""
 
-    data: Optional[dict[str, Any]]
-    start: Optional[str]
+    data: dict[str, Any] | None
+    start: str | None
 
 
 class ConfigurationPreset(BaseModel):
     """Class holding the configuration presets."""
 
-    output_0_id: Optional[int]
-    output_1_id: Optional[int]
-    presets: Optional[Presets]
-    schedule: Optional[Schedule]
-    sensor_id: Optional[int]
+    output_0_id: int | None
+    output_1_id: int | None
+    presets: Presets | None
+    schedule: Schedule | None
+    sensor_id: int | None
 
 
 class Configuration(BaseModel):
     """Class holding the configuration."""
 
-    heating: Optional[ConfigurationPreset]
-    cooling: Optional[ConfigurationPreset]
+    heating: ConfigurationPreset | None
+    cooling: ConfigurationPreset | None
 
 
 class Allowed(BaseModel):
     """Object holding allowed."""
 
-    allowed: Optional[bool]
+    allowed: bool | None
 
 
 class Acl(BaseModel):
     """Object holding an acl."""
 
-    set_state: Optional[Allowed]
-    set_mode: Optional[Allowed]
+    set_state: Allowed | None
+    set_mode: Allowed | None
 
 
 class ThermostatGroup(BaseModel):
@@ -108,11 +108,11 @@ class ThermostatGroup(BaseModel):
     idx: int = Field(..., alias="id")
     local_id: int
     name: str
-    schedule: Optional[Schedule]
-    capabilities: Optional[list[Any]]
+    schedule: Schedule | None
+    capabilities: list[Any] | None
     version: Optional[str] = Field(..., alias="_version")
-    thermostat_ids: Optional[dict[str, Any]]
-    status: Optional[GroupStatus]
+    thermostat_ids: dict[str, Any] | None
+    status: GroupStatus | None
     acl: Optional[Acl] = Field(..., alias="_acl")
 
     def __str__(self) -> str:
@@ -198,10 +198,10 @@ class ThermostatUnit(BaseModel):
 
     # pylint: disable=too-many-instance-attributes
     idx: int = Field(..., alias="id")
-    local_id: Optional[int]
+    local_id: int | None
     name: str
-    location: Optional[UnitLocation] = None
-    status: Optional[UnitStatus]
+    location: UnitLocation | None
+    status: UnitStatus | None
     version: Optional[str] = Field(..., alias="_version")
     acl: Optional[str] = Field(..., alias="_acl")
 

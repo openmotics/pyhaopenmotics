@@ -1,7 +1,7 @@
 """Output Model for the OpenMotics API."""
 from __future__ import annotations
 
-from typing import Any, Optional
+from typing import Any
 
 from pydantic import BaseModel, Field
 
@@ -12,9 +12,9 @@ class Status(BaseModel):
     """Class holding the status."""
 
     on: bool
-    locked: Optional[bool]
-    manual_override: Optional[bool]
-    value: Optional[int]
+    locked: bool | None
+    manual_override: bool | None
+    value: int | None
 
 
 class Output(BaseModel):
@@ -43,14 +43,14 @@ class Output(BaseModel):
 
     # pylint: disable=too-many-instance-attributes
     idx: int = Field(..., alias="id")
-    local_id: Optional[int]
+    local_id: int | None
     name: str
     output_type: str = Field(..., alias="type")
-    location: Optional[Location]
-    capabilities: Optional[list[Any]]
-    metadata: Optional[dict[str, Any]]
+    location: Location | None
+    capabilities: list[Any] | None
+    metadata: dict[str, Any] | None
     status: Status
-    last_state_change: Optional[float]
+    last_state_change: float | None
     version: str = Field(..., alias="_version")
 
     def __str__(self) -> str:
