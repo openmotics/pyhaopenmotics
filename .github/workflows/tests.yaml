@@ -69,7 +69,7 @@ jobs:
               id: python
               uses: actions/setup-python@v3
               with:
-                  python-version: 3.10
+                  python-version: "3.10"
             - name: 🏗 Get pip cache dir
               id: pip-cache
               run: |
