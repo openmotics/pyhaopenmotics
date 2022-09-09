@@ -114,7 +114,7 @@ class LocalGateway:
             response json or text
 
         Raises:
-            OpenMoticsConnectionError: An error occurred while communitcation with
+            OpenMoticsConnectionError: An error occurred while communication with
                 the OpenMotics API.
             OpenMoticsConnectionSslError: Error with SSL certificates.
             OpenMoticsConnectionTimeoutError: A timeout occurred while communicating
