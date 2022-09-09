@@ -108,7 +108,7 @@ class OpenMoticsCloud:
             response json or text
 
         Raises:
-            OpenMoticsConnectionError: An error occurred while communitcation with
+            OpenMoticsConnectionError: An error occurred while communication with
                 the OpenMotics API.
             OpenMoticsConnectionTimeoutError: A timeout occurred while communicating
                 with the OpenMotics API.
