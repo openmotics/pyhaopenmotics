@@ -96,6 +96,7 @@ class LocalGateway:
         method: str = aiohttp.hdrs.METH_POST,
         data: dict[str, Any] | None = None,
         headers: dict[str, Any] | None = None,
+        scheme: str = "https",
         **kwargs: Any,
     ) -> Any:
         """Make post request using the underlying aiohttp clientsession.
@@ -108,6 +109,7 @@ class LocalGateway:
             method: post
             data: dict
             headers: dict
+            scheme: str
             **kwargs: extra args
 
         Returns:
@@ -122,7 +124,7 @@ class LocalGateway:
             AuthenticationException: raised when token is expired.
         """
         url = URL.build(
-            scheme="https", host=self.localgw, port=self.port, path="/"
+            scheme=scheme, host=self.localgw, port=self.port, path="/"
         ).join(URL(path))
 
         if self.session is None:
@@ -154,7 +156,7 @@ class LocalGateway:
             raise OpenMoticsConnectionTimeoutError(
                 "Timeout occurred while connecting to OpenMotics API"
             ) from exception
-        except (aiohttp.ClientConnectorSSLError) as exception:  # pyright: ignore
+        except (aiohttp.ClientConnectorSSLError) as exception:
             # Expired certificate / Date ISSUE
             # pylint: disable=bad-exception-context
             raise OpenMoticsConnectionSslError(
@@ -225,6 +227,7 @@ class LocalGateway:
         await self._request(
             "/ws/events",
             method=aiohttp.hdrs.METH_POST,
+            scheme="wss",
             data={
                 "action": "set_subscription",
                 "types": [
@@ -243,6 +246,7 @@ class LocalGateway:
         await self._request(
             "/ws/events",
             method=aiohttp.hdrs.METH_DELETE,
+            scheme="wss",
             headers=await self._get_auth_headers(),
         )
 

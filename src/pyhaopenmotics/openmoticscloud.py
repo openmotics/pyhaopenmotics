@@ -91,6 +91,7 @@ class OpenMoticsCloud:
         *,
         method: str = aiohttp.hdrs.METH_GET,
         params: dict[str, Any] | None = None,
+        scheme: str | None = None,
         **kwargs: Any,
     ) -> Any:
         """Make post request using the underlying aiohttp clientsession.
@@ -102,6 +103,7 @@ class OpenMoticsCloud:
             path: path
             method: get of post
             params: dict
+            scheme: str
             **kwargs: extra args
 
         Returns:
@@ -117,6 +119,11 @@ class OpenMoticsCloud:
             self.token = await self.token_refresh_method()
 
         url = str(URL(f"{self.base_url}{path}"))
+        if scheme is not None:
+            url = str(
+                URL(url).with_scheme(scheme)
+            )
+        print(url)
 
         if self.session is None:
             self.session = aiohttp.ClientSession()
@@ -211,17 +218,19 @@ class OpenMoticsCloud:
         await self._request(
             "/ws/events",
             method=aiohttp.hdrs.METH_POST,
+            scheme="wss",
             data={
                 "type": "ACTION",
                 "data": {
                     "action": "set_subscription",
                     "types": [
                         "OUTPUT_CHANGE",
-                        "SENSOR_CHANGE",
+                        # "SENSOR_CHANGE",
                         "SHUTTER_CHANGE",
                         "THERMOSTAT_CHANGE",
                         "THERMOSTAT_GROUP_CHANGE",
-                        "VENTILATION_CHANGE",
+                        # "VENTILATION_CHANGE",
+                        "INPUT_TRIGGER",
                     ],
                     "installation_ids": [self.installation_id],
                 },
@@ -233,6 +242,7 @@ class OpenMoticsCloud:
         await self._request(
             "/ws/events",
             method=aiohttp.hdrs.METH_DELETE,
+            scheme="wss",
         )
 
     @property

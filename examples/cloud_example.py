@@ -42,12 +42,6 @@ load_dotenv()
 client_id = os.environ["CLIENT_ID"]
 client_secret = os.environ["CLIENT_SECRET"]
 
-# base_url = f"{CLOUD_BASE_URL}/{CLOUD_API_VERSION}"
-
-# token_url = f"{base_url}{CLOUD_API_TOKEN_URL}"
-# authorize_url = f"{base_url}{CLOUD_API_AUTHORIZATION_URL}"
-
-
 async def main() -> None:
     """Docstring."""
 
