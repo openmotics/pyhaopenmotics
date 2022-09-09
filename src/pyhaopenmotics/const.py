@@ -1,7 +1,7 @@
 """Asynchronous Python client for the OpenMotics API."""
 from __future__ import annotations
 
-CLOUD_BASE_URL = "https://cloud.openmotics.com/api"
+CLOUD_BASE_URL = "https://api.openmotics.com/api"
 CLOUD_API_VERSION = "v1.1"
 
 # CLOUD_SCOPE = f"configure.event_rules view view.energy.realtime " \ # noqa: E800
