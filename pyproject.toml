@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "pyhaopenmotics"
-version = "0.0.1"
+version = "0.0.2"
 description = "Asynchronous Python client for the OpenMotics API."
 authors = ["Wouter Coppens <wouter.coppens@gmail.com>"]
 maintainers = ["Wouter Coppens <wouter.coppens@gmail.com>"]
