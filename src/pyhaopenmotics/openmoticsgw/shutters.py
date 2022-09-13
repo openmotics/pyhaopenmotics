@@ -4,8 +4,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
 
-from pyhaopenmotics.helpers import merge_dicts
-
 from .models.shutter import Shutter
 
 if TYPE_CHECKING:
@@ -63,10 +61,16 @@ class OpenMoticsShutters:  # noqa: SIM119
             if goc["success"] is True:
                 self.shutter_configs = goc["config"]
 
-        shutters_status = await self._omcloud.exec_action("get_shutters_status")
-        status = shutters_status["status"]
+        shutters_status = await self._omcloud.exec_action("get_shutter_status")
+        status = shutters_status["detail"]
 
-        data = merge_dicts(self.shutter_configs, "status", status)
+        data = []
+        for shutter in self.shutter_configs:
+            shutter_id = str(shutter.get("id"))
+            if shutter_id is not None and shutter_id in status:
+                data.append(shutter | {"status": status[shutter_id]})
+            else:
+                data.append(shutter)
 
         shutters = [Shutter.from_dict(device) for device in data]
 

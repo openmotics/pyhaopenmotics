@@ -22,6 +22,7 @@ from .errors import (
     OpenMoticsConnectionTimeoutError,
 )
 from .helpers import get_ssl_context
+from .openmoticsgw.energy import OpenMoticsEnergySensors
 from .openmoticsgw.groupactions import OpenMoticsGroupActions
 from .openmoticsgw.lights import OpenMoticsLights
 from .openmoticsgw.outputs import OpenMoticsOutputs
@@ -312,6 +313,15 @@ class LocalGateway:
             OpenMoticsSensors
         """
         return OpenMoticsSensors(self)
+
+    @property
+    def energysensors(self) -> OpenMoticsEnergySensors:
+        """Get energy sensors.
+
+        Returns:
+            OpenMoticsEnergySensors
+        """
+        return OpenMoticsEnergySensors(self)
 
     @property
     def shutters(self) -> OpenMoticsShutters:
