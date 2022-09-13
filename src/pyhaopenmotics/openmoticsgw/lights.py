@@ -1,6 +1,7 @@
 """Module containing the base of an light."""
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from .models.light import Light
