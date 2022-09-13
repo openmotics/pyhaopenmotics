@@ -27,7 +27,7 @@ class OpenMoticsLights:  # noqa: SIM119
 
     async def get_all(  # noqa: A003
         self,
-        light_filter: str | None = None,
+        light_filter: str | None = None,  # noqa: W0613
     ) -> list[Light]:
         """Get a list of all light objects.
 
