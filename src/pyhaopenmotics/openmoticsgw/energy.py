@@ -66,7 +66,7 @@ class OpenMoticsEnergySensors:  # noqa: SIM119
         total_idx = 0
         for module in self.sensor_configs:
             module_id = str(module.get("id"))
-            if module_id is None:
+            if module_id is None:  # pylint: disable=consider-using-assignment-expr
                 continue
             for idx, status in enumerate(sensors_status[module_id]):
                 data.append(
