@@ -38,7 +38,7 @@ pydantic = "^1.8.0"
 atomicwrites = "^1.4.1"
 aresponses = "^2.1.6"
 bandit = "1.7.4"
-black = "^22.8"
+black = "^22.10"
 blacken-docs = "^1.12.1"
 codespell = "^2.2.1"
 coverage = {version = "^6.5", extras = ["toml"]}
