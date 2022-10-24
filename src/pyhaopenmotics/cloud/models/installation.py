@@ -64,7 +64,7 @@ class Installation(BaseModel):
     # pylint: disable=too-many-instance-attributes
     idx: int = Field(..., alias="id")
     name: str
-    description: str
+    description: str | None
     gateway_model: str | None
     acl: Acl = Field(..., alias="_acl")
     version: str = Field(..., alias="_version")
