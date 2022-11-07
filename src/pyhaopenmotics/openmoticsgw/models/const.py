@@ -19,6 +19,8 @@ OPENMOTICS_OUTPUT_TYPE_TO_NAME = {
     6: "GENERIC",
     7: "MOTOR",
     8: "VENTILATION",
+    9: "HEATER",
+    127: "SHUTTER_RELAY",
     255: "LIGHT",
 }
 
