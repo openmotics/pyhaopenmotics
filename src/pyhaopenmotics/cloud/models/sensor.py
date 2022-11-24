@@ -43,7 +43,7 @@ class Sensor(BaseModel):
     name: str
     location: Location | None
     physical_quantity: str | None
-    status: Status
+    status: Optional[Status]
     last_state_change: float | None
     version: Optional[str] = Field(..., alias="_version")
 
