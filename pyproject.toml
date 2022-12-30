@@ -32,7 +32,7 @@ python = "^3.9"
 aiohttp = ">=3.0.0"
 yarl = ">=1.6.0"
 backoff = ">=1.9.0"
-pydantic = "^1.8.0"
+pydantic = "^1.10.3"
 
 [tool.poetry.dev-dependencies]
 atomicwrites = "^1.4.1"
