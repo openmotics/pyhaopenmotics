@@ -13,6 +13,7 @@ if TYPE_CHECKING:
 
 
 class OpenMoticsOutputs:  # noqa: SIM119
+
     """Object holding information of the OpenMotics outputs.
 
     All actions related to Outputs or a specific Output.
@@ -22,6 +23,7 @@ class OpenMoticsOutputs:  # noqa: SIM119
         """Init the installations object.
 
         Args:
+        ----
             omcloud: OpenMoticsCloud
         """
         self._omcloud = omcloud
@@ -35,7 +37,8 @@ class OpenMoticsOutputs:  # noqa: SIM119
         Args:
             output_filter: str
 
-        Returns:
+        Returns
+        -------
             A list of outputs
         """
         path = f"/base/installations/{self._omcloud.installation_id}/outputs"
@@ -60,12 +63,11 @@ class OpenMoticsOutputs:  # noqa: SIM119
         Args:
             output_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a output with id
         """
-        path = (
-            f"/base/installations/{self._omcloud.installation_id}/outputs/{output_id}"
-        )
+        path = f"/base/installations/{self._omcloud.installation_id}/outputs/{output_id}"
         body = await self._omcloud.get(path)
 
         return Output.parse_obj(body["data"])
@@ -79,13 +81,11 @@ class OpenMoticsOutputs:  # noqa: SIM119
         Args:
             output_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a output with id
         """
-        path = (
-            f"/base/installations/{self._omcloud.installation_id}"
-            f"/outputs/{output_id}/toggle"
-        )
+        path = f"/base/installations/{self._omcloud.installation_id}" f"/outputs/{output_id}/toggle"
         return await self._omcloud.post(path)
 
     async def turn_on(
@@ -99,7 +99,8 @@ class OpenMoticsOutputs:  # noqa: SIM119
             output_id: int
             value: <0 - 100>
 
-        Returns:
+        Returns
+        -------
             Returns a output with id
         """
         if value is not None:
@@ -108,8 +109,7 @@ class OpenMoticsOutputs:  # noqa: SIM119
             value = max(0, value)
 
         path = (
-            f"/base/installations/{self._omcloud.installation_id}"
-            f"/outputs/{output_id}/turn_on"
+            f"/base/installations/{self._omcloud.installation_id}" f"/outputs/{output_id}/turn_on"
         )
         payload = {"value": value}
         return await self._omcloud.post(path, json=payload)
@@ -123,15 +123,13 @@ class OpenMoticsOutputs:  # noqa: SIM119
         Args:
             output_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a output with id
         """
         if output_id is None:
             # Turn off all lights
-            path = (
-                f"/base/installations/{self._omcloud.installation_id}"
-                f"/outputs/turn_off"
-            )
+            path = f"/base/installations/{self._omcloud.installation_id}" f"/outputs/turn_off"
         else:
             # Turn off light with id
             path = (

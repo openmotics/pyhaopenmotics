@@ -13,6 +13,7 @@ if TYPE_CHECKING:
 
 
 class OpenMoticsThermostats:  # noqa: SIM119
+
     """Object holding information of the OpenMotics thermostats.
 
     All actions related to thermostats or a specific thermostat.
@@ -22,6 +23,7 @@ class OpenMoticsThermostats:  # noqa: SIM119
         """Init the installations object.
 
         Args:
+        ----
             omcloud: OpenMoticsCloud
         """
         self._omcloud = omcloud
@@ -38,10 +40,10 @@ class OpenMoticsThermostats:  # noqa: SIM119
         Args:
             mode: "HEATING|COOLING"
 
-        Returns:
+        Returns
+        -------
             Returns something
         """
-
         path = f"/base/installations/{self._omcloud.installation_id}/thermostats/mode"
         payload = {"mode": mode}
         return await self._omcloud.post(path, json=payload)
@@ -55,16 +57,17 @@ class OpenMoticsThermostats:  # noqa: SIM119
         Args:
             state: "ON|OFF"
 
-        Returns:
+        Returns
+        -------
             Returns something
         """
-
         path = f"/base/installations/{self._omcloud.installation_id}/thermostats/state"
         payload = {"state": state}
         return await self._omcloud.post(path, json=payload)
 
 
 class OpenMoticsThermostatGroups:  # noqa: SIM119
+
     """Object holding information of the OpenMotics thermostats.
 
     All actions related to thermostats or a specific thermostat.
@@ -74,6 +77,7 @@ class OpenMoticsThermostatGroups:  # noqa: SIM119
         """Init the installations object.
 
         Args:
+        ----
             _omcloud: _omcloud
         """
         self._omcloud = _omcloud
@@ -85,7 +89,8 @@ class OpenMoticsThermostatGroups:  # noqa: SIM119
 
         Args:
 
-        Returns:
+        Returns
+        -------
             Dict with all thermostats
         """
         path = f"/base/installations/{self._omcloud.installation_id}/thermostats/groups"
@@ -103,10 +108,14 @@ class OpenMoticsThermostatGroups:  # noqa: SIM119
         Args:
             thermostatgroup_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a thermostatgroup_id with id
         """
-        path = f"/base/installations/{self._omcloud.installation_id}/thermostats/groups/{thermostatgroup_id}"
+        path = (
+            f"/base/installations/{self._omcloud.installation_id}"
+            f"/thermostats/groups/{thermostatgroup_id}"
+        )
         body = await self._omcloud.get(path)
 
         return ThermostatGroup.parse_obj(body["data"])
@@ -122,16 +131,20 @@ class OpenMoticsThermostatGroups:  # noqa: SIM119
             thermostatgroup_id: int
             mode: "HEATING|COOLING"
 
-        Returns:
+        Returns
+        -------
             Returns a output with id
         """
-
-        path = f"/base/installations/{self._omcloud.installation_id}/thermostats/groups/{thermostatgroup_id}/mode"
+        path = (
+            f"/base/installations/{self._omcloud.installation_id}"
+            f"/thermostats/groups/{thermostatgroup_id}/mode"
+        )
         payload = {"mode": mode}
         return await self._omcloud.post(path, json=payload)
 
 
 class OpenMoticsThermostatUnits:  # noqa: SIM119
+
     """Object holding information of the OpenMotics thermostats.
 
     All actions related to thermostats or a specific thermostat.
@@ -141,6 +154,7 @@ class OpenMoticsThermostatUnits:  # noqa: SIM119
         """Init the installations object.
 
         Args:
+        ----
             _omcloud: _omcloud
         """
         self._omcloud = _omcloud
@@ -152,7 +166,8 @@ class OpenMoticsThermostatUnits:  # noqa: SIM119
 
         Args:
 
-        Returns:
+        Returns
+        -------
             Dict with all thermostatunits
         """
         path = f"/base/installations/{self._omcloud.installation_id}/thermostats/units"
@@ -170,10 +185,14 @@ class OpenMoticsThermostatUnits:  # noqa: SIM119
         Args:
             thermostatunit_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a thermostatunit with id
         """
-        path = f"/base/installations/{self._omcloud.installation_id}/thermostats/units/{thermostatunit_id}"
+        path = (
+            f"/base/installations/{self._omcloud.installation_id}"
+            f"/thermostats/units/{thermostatunit_id}"
+        )
         body = await self._omcloud.get(path)
 
         return ThermostatUnit.parse_obj(body["data"])
@@ -189,11 +208,14 @@ class OpenMoticsThermostatUnits:  # noqa: SIM119
             thermostatunit_id: int
             state: "ON|OFF"
 
-        Returns:
+        Returns
+        -------
             Returns a thermostatunit with id
         """
-
-        path = f"/base/installations/{self._omcloud.installation_id}/thermostats/units/{thermostatunit_id}/state"
+        path = (
+            f"/base/installations/{self._omcloud.installation_id}"
+            f"/thermostats/units/{thermostatunit_id}/state"
+        )
         payload = {"state": state}
         return await self._omcloud.post(path, json=payload)
 
@@ -208,11 +230,14 @@ class OpenMoticsThermostatUnits:  # noqa: SIM119
             thermostatunit_id: int
             temperature: float
 
-        Returns:
+        Returns
+        -------
             Returns a thermostatunit with id
         """
-
-        path = f"/base/installations/{self._omcloud.installation_id}/thermostats/units/{thermostatunit_id}/setpoint"
+        path = (
+            f"/base/installations/{self._omcloud.installation_id}"
+            f"/thermostats/units/{thermostatunit_id}/setpoint"
+        )
         payload = {"temperature": temperature}
         return await self._omcloud.post(path, json=payload)
 
@@ -227,11 +252,14 @@ class OpenMoticsThermostatUnits:  # noqa: SIM119
             thermostatunit_id: int
             preset: "AUTO|AWAY|PARTY|VACATION"
 
-        Returns:
+        Returns
+        -------
             Returns a thermostatunit with id
         """
-
-        path = f"/base/installations/{self._omcloud.installation_id}/thermostats/units/{thermostatunit_id}/preset"
+        path = (
+            f"/base/installations/{self._omcloud.installation_id}"
+            f"/thermostats/units/{thermostatunit_id}/preset"
+        )
         payload = {"preset": preset}
         return await self._omcloud.post(path, json=payload)
 
@@ -256,11 +284,14 @@ class OpenMoticsThermostatUnits:  # noqa: SIM119
             cooling_vacation_temp: float,
             cooling_party_temp: float,
 
-        Returns:
+        Returns
+        -------
             Returns a thermostatunit with id
         """
-
-        path = f"/base/installations/{self._omcloud.installation_id}/thermostats/units/{thermostatunit_id}/preset/config"
+        path = (
+            f"/base/installations/{self._omcloud.installation_id}"
+            f"/thermostats/units/{thermostatunit_id}/preset/config"
+        )
         payload = {
             "heating": {
                 "AWAY": heating_away_temp,

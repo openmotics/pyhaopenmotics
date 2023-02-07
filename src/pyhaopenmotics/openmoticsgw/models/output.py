@@ -10,6 +10,7 @@ from .location import Location
 
 @dataclass
 class Status:
+
     """Class holding the status."""
 
     on: bool
@@ -24,7 +25,8 @@ class Status:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A Status object.
         """
         return Status(
@@ -38,6 +40,7 @@ class Status:
 
 @dataclass
 class Output:
+
     """Class holding an OpenMotics Output.
 
     # noqa: E800
@@ -80,7 +83,8 @@ class Output:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A Output object.
         """
         output_type = OPENMOTICS_OUTPUT_TYPE_TO_NAME[data.get("type", 0)]
@@ -111,7 +115,8 @@ class Output:
     def __str__(self) -> str:
         """Represent the class objects as a string.
 
-        Returns:
+        Returns
+        -------
             string
 
         """

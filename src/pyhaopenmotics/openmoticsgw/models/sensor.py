@@ -9,6 +9,7 @@ from .location import Location
 
 @dataclass
 class Status:
+
     """Class holding the status."""
 
     humidity: float
@@ -22,7 +23,8 @@ class Status:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A Status object.
         """
         return Status(
@@ -35,6 +37,7 @@ class Status:
 
 @dataclass
 class Sensor:
+
     """Class holding an OpenMotics Sensor.
 
     # noqa: E800
@@ -72,10 +75,10 @@ class Sensor:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A Output object.
         """
-
         status = Status.from_dict({})
         if "status" in data:
             status = Status.from_dict(data.get("status", {}))
@@ -100,7 +103,8 @@ class Sensor:
     def __str__(self) -> str:
         """Represent the class objects as a string.
 
-        Returns:
+        Returns
+        -------
             string
 
         """

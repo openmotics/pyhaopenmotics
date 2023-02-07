@@ -7,6 +7,7 @@ from typing import Any
 
 @dataclass
 class Status:
+
     """Class holding the status."""
 
     voltage: float
@@ -21,7 +22,8 @@ class Status:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A Status object.
         """
         return Status(
@@ -34,6 +36,7 @@ class Status:
 
 @dataclass
 class EnergySensor:
+
     """Class holding an OpenMotics Energy Sensor.
 
     # noqa: E800
@@ -65,10 +68,10 @@ class EnergySensor:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A EnergySensor object.
         """
-
         status = Status.from_list([])
         if "status" in data:
             status = Status.from_list(data.get("status", []))
@@ -84,7 +87,8 @@ class EnergySensor:
     def __str__(self) -> str:
         """Represent the class objects as a string.
 
-        Returns:
+        Returns
+        -------
             string
 
         """

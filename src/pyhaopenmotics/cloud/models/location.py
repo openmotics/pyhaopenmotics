@@ -5,6 +5,7 @@ from pydantic import BaseModel
 
 
 class FloorCoordinates(BaseModel):
+
     """Class holding the floor_coordinates."""
 
     x: int | None
@@ -12,6 +13,7 @@ class FloorCoordinates(BaseModel):
 
 
 class Location(BaseModel):
+
     """Class holding the location."""
 
     floor_coordinates: FloorCoordinates | None

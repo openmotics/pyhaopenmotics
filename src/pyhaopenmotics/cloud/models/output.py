@@ -9,6 +9,7 @@ from .location import Location
 
 
 class Status(BaseModel):
+
     """Class holding the status."""
 
     on: bool
@@ -18,6 +19,7 @@ class Status(BaseModel):
 
 
 class Output(BaseModel):
+
     """Class holding an OpenMotics Output.
 
     # noqa: E800
@@ -56,7 +58,8 @@ class Output(BaseModel):
     def __str__(self) -> str:
         """Represent the class objects as a string.
 
-        Returns:
+        Returns
+        -------
             string
 
         """

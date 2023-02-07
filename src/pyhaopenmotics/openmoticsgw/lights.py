@@ -12,6 +12,7 @@ if TYPE_CHECKING:
 
 @dataclass
 class OpenMoticsLights:  # noqa: SIM119
+
     """Object holding information of the OpenMotics lights.
 
     All actions related to lights or a specific light.
@@ -21,6 +22,7 @@ class OpenMoticsLights:  # noqa: SIM119
         """Init the installations object.
 
         Args:
+        ----
             omcloud: LocalGateway
         """
         self._omcloud = omcloud
@@ -34,8 +36,8 @@ class OpenMoticsLights:  # noqa: SIM119
         Args:
             light_filter: str
 
-        Returns:
+        Returns
+        -------
             list with all lights
         """
-
         return []

@@ -9,6 +9,7 @@ from .location import Location
 
 @dataclass
 class Status:
+
     """Class holding the status."""
 
     locked: bool
@@ -25,7 +26,8 @@ class Status:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A Status object.
         """
         return Status(
@@ -40,6 +42,7 @@ class Status:
 
 @dataclass
 class Attributes:
+
     """Class holding the Attributes."""
 
     azimuth: str
@@ -53,7 +56,8 @@ class Attributes:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A Attributes object.
         """
         return Attributes(
@@ -65,6 +69,7 @@ class Attributes:
 
 @dataclass
 class Shutter:
+
     """Object holding an OpenMotics Shutter.
 
     # noqa: E800
@@ -121,10 +126,10 @@ class Shutter:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A Shutter object.
         """
-
         status = Status.from_dict({})
         if "status" in data:
             status = Status.from_dict(data.get("status", {}))
@@ -145,7 +150,8 @@ class Shutter:
     def __str__(self) -> str:
         """Represent the class objects as a string.
 
-        Returns:
+        Returns
+        -------
             string
 
         """

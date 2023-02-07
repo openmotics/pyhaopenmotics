@@ -37,6 +37,7 @@ CLOCK_OUT_OF_SYNC_MAX_SEC = 20
 
 
 class LocalGateway:
+
     """Docstring."""
 
     _close_session: bool = False
@@ -56,6 +57,7 @@ class LocalGateway:
         """Initialize connection with the OpenMotics LocalGateway API.
 
         Args:
+        ----
             localgw: Hostname or IP address of the AdGuard Home instance.
             password: Password for HTTP auth, if enabled.
             port: Port on which the API runs, usually 3000.
@@ -87,9 +89,7 @@ class LocalGateway:
             _LOGGER.debug("LocalGateway setting self.auth")
             self.auth = {"username": self.username, "password": self.password}
 
-    @backoff.on_exception(
-        backoff.expo, OpenMoticsConnectionError, max_tries=3, logger=None
-    )
+    @backoff.on_exception(backoff.expo, OpenMoticsConnectionError, max_tries=3, logger=None)
     async def _request(
         self,
         path: str,
@@ -111,10 +111,12 @@ class LocalGateway:
             headers: dict
             **kwargs: extra args
 
-        Returns:
+        Returns
+        -------
             response json or text
 
-        Raises:
+        Raises
+        ------
             OpenMoticsConnectionError: An error occurred while communication with
                 the OpenMotics API.
             OpenMoticsConnectionSslError: Error with SSL certificates.
@@ -122,9 +124,7 @@ class LocalGateway:
                 with the OpenMotics API.
             AuthenticationException: raised when token is expired.
         """
-        url = URL.build(
-            scheme="https", host=self.localgw, port=self.port, path="/"
-        ).join(URL(path))
+        url = URL.build(scheme="https", host=self.localgw, port=self.port, path="/").join(URL(path))
 
         if self.session is None:
             self.session = aiohttp.ClientSession()
@@ -155,13 +155,11 @@ class LocalGateway:
             raise OpenMoticsConnectionTimeoutError(
                 "Timeout occurred while connecting to OpenMotics API"
             ) from exception
-        except (aiohttp.ClientConnectorSSLError) as exception:  # pyright: ignore
+        except aiohttp.ClientConnectorSSLError as exception:  # pyright: ignore
             # Expired certificate / Date ISSUE
             # pylint: disable=bad-exception-context
-            raise OpenMoticsConnectionSslError(
-                "Error with SSL certificate."
-            ) from exception
-        except (aiohttp.ClientResponseError) as exception:
+            raise OpenMoticsConnectionSslError("Error with SSL certificate.") from exception
+        except aiohttp.ClientResponseError as exception:
             if exception.status in [401, 403]:
                 raise AuthenticationException() from exception
             raise OpenMoticsConnectionError(
@@ -191,7 +189,8 @@ class LocalGateway:
             data: dict
             headers: dict
 
-        Returns:
+        Returns
+        -------
             response json or text
         """
         # Try to execute the action.
@@ -219,6 +218,7 @@ class LocalGateway:
         """Register a webhook with OpenMotics for live updates.
 
         Args:
+        ----
             installation_id: int
 
         """
@@ -256,13 +256,11 @@ class LocalGateway:
         Args:
             headers: dict
 
-        Returns:
+        Returns
+        -------
             headers
         """
-        if (
-            self.token is None
-            or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC
-        ):
+        if self.token is None or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC:
             await self.get_token()
 
         if headers is None:
@@ -281,7 +279,8 @@ class LocalGateway:
     def outputs(self) -> OpenMoticsOutputs:
         """Get outputs.
 
-        Returns:
+        Returns
+        -------
             OpenMoticsOutputs
         """
         return OpenMoticsOutputs(self)
@@ -290,7 +289,8 @@ class LocalGateway:
     def groupactions(self) -> OpenMoticsGroupActions:
         """Get groupactions.
 
-        Returns:
+        Returns
+        -------
             OpenMoticsGroupActions
         """
         return OpenMoticsGroupActions(self)
@@ -299,7 +299,8 @@ class LocalGateway:
     def lights(self) -> OpenMoticsLights:
         """Get lights.
 
-        Returns:
+        Returns
+        -------
             OpenMoticsLights
         """
         # implemented to be compatible with cloud
@@ -309,7 +310,8 @@ class LocalGateway:
     def sensors(self) -> OpenMoticsSensors:
         """Get sensors.
 
-        Returns:
+        Returns
+        -------
             OpenMoticsSensors
         """
         return OpenMoticsSensors(self)
@@ -318,7 +320,8 @@ class LocalGateway:
     def energysensors(self) -> OpenMoticsEnergySensors:
         """Get energy sensors.
 
-        Returns:
+        Returns
+        -------
             OpenMoticsEnergySensors
         """
         return OpenMoticsEnergySensors(self)
@@ -327,7 +330,8 @@ class LocalGateway:
     def shutters(self) -> OpenMoticsShutters:
         """Get shutters.
 
-        Returns:
+        Returns
+        -------
             OpenMoticsShutters
         """
         return OpenMoticsShutters(self)
@@ -336,7 +340,8 @@ class LocalGateway:
     def thermostats(self) -> OpenMoticsThermostats:
         """Get thermostats.
 
-        Returns:
+        Returns
+        -------
             OpenMoticsThermostats
         """
         return OpenMoticsThermostats(self)
@@ -349,7 +354,8 @@ class LocalGateway:
     async def __aenter__(self) -> LocalGateway:
         """Async enter.
 
-        Returns:
+        Returns
+        -------
             LocalGateway: The LocalGateway object.
         """
         return self
@@ -358,6 +364,7 @@ class LocalGateway:
         """Async exit.
 
         Args:
+        ----
             *_exc_info: Exec type.
         """
         await self.close()

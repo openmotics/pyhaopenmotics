@@ -7,6 +7,7 @@ from typing import Any
 
 @dataclass
 class FloorCoordinates:
+
     """Class holding the floor_coordinates."""
 
     x: int  # pylint: disable-msg=C0103
@@ -19,7 +20,8 @@ class FloorCoordinates:
         Args:
             data: dict
 
-        Returns:
+        Returns
+        -------
             FloorCoordinates object
         """
         if "x" not in data or "y" not in data:
@@ -33,6 +35,7 @@ class FloorCoordinates:
 
 @dataclass
 class Location:
+
     """Class holding the location."""
 
     floor_coordinates: FloorCoordinates | None
@@ -48,10 +51,10 @@ class Location:
         Args:
             data: dict
 
-        Returns:
+        Returns
+        -------
             Location object
         """
-
         _floor_coordinates: FloorCoordinates | None
         _room_id: int
 
@@ -62,9 +65,7 @@ class Location:
                 _room_id = data.get("room", 0)
 
             if "floor_coordinates" in data:
-                _floor_coordinates = FloorCoordinates.from_dict(
-                    data.get("floor_coordinates", {})
-                )
+                _floor_coordinates = FloorCoordinates.from_dict(data.get("floor_coordinates", {}))
             else:
                 _floor_coordinates = None
 

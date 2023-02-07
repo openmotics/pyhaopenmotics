@@ -9,6 +9,7 @@ from .location import Location
 
 @dataclass
 class Status:
+
     """Class holding the status."""
 
     on: bool
@@ -23,7 +24,8 @@ class Status:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A Status object.
         """
         return Status(
@@ -37,6 +39,7 @@ class Status:
 
 @dataclass
 class Light:
+
     """Class holding an OpenMotics Light."""
 
     # pylint: disable=too-many-instance-attributes
@@ -57,7 +60,8 @@ class Light:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A Output object.
         """
         status = Status.from_dict({})
@@ -85,7 +89,8 @@ class Light:
     def __str__(self) -> str:
         """Represent the class objects as a string.
 
-        Returns:
+        Returns
+        -------
             string
 
         """

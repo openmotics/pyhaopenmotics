@@ -7,12 +7,14 @@ from pydantic import BaseModel, Field
 
 
 class Allowed(BaseModel):
+
     """Object holding an OpenMotics Installation."""
 
     allowed: bool | None
 
 
 class Acl(BaseModel):
+
     """Object holding an OpenMotics Installation."""
 
     configure: Allowed | None
@@ -21,12 +23,14 @@ class Acl(BaseModel):
 
 
 class Network(BaseModel):
+
     """Object holding an OpenMotics Installation."""
 
     local_ip_address: str | None
 
 
 class Installation(BaseModel):
+
     """Object holding an OpenMotics Installation.
 
     # noqa: E800
@@ -79,9 +83,9 @@ class Installation(BaseModel):
     def __str__(self) -> str:
         """Represent the class objects as a string.
 
-        Returns:
+        Returns
+        -------
             string
 
         """
-
         return f"{self.idx}_{self.name}"

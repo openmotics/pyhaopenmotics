@@ -12,7 +12,8 @@ def get_key_for_word(dictionary: dict[str, Any], word: str) -> Any:
         dictionary: dict
         word: str
 
-    Returns:
+    Returns
+    -------
         Any
     """
     try:
@@ -34,7 +35,8 @@ def merge_dicts(list_a: list[Any], dkey: str, list_b: list[Any]) -> list[Any]:
         list_a: list
         list_b: list
 
-    Returns:
+    Returns
+    -------
         result: list
 
     # noqa: E800
@@ -54,7 +56,7 @@ def merge_dicts(list_a: list[Any], dkey: str, list_b: list[Any]) -> list[Any]:
         return []
     if len(list_b) == 0:
         return list_a
-    result = [d1 | {dkey: d2} for d1, d2 in zip(list_a, list_b)]
+    result = [d1 | {dkey: d2} for d1, d2 in zip(list_a, list_b, strict=False)]
     return result
 
 
@@ -64,7 +66,8 @@ def get_ssl_context(verify_ssl: bool = True) -> ssl.SSLContext:
     Args:
         verify_ssl: bool
 
-    Returns:
+    Returns
+    -------
         ssl.SSLContext
     """
     if verify_ssl:
@@ -77,7 +80,5 @@ def get_ssl_context(verify_ssl: bool = True) -> ssl.SSLContext:
 
         ssl_context.options &= ~ssl.OP_NO_SSLv3  # noqa: E800
         ssl_context.minimum_version = ssl.TLSVersion.TLSv1  # noqa: E800
-        ssl_context.set_ciphers(
-            "AES256-SHA"
-        )  # enables weaker ciphers and protocols # noqa: E800
+        ssl_context.set_ciphers("AES256-SHA")  # enables weaker ciphers and protocols # noqa: E800
     return ssl_context

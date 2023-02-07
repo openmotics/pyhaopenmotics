@@ -12,6 +12,7 @@ if TYPE_CHECKING:
 
 @dataclass
 class OpenMoticsShutters:  # noqa: SIM119
+
     """Object holding information of the OpenMotics shutters.
 
     All actions related to Shutters or a specific Shutter.
@@ -21,6 +22,7 @@ class OpenMoticsShutters:  # noqa: SIM119
         """Init the installations object.
 
         Args:
+        ----
             omcloud: LocalGateway
         """
         self._omcloud = omcloud
@@ -30,7 +32,8 @@ class OpenMoticsShutters:  # noqa: SIM119
     def shutter_configs(self) -> list[Any]:
         """Get a list of all shutter confs.
 
-        Returns:
+        Returns
+        -------
             list of all shutter confs
         """
         return self._shutter_configs
@@ -40,6 +43,7 @@ class OpenMoticsShutters:  # noqa: SIM119
         """Set a list of all shutter confs.
 
         Args:
+        ----
             shutter_configs: list
         """
         self._shutter_configs = shutter_configs
@@ -53,7 +57,8 @@ class OpenMoticsShutters:  # noqa: SIM119
         Args:
             shutter_filter: str
 
-        Returns:
+        Returns
+        -------
             list with all shutters
         """
         if len(self.shutter_configs) == 0:
@@ -89,7 +94,8 @@ class OpenMoticsShutters:  # noqa: SIM119
         Args:
             shutter_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a shutter with id
         """
         for shutter in await self.get_all():
@@ -106,7 +112,8 @@ class OpenMoticsShutters:  # noqa: SIM119
         Args:
             shutter_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a shutter with id
         """
         data = {"id": shutter_id}
@@ -121,7 +128,8 @@ class OpenMoticsShutters:  # noqa: SIM119
         Args:
             shutter_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a shutter with id
         """
         data = {"id": shutter_id}
@@ -136,7 +144,8 @@ class OpenMoticsShutters:  # noqa: SIM119
         Args:
             shutter_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a shutter with id
         """
         data = {"id": shutter_id}
@@ -157,7 +166,8 @@ class OpenMoticsShutters:  # noqa: SIM119
             shutter_id: int
             position: int  (in body)
 
-        Returns:
+        Returns
+        -------
             Returns a shutter with id
         """
         data = {"id": shutter_id, "position": position}

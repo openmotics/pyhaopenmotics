@@ -1,164 +1,121 @@
 ---
 repos:
+    - repo: https://github.com/abravalheri/validate-pyproject
+      rev: v0.10.1
+      hooks:
+          - id: validate-pyproject
+
+    - repo: https://github.com/python-poetry/poetry
+      rev: "1.3.2"
+      hooks:
+          - id: poetry-check
+
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v4.4.0
+      hooks:
+          - id: check-ast
+          - id: check-executables-have-shebangs
+            stages: [manual]
+          - id: check-case-conflict
+          - id: check-docstring-first
+          - id: check-json
+            exclude: (.vscode|.devcontainer)
+          - id: check-toml
+          - id: check-yaml
+          # - id: pretty-format-json
+          #   args: [--indent=4, --autofix]
+          - id: end-of-file-fixer
+          # - id: double-quote-string-fixer
+          - id: mixed-line-ending
+            args: [--fix=lf]
+          - id: trailing-whitespace
+            args: [--markdown-linebreak-ext=md]
+          - id: no-commit-to-branch
+            args:
+                - --branch=dev
+                - --branch=master
+
+    - repo: https://github.com/pre-commit/pygrep-hooks
+      rev: v1.10.0
+      hooks:
+          - id: python-check-blanket-noqa
+          - id: python-use-type-annotations
+
+    - repo: https://github.com/psf/black
+      rev: 23.1.0
+      hooks:
+          - id: black
+            args:
+                - --quiet
+            files: ^((src|examples|tests)/.+)?[^/]+\.py$
+            language_version: python3
+
+    # - repo: https://github.com/PyCQA/isort
+    #   rev: 5.12.0
+    #   hooks:
+    #       - id: isort
+
+    - repo: https://github.com/charliermarsh/ruff-pre-commit
+      rev: v0.0.241
+      hooks:
+          - id: ruff
+            args:
+                - --fix
+
+    - repo: https://github.com/codespell-project/codespell
+      rev: v2.2.2
+      hooks:
+          - id: codespell
+            args:
+                - --ignore-words-list=additionals,alle,alot,ba,bre,bund,datas,dof,dur,ether,farenheit,falsy,fo,haa,hass,hist,iam,iff,iif,incomfort,ines,ist,lightsensor,mut,nam,nd,pres,pullrequests,referer,resset,rime,ser,serie,sur,te,technik,ue,uint,unsecure,visability,wan,wanna,withing,zar
+                - --skip="./.*,*.csv,*.json"
+                - --quiet-level=2
+            exclude_types: [csv, json]
+
+    - repo: https://github.com/pre-commit/mirrors-prettier
+      rev: v2.7.1
+      hooks:
+          - id: prettier
+
+    - repo: https://github.com/cdce8p/python-typing-update
+      rev: v0.5.1
+      hooks:
+          # Run `python-typing-update` hook manually from time to time
+          # to update python typing syntax.
+          # Will require manual work, before submitting changes!
+          # pre-commit run --hook-stage manual python-typing-update --all-files
+          - id: python-typing-update
+            stages: [manual]
+            args:
+                - --py310-plus
+                - --force
+                - --keep-updates
+            files: ^(src|tests|examples)/.+\.py$
+
+    - repo: https://github.com/pre-commit/mirrors-mypy
+      rev: v0.991
+      hooks:
+          - id: mypy
+            args: []
+            pass_filenames: false
+            additional_dependencies: []
+
     - repo: local
       hooks:
-          - id: bandit
-            name: 🎰 Checking using bandit
-            language: system
-            types: [python]
-            entry: poetry run bandit
-            files: ^src/
-            require_serial: true
-          - id: black
-            name: ☕️ Format using black
-            language: system
-            types: [python]
-            entry: poetry run black
-            require_serial: true
-          - id: blacken-docs
-            name: ☕️ Format documentation examples using black
-            language: system
-            files: '\.(rst|md|markdown|py|tex)$'
-            entry: poetry run blacken-docs
-            require_serial: true
-          - id: check-ast
-            name: 🐍 Check Python AST
-            language: system
-            types: [python]
-            entry: poetry run check-ast
-          - id: check-case-conflict
-            name: 🔠 Check for case conflicts
-            language: system
-            entry: poetry run check-case-conflict
-          - id: check-docstring-first
-            name: ℹ️  Check docstring is first
-            language: system
-            types: [python]
-            entry: poetry run check-docstring-first
-          - id: check-executables-have-shebangs
-            name: 🧐 Check that executables have shebangs
-            language: system
-            types: [text, executable]
-            entry: poetry run check-executables-have-shebangs
-            stages: [commit, push, manual]
-          - id: check-json
-            name: ｛ Check JSON files
-            language: system
-            types: [json]
-            entry: poetry run check-json
-          - id: check-merge-conflict
-            name: 💥 Check for merge conflicts
-            language: system
-            types: [text]
-            entry: poetry run check-merge-conflict
-          - id: check-symlinks
-            name: 🔗 Check for broken symlinks
-            language: system
-            types: [symlink]
-            entry: poetry run check-symlinks
-          - id: check-toml
-            name: ✅ Check TOML files
-            language: system
-            types: [toml]
-            entry: poetry run check-toml
-          - id: check-yaml
-            name: ✅ Check YAML files
-            language: system
-            types: [yaml]
-            entry: poetry run check-yaml
-          - id: codespell
-            name: ✅ Check code for common misspellings
-            language: system
-            types: [text]
-            exclude: ^poetry\.lock$
-            entry: poetry run codespell
-          - id: debug-statements
-            name: 🪵  Debug Statements and imports (Python)
-            language: system
-            types: [python]
-            entry: poetry run debug-statement-hook
-          - id: detect-private-key
-            name: 🕵️  Detect Private Keys
-            language: system
-            types: [text]
-            entry: poetry run detect-private-key
-          - id: end-of-file-fixer
-            name: ⮐  Fix End of Files
-            language: system
-            types: [text]
-            entry: poetry run end-of-file-fixer
-            stages: [commit, push, manual]
-          - id: fix-byte-order-marker
-            name: 🚏 Fix UTF-8 byte order marker
-            language: system
-            types: [text]
-            entry: poetry run fix-byte-order-marker
-          - id: flake8
-            name: 👔 Enforcing style guide with flake8
-            language: system
-            types: [python]
-            entry: poetry run flake8
-            require_serial: true
-          - id: isort
-            name: 🔀 Sort all imports with isort
-            language: system
-            types: [python]
-            entry: poetry run isort
-          - id: mypy
-            name: 🆎 Static type checking using mypy
-            language: system
-            types: [python]
-            entry: poetry run mypy
-            require_serial: true
-          - id: no-commit-to-branch
-            name: 🛑 Don't commit to main branch
-            language: system
-            entry: poetry run no-commit-to-branch
-            pass_filenames: false
-            always_run: true
-            args:
-                - --branch=main
-          - id: poetry
-            name: 📜 Check pyproject with Poetry
-            language: system
-            entry: poetry check
-            pass_filenames: false
-            always_run: true
-          - id: prettier
-            name: 💄 Ensuring files are prettier
-            language: system
-            types: [text]
-            entry: npm run prettier
-            pass_filenames: false
-          - id: pylint
-            name: 🌟 Starring code with pylint
-            language: system
-            types: [python]
-            entry: poetry run pylint
           - id: pyright
             name: 🆎 Static type checking using pyright
             language: system
             types: [python]
             entry: npm run pyright
             pass_filenames: false
+
           - id: pytest
             name: 🧪 Running tests and test coverage with pytest
             language: system
             types: [python]
             entry: poetry run pytest
             pass_filenames: false
-          - id: pyupgrade
-            name: 🆙 Checking for upgradable syntax with pyupgrade
-            language: system
-            types: [python]
-            entry: poetry run pyupgrade
-            args: [--py39-plus, --keep-runtime-typing]
-          - id: trailing-whitespace
-            name: ✄  Trim Trailing Whitespace
-            language: system
-            types: [text]
-            entry: poetry run trailing-whitespace-fixer
-            stages: [commit, push, manual]
+
           - id: vulture
             name: 🔍 Find unused Python code with Vulture
             language: system
@@ -166,8 +123,3 @@ repos:
             entry: poetry run vulture
             pass_filenames: false
             require_serial: true
-          - id: yamllint
-            name: 🎗  Check YAML files with yamllint
-            language: system
-            types: [yaml]
-            entry: poetry run yamllint

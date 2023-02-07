@@ -49,7 +49,6 @@ tls = bool(os.environ["TLS"])
 
 async def main() -> None:
     """Show example on controlling your OpenMotics device."""
-
     async with LocalGateway(
         localgw=localgw,
         username=username,
@@ -60,36 +59,28 @@ async def main() -> None:
     ) as omclient:
         # await omclient.login()
 
-        version = await omclient.exec_action("get_version")
-        print(version)
+        await omclient.exec_action("get_version")
 
         outputs = await omclient.outputs.get_all()
-        print(outputs)
 
         if outputs[0].status.on is True:
-            print("output_0 is on.")
+            pass
         else:
-            print("output_0 is off.")
+            pass
 
-        output_0 = await omclient.outputs.get_by_id(0)
-        print(output_0)
+        await omclient.outputs.get_by_id(0)
 
         # await omclient.outputs.toggle(0)
 
-        sensors = await omclient.sensors.get_all()
-        print(sensors)
+        await omclient.sensors.get_all()
 
-        shutters = await omclient.shutters.get_all()
-        print(shutters)
+        await omclient.shutters.get_all()
 
-        gaga = await omclient.groupactions.get_all()
-        print(gaga)
+        await omclient.groupactions.get_all()
 
-        tgga = await omclient.thermostats.groups.get_all()
-        print(tgga)
+        await omclient.thermostats.groups.get_all()
 
-        tuga = await omclient.thermostats.units.get_all()
-        print(tuga)
+        await omclient.thermostats.units.get_all()
 
         await omclient.close()
 

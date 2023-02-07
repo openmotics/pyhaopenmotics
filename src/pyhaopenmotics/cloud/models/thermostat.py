@@ -1,12 +1,13 @@
 """Thermostat Model for the OpenMotics API."""
 from __future__ import annotations
 
-from typing import Any, Optional
+from typing import Any
 
 from pydantic import BaseModel, Field
 
 
 class GroupLocation(BaseModel):
+
     """Class holding the location."""
 
     thermostat_group_id: int | None
@@ -15,6 +16,7 @@ class GroupLocation(BaseModel):
 
 
 class UnitLocation(BaseModel):
+
     """Class holding the location."""
 
     thermostat_group_id: int | None
@@ -23,6 +25,7 @@ class UnitLocation(BaseModel):
 
 
 class GroupStatus(BaseModel):
+
     """Class holding the status."""
 
     mode: str | None
@@ -30,6 +33,7 @@ class GroupStatus(BaseModel):
 
 
 class UnitStatus(BaseModel):
+
     """Class holding the status."""
 
     actual_temperature: float | None
@@ -40,6 +44,7 @@ class UnitStatus(BaseModel):
 
 
 class Presets(BaseModel):
+
     """Class holding the status."""
 
     away: str | None
@@ -48,6 +53,7 @@ class Presets(BaseModel):
 
 
 class Schedule(BaseModel):
+
     """Class holding the schedule."""
 
     data: dict[str, Any] | None
@@ -55,6 +61,7 @@ class Schedule(BaseModel):
 
 
 class ConfigurationPreset(BaseModel):
+
     """Class holding the configuration presets."""
 
     output_0_id: int | None
@@ -65,6 +72,7 @@ class ConfigurationPreset(BaseModel):
 
 
 class Configuration(BaseModel):
+
     """Class holding the configuration."""
 
     heating: ConfigurationPreset | None
@@ -72,12 +80,14 @@ class Configuration(BaseModel):
 
 
 class Allowed(BaseModel):
+
     """Object holding allowed."""
 
     allowed: bool | None
 
 
 class Acl(BaseModel):
+
     """Object holding an acl."""
 
     set_state: Allowed | None
@@ -85,6 +95,7 @@ class Acl(BaseModel):
 
 
 class ThermostatGroup(BaseModel):
+
     """Class holding an OpenMotics ThermostatGroup .
 
         # noqa: E800
@@ -110,15 +121,16 @@ class ThermostatGroup(BaseModel):
     name: str
     schedule: Schedule | None
     capabilities: list[Any] | None
-    version: Optional[str] = Field(..., alias="_version")
+    version: str | None = Field(..., alias="_version")
     thermostat_ids: dict[str, Any] | None
     status: GroupStatus | None
-    acl: Optional[Acl] = Field(..., alias="_acl")
+    acl: Acl | None = Field(..., alias="_acl")
 
     def __str__(self) -> str:
         """Represent the class objects as a string.
 
-        Returns:
+        Returns
+        -------
             string
 
         """
@@ -126,6 +138,7 @@ class ThermostatGroup(BaseModel):
 
 
 class ThermostatUnit(BaseModel):
+
     """Class holding an OpenMotics ThermostatUnit.
 
     # noqa: E800
@@ -202,13 +215,14 @@ class ThermostatUnit(BaseModel):
     name: str
     location: UnitLocation | None
     status: UnitStatus | None
-    version: Optional[str] = Field(..., alias="_version")
-    acl: Optional[str] = Field(..., alias="_acl")
+    version: str | None = Field(..., alias="_version")
+    acl: str | None = Field(..., alias="_acl")
 
     def __str__(self) -> str:
         """Represent the class objects as a string.
 
-        Returns:
+        Returns
+        -------
             string
 
         """
