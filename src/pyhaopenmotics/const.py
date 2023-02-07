@@ -12,5 +12,5 @@ CLOUD_API_VERSION = "v1.1"
 CLOUD_SCOPE = "control view configure"
 
 CLOUD_API_URL = f"{CLOUD_BASE_URL}/{CLOUD_API_VERSION}"
-OAUTH2_TOKEN = f"{CLOUD_API_URL}/authentication/oauth2/token"  # noqa # nosec
+OAUTH2_TOKEN = f"{CLOUD_API_URL}/authentication/oauth2/token"  # noqa: S106 # nosec
 OAUTH2_AUTHORIZE = f"{CLOUD_API_URL}/authentication/oauth2/authorize"

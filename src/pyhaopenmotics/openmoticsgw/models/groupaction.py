@@ -9,6 +9,7 @@ from .location import Location
 
 @dataclass
 class GroupAction:
+
     """Class holding an OpenMotics GroupAction.
 
     # noqa: E800
@@ -42,7 +43,8 @@ class GroupAction:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A GroupAction object.
         """
         actions = [""]
@@ -59,7 +61,8 @@ class GroupAction:
     def __str__(self) -> str:
         """Represent the class objects as a string.
 
-        Returns:
+        Returns
+        -------
             string
 
         """

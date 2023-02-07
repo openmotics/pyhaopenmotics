@@ -13,6 +13,7 @@ from pyhaopenmotics import OpenMoticsCloud
 from pyhaopenmotics.const import CLOUD_API_VERSION, CLOUD_BASE_URL
 from pyhaopenmotics.errors import OpenMoticsConnectionError, OpenMoticsError
 
+
 get_token_data_request = {
     "grant_type": "client_credentials",
     "client_id": "abc",
@@ -29,6 +30,7 @@ get_installations_data_request = {
 async def test_timeout(aresponses: ResponsesMockServer) -> None:
     """Test request timeout."""
     assert socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
     # Faking a timeout by sleeping
     async def response_handler(_):  # type: ignore
         """Test request timeout."""

@@ -1,7 +1,7 @@
 """Shutter Model for the OpenMotics API."""
 from __future__ import annotations
 
-from typing import Any, Optional
+from typing import Any
 
 from pydantic import BaseModel, Field
 
@@ -9,6 +9,7 @@ from .location import Location
 
 
 class Status(BaseModel):
+
     """Class holding the status."""
 
     locked: bool | None
@@ -20,6 +21,7 @@ class Status(BaseModel):
 
 
 class Attributes(BaseModel):
+
     """Class holding the attributes."""
 
     azimuth: str | None
@@ -28,6 +30,7 @@ class Attributes(BaseModel):
 
 
 class Shutter(BaseModel):
+
     """Object holding an OpenMotics Shutter.
 
     # noqa: E800
@@ -75,12 +78,13 @@ class Shutter(BaseModel):
     location: Location | None
     attributes: Attributes | None
     metadata: str | None
-    version: Optional[str] = Field(..., alias="_version")
+    version: str | None = Field(..., alias="_version")
 
     def __str__(self) -> str:
         """Represent the class objects as a string.
 
-        Returns:
+        Returns
+        -------
             string
 
         """

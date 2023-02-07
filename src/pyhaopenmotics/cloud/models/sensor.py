@@ -1,14 +1,13 @@
 """Sensor Model for the OpenMotics API."""
 from __future__ import annotations
 
-from typing import Optional
-
 from pydantic import BaseModel, Field
 
 from .location import Location
 
 
 class Status(BaseModel):
+
     """Class holding the status."""
 
     humidity: float | None
@@ -17,6 +16,7 @@ class Status(BaseModel):
 
 
 class Sensor(BaseModel):
+
     """Class holding an OpenMotics Sensor.
 
     # noqa: E800
@@ -45,12 +45,13 @@ class Sensor(BaseModel):
     physical_quantity: str | None
     status: Status
     last_state_change: float | None
-    version: Optional[str] = Field(..., alias="_version")
+    version: str | None = Field(..., alias="_version")
 
     def __str__(self) -> str:
         """Represent the class objects as a string.
 
-        Returns:
+        Returns
+        -------
             string
 
         """

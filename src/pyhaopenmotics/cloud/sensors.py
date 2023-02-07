@@ -13,6 +13,7 @@ if TYPE_CHECKING:
 
 
 class OpenMoticsSensors:  # noqa: SIM119
+
     """Object holding information of the OpenMotics sensors.
 
     All actions related to Sensors or a specific Sensor.
@@ -22,6 +23,7 @@ class OpenMoticsSensors:  # noqa: SIM119
         """Init the installations object.
 
         Args:
+        ----
             omcloud: OpenMoticsCloud
         """
         self._omcloud = omcloud
@@ -35,7 +37,8 @@ class OpenMoticsSensors:  # noqa: SIM119
         Args:
             sensor_filter: str
 
-        Returns:
+        Returns
+        -------
             Dict with all sensors
         """
         path = f"/base/installations/{self._omcloud.installation_id}/sensors"
@@ -60,12 +63,11 @@ class OpenMoticsSensors:  # noqa: SIM119
         Args:
             sensor_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a sensor with id
         """
-        path = (
-            f"/base/installations/{self._omcloud.installation_id}/sensors/{sensor_id}"
-        )
+        path = f"/base/installations/{self._omcloud.installation_id}/sensors/{sensor_id}"
         body = await self._omcloud.get(path)
 
         return Sensor.parse_obj(body["data"])

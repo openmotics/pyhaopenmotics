@@ -45,34 +45,28 @@ client_secret = os.environ["CLIENT_SECRET"]
 
 async def main() -> None:
     """Docstring."""
-
     token = None
-
-    print(OAUTH2_TOKEN)
 
     async with AsyncOAuth2Client(
         client_id=client_id,
         client_secret=client_secret,
-        token_endpoint_auth_method="client_secret_post",  # noqa # nosec
+        token_endpoint_auth_method="client_secret_post",  # noqa: S106 # nosec
         scope=CLOUD_SCOPE,
         token_endpoint=OAUTH2_TOKEN,
         grant_type="client_credentials",
     ) as httpx_session:
-
         token = await httpx_session.fetch_token(
             url=OAUTH2_TOKEN,
             grant_type="client_credentials",
         )
         access_token = token.get("access_token")
-        print(access_token)
 
         omclient = OpenMoticsCloud(token=access_token)
 
         installations = await omclient.installations.get_all()
         i_id = installations[0].idx
 
-        installation = await omclient.installations.get_by_id(i_id)
-        print(installation)
+        await omclient.installations.get_by_id(i_id)
         omclient.installation_id = i_id
 
         await omclient.subscribe_webhook()

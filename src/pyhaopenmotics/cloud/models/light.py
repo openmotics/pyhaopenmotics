@@ -1,7 +1,7 @@
 """Light Model for the OpenMotics API."""
 from __future__ import annotations
 
-from typing import Any, Optional
+from typing import Any
 
 from pydantic import BaseModel, Field
 
@@ -9,6 +9,7 @@ from .location import Location
 
 
 class Status(BaseModel):
+
     """Class holding the status."""
 
     on: bool
@@ -18,6 +19,7 @@ class Status(BaseModel):
 
 
 class Light(BaseModel):
+
     """Class holding an OpenMotics Light.
 
     # noqa: E800
@@ -51,14 +53,15 @@ class Light(BaseModel):
     capabilities: list[Any] | None
     location: Location | None
     status: Status | None
-    version: Optional[str] = Field(None, alias="_version")
+    version: str | None = Field(None, alias="_version")
 
     _brightness: int | None
 
     def __str__(self) -> str:
         """Represent the class objects as a string.
 
-        Returns:
+        Returns
+        -------
             string
 
         """

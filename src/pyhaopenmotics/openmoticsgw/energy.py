@@ -11,6 +11,7 @@ if TYPE_CHECKING:
 
 
 class OpenMoticsEnergySensors:  # noqa: SIM119
+
     """Object holding information of the OpenMotics energy sensors.
 
     All actions related to Sensors or a specific Sensor.
@@ -20,6 +21,7 @@ class OpenMoticsEnergySensors:  # noqa: SIM119
         """Init the installations object.
 
         Args:
+        ----
             omcloud: LocalGateway
         """
         self._omcloud = omcloud
@@ -29,7 +31,8 @@ class OpenMoticsEnergySensors:  # noqa: SIM119
     def sensor_configs(self) -> list[Any]:
         """Get a list of all sensor confs.
 
-        Returns:
+        Returns
+        -------
             list of all sensor confs
         """
         return self._sensor_configs
@@ -39,6 +42,7 @@ class OpenMoticsEnergySensors:  # noqa: SIM119
         """Set a list of all sensor confs.
 
         Args:
+        ----
             sensor_configs: list
         """
         self._sensor_configs = sensor_configs
@@ -52,7 +56,8 @@ class OpenMoticsEnergySensors:  # noqa: SIM119
         Args:
             sensor_filter: str
 
-        Returns:
+        Returns
+        -------
             List with all energy sensors
         """
         if len(self.sensor_configs) == 0:
@@ -96,7 +101,8 @@ class OpenMoticsEnergySensors:  # noqa: SIM119
         Args:
             sensor_id: int
 
-        Returns:
+        Returns
+        -------
             Returns an energy sensor with id
         """
         for sensor in await self.get_all():

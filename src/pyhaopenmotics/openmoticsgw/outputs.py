@@ -14,6 +14,7 @@ if TYPE_CHECKING:
 
 @dataclass
 class OpenMoticsOutputs:  # noqa: SIM119
+
     """Object holding information of the OpenMotics outputs.
 
     All actions related to Outputs or a specific Output.
@@ -23,6 +24,7 @@ class OpenMoticsOutputs:  # noqa: SIM119
         """Init the installations object.
 
         Args:
+        ----
             omcloud: LocalGateway
         """
         self._omcloud = omcloud
@@ -32,7 +34,8 @@ class OpenMoticsOutputs:  # noqa: SIM119
     def output_configs(self) -> list[Any]:
         """Get a list of all output confs.
 
-        Returns:
+        Returns
+        -------
             list of all output confs
         """
         return self._output_configs
@@ -42,6 +45,7 @@ class OpenMoticsOutputs:  # noqa: SIM119
         """Set a list of all output confs.
 
         Args:
+        ----
             output_configs: list
         """
         self._output_configs = output_configs
@@ -55,7 +59,8 @@ class OpenMoticsOutputs:  # noqa: SIM119
         Args:
             output_filter: str
 
-        Returns:
+        Returns
+        -------
             list with all outputs
         """
         if len(self.output_configs) == 0:
@@ -85,7 +90,8 @@ class OpenMoticsOutputs:  # noqa: SIM119
         Args:
             output_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a output with id
         """
         for output in await self.get_all():
@@ -102,7 +108,8 @@ class OpenMoticsOutputs:  # noqa: SIM119
         Args:
             output_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a output with id
         """
         if (output := await self.get_by_id(output_id)) is None:
@@ -125,7 +132,8 @@ class OpenMoticsOutputs:  # noqa: SIM119
             output_id: int
             value: <0 - 100>
 
-        Returns:
+        Returns
+        -------
             Returns a output with id
         """
         if value is not None:
@@ -147,7 +155,8 @@ class OpenMoticsOutputs:  # noqa: SIM119
         Args:
             output_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a output with id
         """
         data = {"id": output_id, "is_on": False}

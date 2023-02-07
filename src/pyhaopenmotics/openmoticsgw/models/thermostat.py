@@ -7,6 +7,7 @@ from typing import Any
 
 @dataclass
 class GroupLocation:
+
     """Class holding the location."""
 
     thermostat_group_id: int
@@ -20,7 +21,8 @@ class GroupLocation:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A GroupLocation object.
         """
         return GroupLocation(
@@ -32,6 +34,7 @@ class GroupLocation:
 
 @dataclass
 class UnitLocation:
+
     """Class holding the location."""
 
     thermostat_group_id: int
@@ -45,7 +48,8 @@ class UnitLocation:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A UnitLocation object.
         """
         return UnitLocation(
@@ -57,6 +61,7 @@ class UnitLocation:
 
 @dataclass
 class GroupStatus:
+
     """Class holding the status."""
 
     mode: str
@@ -69,7 +74,8 @@ class GroupStatus:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A GroupStatus object.
         """
         return GroupStatus(
@@ -80,6 +86,7 @@ class GroupStatus:
 
 @dataclass
 class UnitStatus:
+
     """Class holding the status."""
 
     actual_temperature: float
@@ -95,7 +102,8 @@ class UnitStatus:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A UnitStatus object.
         """
         return UnitStatus(
@@ -109,6 +117,7 @@ class UnitStatus:
 
 @dataclass
 class Presets:
+
     """Class holding the status."""
 
     away: str
@@ -122,7 +131,8 @@ class Presets:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A Presets object.
         """
         return Presets(
@@ -134,6 +144,7 @@ class Presets:
 
 @dataclass
 class Schedule:
+
     """Class holding the Schedule."""
 
     data: dict[str, Any]
@@ -146,7 +157,8 @@ class Schedule:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A Schedule object.
         """
         return Schedule(
@@ -157,6 +169,7 @@ class Schedule:
 
 @dataclass
 class ConfigurationPreset:
+
     """Class holding the ConfigurationPreset."""
 
     output_0_id: int
@@ -172,7 +185,8 @@ class ConfigurationPreset:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A ConfigurationPreset object.
         """
         return ConfigurationPreset(
@@ -186,6 +200,7 @@ class ConfigurationPreset:
 
 @dataclass
 class Allowed:
+
     """Class holding the Configuration."""
 
     allowed: bool
@@ -197,7 +212,8 @@ class Allowed:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A Allowed object.
         """
         return Allowed(
@@ -207,6 +223,7 @@ class Allowed:
 
 @dataclass
 class Acl:
+
     """Class holding the Acl."""
 
     set_state: Allowed
@@ -219,7 +236,8 @@ class Acl:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A Acl object.
         """
         return Acl(
@@ -230,6 +248,7 @@ class Acl:
 
 @dataclass
 class Configuration:
+
     """Class holding the Configuration."""
 
     heating: ConfigurationPreset
@@ -242,7 +261,8 @@ class Configuration:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A Configuration object.
         """
         return Configuration(
@@ -253,6 +273,7 @@ class Configuration:
 
 @dataclass
 class ThermostatGroup:
+
     """Class holding an OpenMotics ThermostatGroup."""
 
     # pylint: disable=too-many-instance-attributes
@@ -273,10 +294,10 @@ class ThermostatGroup:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A ThermostatGroup object.
         """
-
         status = GroupStatus.from_dict({})
         if "status" in data:
             status = GroupStatus.from_dict(data.get("status", {}))
@@ -300,7 +321,8 @@ class ThermostatGroup:
     def __str__(self) -> str:
         """Represent the class objects as a string.
 
-        Returns:
+        Returns
+        -------
             string
 
         """
@@ -309,6 +331,7 @@ class ThermostatGroup:
 
 @dataclass
 class ThermostatUnit:
+
     """Class holding an OpenMotics ThermostatUnit."""
 
     # pylint: disable=too-many-instance-attributes
@@ -327,10 +350,10 @@ class ThermostatUnit:
         Args:
             data: The data from the OpenMotics API.
 
-        Returns:
+        Returns
+        -------
             A ThermostatUnit object.
         """
-
         status = UnitStatus.from_dict({})
         if "status" in data:
             status = UnitStatus.from_dict(data.get("status", {}))
@@ -348,7 +371,8 @@ class ThermostatUnit:
     def __str__(self) -> str:
         """Represent the class objects as a string.
 
-        Returns:
+        Returns
+        -------
             string
 
         """

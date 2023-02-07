@@ -29,6 +29,7 @@ _LOGGER = logging.getLogger(__name__)
 
 
 class OpenMoticsCloud:
+
     """Docstring."""
 
     _installations: list[Installation] | None
@@ -47,6 +48,7 @@ class OpenMoticsCloud:
         """Initialize connection with the OpenMotics Cloud API.
 
         Args:
+        ----
             token: str
             request_timeout: int
             session: aiohttp.client.ClientSession
@@ -67,7 +69,8 @@ class OpenMoticsCloud:
     def installation_id(self) -> int | None:
         """Get installation id.
 
-        Returns:
+        Returns
+        -------
             The installation id that will be used for this session.
         """
         return self._installation_id
@@ -77,14 +80,13 @@ class OpenMoticsCloud:
         """Set installation id.
 
         Args:
+        ----
             installation_id: The installation id that will be used
                 for this session.
         """
         self._installation_id = installation_id
 
-    @backoff.on_exception(
-        backoff.expo, OpenMoticsConnectionError, max_tries=3, logger=None
-    )
+    @backoff.on_exception(backoff.expo, OpenMoticsConnectionError, max_tries=3, logger=None)
     async def _request(
         self,
         path: str,
@@ -104,10 +106,12 @@ class OpenMoticsCloud:
             params: dict
             **kwargs: extra args
 
-        Returns:
+        Returns
+        -------
             response json or text
 
-        Raises:
+        Raises
+        ------
             OpenMoticsConnectionError: An error occurred while communication with
                 the OpenMotics API.
             OpenMoticsConnectionTimeoutError: A timeout occurred while communicating
@@ -178,7 +182,8 @@ class OpenMoticsCloud:
             path: string
             **kwargs: any
 
-        Returns:
+        Returns
+        -------
             response json or text
         """
         response = await self._request(
@@ -195,7 +200,8 @@ class OpenMoticsCloud:
             path: path
             **kwargs: extra args
 
-        Returns:
+        Returns
+        -------
             response json or text
         """
         response = await self._request(
@@ -239,7 +245,8 @@ class OpenMoticsCloud:
     def installations(self) -> OpenMoticsInstallations:
         """Get installations.
 
-        Returns:
+        Returns
+        -------
             OpenMoticsInstallations
         """
         return OpenMoticsInstallations(self)
@@ -248,7 +255,8 @@ class OpenMoticsCloud:
     def outputs(self) -> OpenMoticsOutputs:
         """Get outputs.
 
-        Returns:
+        Returns
+        -------
             OpenMoticsOutputs
         """
         return OpenMoticsOutputs(self)
@@ -257,7 +265,8 @@ class OpenMoticsCloud:
     def groupactions(self) -> OpenMoticsGroupActions:
         """Get groupactions.
 
-        Returns:
+        Returns
+        -------
             OpenMoticsGroupActions
         """
         return OpenMoticsGroupActions(self)
@@ -266,7 +275,8 @@ class OpenMoticsCloud:
     def lights(self) -> OpenMoticsLights:
         """Get lights.
 
-        Returns:
+        Returns
+        -------
             OpenMoticsLights
         """
         return OpenMoticsLights(self)
@@ -275,7 +285,8 @@ class OpenMoticsCloud:
     def sensors(self) -> OpenMoticsSensors:
         """Get sensors.
 
-        Returns:
+        Returns
+        -------
             OpenMoticsSensors
         """
         return OpenMoticsSensors(self)
@@ -284,7 +295,8 @@ class OpenMoticsCloud:
     def shutters(self) -> OpenMoticsShutters:
         """Get shutters.
 
-        Returns:
+        Returns
+        -------
             OpenMoticsShutters
         """
         return OpenMoticsShutters(self)
@@ -293,7 +305,8 @@ class OpenMoticsCloud:
     def thermostats(self) -> OpenMoticsThermostats:
         """Get thermostats.
 
-        Returns:
+        Returns
+        -------
             OpenMoticsThermostats
         """
         return OpenMoticsThermostats(self)
@@ -306,7 +319,8 @@ class OpenMoticsCloud:
     async def __aenter__(self) -> OpenMoticsCloud:
         """Async enter.
 
-        Returns:
+        Returns
+        -------
             OpenMoticsCloud: The OpenMoticsCloud object.
         """
         return self
@@ -315,6 +329,7 @@ class OpenMoticsCloud:
         """Async exit.
 
         Args:
+        ----
             *_exc_info: Exec type.
         """
         await self.close()

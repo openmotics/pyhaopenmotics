@@ -13,6 +13,7 @@ if TYPE_CHECKING:
 
 
 class OpenMoticsShutters:  # noqa: SIM119
+
     """Object holding information of the OpenMotics shutters.
 
     All actions related to Shutters or a specific Shutter.
@@ -22,6 +23,7 @@ class OpenMoticsShutters:  # noqa: SIM119
         """Init the installations object.
 
         Args:
+        ----
             omcloud: OpenMoticsCloud
         """
         self._omcloud = omcloud
@@ -35,7 +37,8 @@ class OpenMoticsShutters:  # noqa: SIM119
         Args:
             shutter_filter: Optional filter
 
-        Returns:
+        Returns
+        -------
             Dict with all shutters
 
         usage: The usage filter allows the Shutters to be filtered for their
@@ -64,12 +67,11 @@ class OpenMoticsShutters:  # noqa: SIM119
         Args:
             shutter_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a shutter with id
         """
-        path = (
-            f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}"
-        )
+        path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}"
         body = await self._omcloud.get(path)
 
         return Shutter.parse_obj(body["data"])
@@ -83,7 +85,8 @@ class OpenMoticsShutters:  # noqa: SIM119
         Args:
             shutter_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a shutter with id
         """
         path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}/up"
@@ -98,7 +101,8 @@ class OpenMoticsShutters:  # noqa: SIM119
         Args:
             shutter_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a shutter with id
         """
         path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}/down"
@@ -113,7 +117,8 @@ class OpenMoticsShutters:  # noqa: SIM119
         Args:
             shutter_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a shutter with id
         """
         path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}/stop"
@@ -134,7 +139,8 @@ class OpenMoticsShutters:  # noqa: SIM119
             shutter_id: int
             position: int  (in body)
 
-        Returns:
+        Returns
+        -------
             Returns a shutter with id
         """
         # E501 line too long
@@ -164,7 +170,8 @@ class OpenMoticsShutters:  # noqa: SIM119
             shutter_id: int
             offset: int (in body)
 
-        Returns:
+        Returns
+        -------
             Returns a shutter with id
         """
         # E501 line too long
@@ -195,7 +202,8 @@ class OpenMoticsShutters:  # noqa: SIM119
         Args:
             shutter_id: int
 
-        Returns:
+        Returns
+        -------
             Returns the lock_type as response.
         """
         path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}/lock"
@@ -210,7 +218,8 @@ class OpenMoticsShutters:  # noqa: SIM119
         Args:
             shutter_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a shutter with id
         """
         path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}/unlock"
@@ -231,7 +240,8 @@ class OpenMoticsShutters:  # noqa: SIM119
             shutter_id: int
             position: int (in body)
 
-        Returns:
+        Returns
+        -------
             Returns a shutter with id
         """
         path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}/preset"
@@ -253,7 +263,8 @@ class OpenMoticsShutters:  # noqa: SIM119
         Args:
             shutter_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a shutter with id
         """
         path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}/move"

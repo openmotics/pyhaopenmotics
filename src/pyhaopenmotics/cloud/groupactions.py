@@ -12,6 +12,7 @@ if TYPE_CHECKING:
 
 
 class OpenMoticsGroupActions:  # noqa: SIM119
+
     """Object holding information of the OpenMotics groupactions.
 
     All actions related to groupaction or a specific groupaction.
@@ -21,6 +22,7 @@ class OpenMoticsGroupActions:  # noqa: SIM119
         """Init the installations object.
 
         Args:
+        ----
             omcloud: OpenMoticsCloud
         """
         self._omcloud = omcloud
@@ -34,7 +36,8 @@ class OpenMoticsGroupActions:  # noqa: SIM119
         Args:
             groupactions_filter: Optional filter
 
-        Returns:
+        Returns
+        -------
             Dict with all groupactions
 
         usage: The usage filter allows the GroupActions to be filtered for
@@ -77,7 +80,8 @@ class OpenMoticsGroupActions:  # noqa: SIM119
         Args:
             groupaction_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a groupaction with id
         """
         path = f"/base/installations/{self._omcloud.installation_id}/groupactions/{groupaction_id}"
@@ -94,7 +98,8 @@ class OpenMoticsGroupActions:  # noqa: SIM119
         Args:
             groupaction_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a groupaction with id
         """
         # E501 line too long
@@ -116,7 +121,8 @@ class OpenMoticsGroupActions:  # noqa: SIM119
         Args:
             groupaction_usage: str
 
-        Returns:
+        Returns
+        -------
             Returns a groupaction with id
         """
         path = f"/base/installations/{self._omcloud.installation_id}/groupactions"
@@ -129,7 +135,8 @@ class OpenMoticsGroupActions:  # noqa: SIM119
         SCENE: These GroupActions can be considered a scene,
             e.g. watching tv or romantic dinner.
 
-        Returns:
+        Returns
+        -------
             Returns all scenes
         """
         response = await self.by_usage("SCENE")

@@ -13,6 +13,7 @@ if TYPE_CHECKING:
 
 
 class OpenMoticsLights:  # noqa: SIM119
+
     """Object holding information of the OpenMotics lights.
 
     All actions related to lights or a specific light.
@@ -22,6 +23,7 @@ class OpenMoticsLights:  # noqa: SIM119
         """Init the installations object.
 
         Args:
+        ----
             omcloud: OpenMoticsCloud
         """
         self._omcloud = omcloud
@@ -35,7 +37,8 @@ class OpenMoticsLights:  # noqa: SIM119
         Args:
             light_filter: str
 
-        Returns:
+        Returns
+        -------
             Dict with all lights
         """
         path = f"/base/installations/{self._omcloud.installation_id}/lights"
@@ -60,7 +63,8 @@ class OpenMoticsLights:  # noqa: SIM119
         Args:
             light_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a light with id
         """
         path = f"/base/installations/{self._omcloud.installation_id}/lights/{light_id}"
@@ -77,7 +81,8 @@ class OpenMoticsLights:  # noqa: SIM119
         Args:
             light_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a light with id
         """
         path = f"/base/installations/{self._omcloud.installation_id}/lights/{light_id}/toggle"
@@ -94,7 +99,8 @@ class OpenMoticsLights:  # noqa: SIM119
             light_id: int
             value: <0 - 100>
 
-        Returns:
+        Returns
+        -------
             Returns a light with id
         """
         if value is not None:
@@ -114,14 +120,13 @@ class OpenMoticsLights:  # noqa: SIM119
         Args:
             light_id: int
 
-        Returns:
+        Returns
+        -------
             Returns a light with id
         """
         if light_id is None:
             # Turn off all lights
-            path = (
-                f"/base/installations/{self._omcloud.installation_id}/lights/turn_off"
-            )
+            path = f"/base/installations/{self._omcloud.installation_id}/lights/turn_off"
         else:
             # Turn off light with id
             path = f"/base/installations/{self._omcloud.installation_id}/lights/{light_id}/turn_off"
