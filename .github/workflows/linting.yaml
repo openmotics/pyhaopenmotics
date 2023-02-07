@@ -14,12 +14,8 @@ jobs:
         strategy:
             matrix:
                 include:
-                    - id: bandit
-                      name: Check with bandit
-                    - id: black
-                      name: Check code style
-                    - id: blacken-docs
-                      name: Check code style in documentation
+                    - id: ruff
+                      name: Check with ruff
                     - id: check-ast
                       name: Check Python AST
                     - id: check-case-conflict
@@ -30,42 +26,9 @@ jobs:
                       name: Check that executables have shebangs
                     - id: check-json
                       name: Check JSON files
-                    - id: check-merge-conflict
-                      name: Check for merge conflicts
-                    - id: check-symlinks
-                      name: Check for broken symlinks
                     - id: check-toml
                       name: Check TOML files
                     - id: check-yaml
-                      name: Check YAML files
-                    - id: codespell
-                      name: Check code for common misspellings
-                    - id: debug-statements
-                      name: Debug Statements and imports (Python)
-                    - id: detect-private-key
-                      name: Detect Private Keys
-                    - id: end-of-file-fixer
-                      name: Check End of Files
-                    - id: fix-byte-order-marker
-                      name: Check UTF-8 byte order marker
-                    - id: flake8
-                      name: Enforcing style guide with flake8
-                    - id: isort
-                      name: Check imports are sorted
-                    - id: poetry
-                      name: Check pyproject file
-                    - id: prettier
-                      name: Check if code is prettier
-                    - id: pylint
-                      name: Check with pylint
-                    - id: pyupgrade
-                      name: Check for upgradable syntax
-                    - id: trailing-whitespace
-                      name: Trim Trailing Whitespace
-                    - id: vulture
-                      name: Check for unused Python code
-                    - id: yamllint
-                      name: Check YAML style
         steps:
             - name: ⤵️ Check out code from GitHub
               uses: actions/checkout@v3
@@ -77,20 +40,20 @@ jobs:
             - name: 🏗 Read .nvmrc
               if: ${{ matrix.id == 'prettier' }}
               id: nvm
-              run: echo "##[set-output name=nvmrc;]$(cat .nvmrc)"
-            - name: 🏗 Set up Node.js ${{ steps.nvm.outputs.nvmrc }}
+              run: echo "NVMRC=$(cat .nvmrc)" >> $GITHUB_OUTPUT
+            - name: 🏗 Set up Node.js ${{ steps.nvm.outputs.NVMRC }}
               if: ${{ matrix.id == 'prettier' }}
               uses: actions/setup-node@v3.6.0
               with:
-                  node-version: "${{ steps.nvm.outputs.nvmrc }}"
+                  node-version: "${{ steps.nvm.outputs.NVMRC }}"
             - name: 🏗 Get pip cache dir
               id: pip-cache
               run: |
-                  echo "::set-output name=dir::$(pip cache dir)"
+                  echo "DIR=$(pip cache dir)" >> $GITHUB_OUTPUT
             - name: ⤵️ Restore cached Python PIP packages
               uses: actions/cache@v3
               with:
-                  path: ${{ steps.pip-cache.outputs.dir }}
+                  path: ${{ steps.pip-cache.outputs.DIR }}
                   key: pip-${{ runner.os }}-${{ steps.python.outputs.python-version }}-${{ hashFiles('.github/workflows/requirements.txt') }}
                   restore-keys: |
                       pip-${{ runner.os }}-${{ steps.python.outputs.python-version }}-
@@ -113,15 +76,15 @@ jobs:
               if: ${{ matrix.id == 'prettier' }}
               id: npm-cache
               run: |
-                  echo "::set-output name=dir::$(npm config get cache)"
+                  echo "DIR=$(npm config get cache)" >> $GITHUB_OUTPUT
             - name: ⤵️ Restore cached node modules
               if: ${{ matrix.id == 'prettier' }}
               uses: actions/cache@v3
               with:
-                  path: ${{ steps.npm-cache.outputs.dir }}
-                  key: node-${{ runner.os }}-${{ steps.nvm.outputs.nvmrc }}-${{ hashFiles('.github/workflows/requirements.txt') }}
+                  path: ${{ steps.npm-cache.outputs.DIR }}
+                  key: node-${{ runner.os }}-${{ steps.nvm.outputs.NVMRC }}-${{ hashFiles('.github/workflows/requirements.txt') }}
                   restore-keys: |
-                      node-${{ runner.os }}-${{ steps.nvm.outputs.nvmrc }}-
+                      node-${{ runner.os }}-${{ steps.nvm.outputs.NVMRC }}-
             - name: 🏗 Install NPM dependencies
               if: ${{ matrix.id == 'prettier' }}
               run: npm install
