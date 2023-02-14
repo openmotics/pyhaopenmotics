@@ -47,7 +47,11 @@ taskipy = "~=1.10.3"
 [tool.poetry.group.test.dependencies]
 pytest = "^7.2.1"
 pytest-mock = "^3.7.0"
+pytest-socket = "^0.5.1"
+pytest-asyncio = "^0.20.3"
+pytest-cov = "^3.0.0"
 coverage = "^7.1.0"
+
 
 
 [tool.poetry.urls]
