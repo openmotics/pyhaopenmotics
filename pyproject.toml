@@ -49,10 +49,8 @@ pytest = "^7.2.1"
 pytest-mock = "^3.7.0"
 pytest-socket = "^0.5.1"
 pytest-asyncio = "^0.20.3"
-pytest-cov = "^3.0.0"
-coverage = "^7.1.0"
-
-
+pytest-cov = "^4.0.0"
+coverage = {version = "^7.1", extras = ["toml"]}
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/openmotics/pyhaopenmotics/issues"
