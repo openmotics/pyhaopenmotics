@@ -39,7 +39,7 @@ black = "^22.12"
 isort = "^5.10.1"
 mypy = "^1.0"
 pre-commit = "^3.0.4"
-pyright = "^1.1.292"
+pyright = "^1.1.293"
 python-dotenv = "~=0.21.0"
 ruff = "^0.0.241"
 taskipy = "~=1.10.3"
@@ -49,10 +49,10 @@ pytest = "^7.2.1"
 pytest-mock = "^3.7.0"
 pytest-socket = "^0.5.1"
 pytest-asyncio = "^0.20.3"
-pytest-cov = "^3.0.0"
-coverage = "^7.1.0"
-
-
+pytest-cov = "^4.0.0"
+coverage = {version = "^7.1", extras = ["toml"]}
+pytest-asyncio = "^0.20.3"
+pytest-cov = "^4.0.0"
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/openmotics/pyhaopenmotics/issues"
@@ -174,7 +174,7 @@ typeCheckingMode = "basic"
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 # addopts = "--cov"
-addopts = "--cov --cov-report term-missing --cov-report xml --cov=pyhaopenmotics tests"
+addopts = "--cov-report term-missing --cov-report xml --cov=pyhaopenmotics tests"
 
 [tool.vulture]
 min_confidence = 80

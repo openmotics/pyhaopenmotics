@@ -26,11 +26,11 @@ jobs:
             - name: 🏗 Get pip cache dir
               id: pip-cache
               run: |
-                  echo "::set-output name=dir::$(pip cache dir)"
+                  echo "DIR=$(pip cache dir)" >> $GITHUB_OUTPUT
             - name: ⤵️ Restore cached Python PIP packages
               uses: actions/cache@v3
               with:
-                  path: ${{ steps.pip-cache.outputs.dir }}
+                  path: ${{ steps.pip-cache.outputs.DIR }}
                   key: pip-${{ runner.os }}-${{ steps.python.outputs.python-version }}-${{ hashFiles('.github/workflows/requirements.txt') }}
                   restore-keys: |
                       pip-${{ runner.os }}-${{ steps.python.outputs.python-version }}-
@@ -50,7 +50,7 @@ jobs:
             - name: 🏗 Install dependencies
               run: poetry install --no-interaction
             - name: 🚀 Run pytest
-              run: poetry run pytest --cov radios tests
+              run: poetry run pytest 
             - name: ⬆️ Upload coverage artifact
               uses: actions/upload-artifact@v3
               with:
@@ -73,11 +73,11 @@ jobs:
             - name: 🏗 Get pip cache dir
               id: pip-cache
               run: |
-                  echo "::set-output name=dir::$(pip cache dir)"
+                  echo "DIR=$(pip cache dir)" >> $GITHUB_OUTPUT
             - name: ⤵️ Restore cached Python PIP packages
               uses: actions/cache@v3
               with:
-                  path: ${{ steps.pip-cache.outputs.dir }}
+                  path: ${{ steps.pip-cache.outputs.DIR }}
                   key: pip-${{ runner.os }}-${{ steps.python.outputs.python-version }}-${{ hashFiles('.github/workflows/requirements.txt') }}
                   restore-keys: |
                       pip-${{ runner.os }}-${{ steps.python.outputs.python-version }}-
