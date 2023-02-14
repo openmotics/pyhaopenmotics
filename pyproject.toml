@@ -47,8 +47,9 @@ taskipy = "~=1.10.3"
 [tool.poetry.group.test.dependencies]
 pytest = "^7.2.1"
 pytest-mock = "^3.7.0"
-coverage = "^7.1.0"
-
+coverage = {version = "^7.1", extras = ["toml"]}
+pytest-asyncio = "^0.20.3"
+pytest-cov = "^4.0.0"
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/openmotics/pyhaopenmotics/issues"
@@ -170,7 +171,7 @@ typeCheckingMode = "basic"
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 # addopts = "--cov"
-addopts = "--cov --cov-report term-missing --cov-report xml --cov=pyhaopenmotics tests"
+addopts = "--cov-report term-missing --cov-report xml --cov=pyhaopenmotics tests"
 
 [tool.vulture]
 min_confidence = 80
