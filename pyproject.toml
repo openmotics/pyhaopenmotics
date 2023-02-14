@@ -39,7 +39,7 @@ black = "^22.12"
 isort = "^5.10.1"
 mypy = "^1.0"
 pre-commit = "^3.0.4"
-pyright = "^1.1.292"
+pyright = "^1.1.293"
 python-dotenv = "~=0.21.0"
 ruff = "^0.0.241"
 taskipy = "~=1.10.3"
@@ -172,7 +172,7 @@ typeCheckingMode = "basic"
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 # addopts = "--cov"
-addopts = "--cov --cov-report term-missing --cov-report xml --cov=pyhaopenmotics tests"
+addopts = "--cov-report term-missing --cov-report xml --cov=pyhaopenmotics tests"
 
 [tool.vulture]
 min_confidence = 80

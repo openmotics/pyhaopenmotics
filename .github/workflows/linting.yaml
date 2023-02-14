@@ -11,24 +11,6 @@ jobs:
     precommit:
         name: ${{ matrix.name }}
         runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                include:
-                    - id: ruff
-                      name: Check with ruff
-                    - id: check-ast
-                      name: Check Python AST
-                    - id: check-case-conflict
-                      name: Check for case conflicts
-                    - id: check-docstring-first
-                      name: Check docstring is first
-                    - id: check-executables-have-shebangs
-                      name: Check that executables have shebangs
-                    - id: check-json
-                      name: Check JSON files
-                    - id: check-toml
-                      name: Check TOML files
-                    - id: check-yaml
         steps:
             - name: ⤵️ Check out code from GitHub
               uses: actions/checkout@v3
@@ -88,5 +70,5 @@ jobs:
             - name: 🏗 Install NPM dependencies
               if: ${{ matrix.id == 'prettier' }}
               run: npm install
-            - name: 🚀 Run pre-commit for ${{ matrix.id }}
-              run: poetry run pre-commit run ${{ matrix.id }} --all-files
+            - name: 🚀 Run pre-commit for all files
+              run: poetry run pre-commit run  --all-files
