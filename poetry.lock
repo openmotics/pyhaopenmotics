@@ -1175,7 +1175,7 @@ tomli = {version = ">=2.0.1,<3.0.0", markers = "python_version >= \"3.7\" and py
 name = "toml"
 version = "0.10.2"
 description = "Python Library for Tom's Obvious, Minimal Language"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 files = [
@@ -1232,7 +1232,7 @@ test = ["covdefaults (>=2.2.2)", "coverage (>=7.1)", "coverage-enable-subprocess
 name = "vulture"
 version = "2.7"
 description = "Find dead code"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.6"
 files = [
@@ -1334,4 +1334,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "db4ab0ea8b52ea02d01fc18cc3d566955bf95def28fd93061851bfeca4a2be94"
+content-hash = "146797ab51d64060567c09d8696a4429efd7c2449475ceff316a6460734d4572"
