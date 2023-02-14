@@ -54,6 +54,11 @@ pytest-cov = "^4.0.0"
 coverage = {version = "^7.1", extras = ["toml"]}
 aresponses = "^2.1.6"
 
+[tool.poetry.group.examples.dependencies]
+authlib = "^1.2.0"
+httpx = "^0.23.3"
+python-dotenv = "^0.21.1"
+
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/openmotics/pyhaopenmotics/issues"
 Changelog = "https://github.com/openmotics/pyhaopenmotics/releases"
