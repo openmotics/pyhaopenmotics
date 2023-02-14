@@ -47,9 +47,10 @@ taskipy = "~=1.10.3"
 [tool.poetry.group.test.dependencies]
 pytest = "^7.2.1"
 pytest-mock = "^3.7.0"
-coverage = {version = "^7.1", extras = ["toml"]}
+pytest-socket = "^0.5.1"
 pytest-asyncio = "^0.20.3"
 pytest-cov = "^4.0.0"
+coverage = {version = "^7.1", extras = ["toml"]}
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/openmotics/pyhaopenmotics/issues"
