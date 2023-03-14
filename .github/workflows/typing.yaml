@@ -34,7 +34,7 @@ jobs:
       - name: 🚀 Run mypy
         run: poetry run mypy examples src tests
         
-    pyright:
+  pyright:
     name: pyright
     runs-on: ubuntu-latest
     steps:
