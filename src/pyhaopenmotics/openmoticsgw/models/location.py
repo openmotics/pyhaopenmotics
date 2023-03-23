@@ -18,9 +18,10 @@ class FloorCoordinates:
         """Get floor coordinates from data.
 
         Args:
+        ----
             data: dict
 
-        Returns
+        Returns:
         -------
             FloorCoordinates object
         """
@@ -49,9 +50,10 @@ class Location:
         """Get location coordinates from data.
 
         Args:
+        ----
             data: dict
 
-        Returns
+        Returns:
         -------
             Location object
         """

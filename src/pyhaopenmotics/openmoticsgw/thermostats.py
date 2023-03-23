@@ -39,9 +39,10 @@ class OpenMoticsThermostats:  # noqa: SIM119
         """Set a mode to all Groups the User has access to.
 
         Args:
+        ----
             mode: "HEATING|COOLING"
 
-        Returns
+        Returns:
         -------
             Returns None
         """
@@ -56,9 +57,10 @@ class OpenMoticsThermostats:  # noqa: SIM119
         """Set a mode to all Groups the User has access to.
 
         Args:
+        ----
             state: "ON|OFF"
 
-        Returns
+        Returns:
         -------
             Returns None
         """
@@ -111,9 +113,10 @@ class OpenMoticsThermostatGroups:  # noqa: SIM119
         """Get a list of all ThermostatGroup objects.
 
         Args:
+        ----
             thermostatgroup_filter: str
 
-        Returns
+        Returns:
         -------
             Dict with all ThermostatGroup
         """
@@ -142,9 +145,10 @@ class OpenMoticsThermostatGroups:  # noqa: SIM119
         """Get thermostat by id.
 
         Args:
+        ----
             thermostatgroup_id: int
 
-        Returns
+        Returns:
         -------
             Returns a thermostatgroup with id
         """
@@ -161,10 +165,11 @@ class OpenMoticsThermostatGroups:  # noqa: SIM119
         """Turn on a specified Output object.
 
         Args:
+        ----
             thermostatgroup_id: int
             mode: "HEATING|COOLING"
 
-        Returns
+        Returns:
         -------
             Returns a output with id
         """
@@ -217,9 +222,10 @@ class OpenMoticsThermostatUnits:  # noqa: SIM119
         """Get a list of all ThermostatUnit objects.
 
         Args:
+        ----
             thermostatunit_filter: str
 
-        Returns
+        Returns:
         -------
             Dict with all ThermostatUnit
         """
@@ -248,9 +254,10 @@ class OpenMoticsThermostatUnits:  # noqa: SIM119
         """Get thermostatunit by id.
 
         Args:
+        ----
             thermostatunit_id: int
 
-        Returns
+        Returns:
         -------
             Returns a thermostatunit with id
         """
@@ -267,10 +274,11 @@ class OpenMoticsThermostatUnits:  # noqa: SIM119
         """Set state of a thermostatunit.
 
         Args:
+        ----
             thermostatunit_id: int
             state: "ON|OFF"
 
-        Returns
+        Returns:
         -------
             Returns a thermostatunit with id
         """
@@ -286,10 +294,11 @@ class OpenMoticsThermostatUnits:  # noqa: SIM119
         """Set temperature of a thermostatunit.
 
         Args:
+        ----
             thermostatunit_id: int
             temperature: float
 
-        Returns
+        Returns:
         -------
             Returns a thermostatunit with id
         """
@@ -305,10 +314,11 @@ class OpenMoticsThermostatUnits:  # noqa: SIM119
         """Set preset of a thermostatunit.
 
         Args:
+        ----
             thermostatunit_id: int
             preset: "AUTO|AWAY|PARTY|VACATION"
 
-        Returns
+        Returns:
         -------
             Returns a thermostatunit with id
         """
@@ -329,6 +339,7 @@ class OpenMoticsThermostatUnits:  # noqa: SIM119
         """Set preset of a thermostatunit.
 
         Args:
+        ----
             thermostatunit_id: int,
             heating_away_temp: float,
             heating_vacation_temp: float,
@@ -337,7 +348,7 @@ class OpenMoticsThermostatUnits:  # noqa: SIM119
             cooling_vacation_temp: float,
             cooling_party_temp: float,
 
-        Returns
+        Returns:
         -------
             Returns a thermostatunit with id
         """

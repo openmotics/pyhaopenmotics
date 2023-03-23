@@ -34,9 +34,10 @@ class OpenMoticsLights:  # noqa: SIM119
         """Get a list of all light objects.
 
         Args:
+        ----
             light_filter: str
 
-        Returns
+        Returns:
         -------
             list with all lights
         """

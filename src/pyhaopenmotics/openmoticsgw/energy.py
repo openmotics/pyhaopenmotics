@@ -54,9 +54,10 @@ class OpenMoticsEnergySensors:  # noqa: SIM119
         """Get a list of all energy sensor objects.
 
         Args:
+        ----
             sensor_filter: str
 
-        Returns
+        Returns:
         -------
             List with all energy sensors
         """
@@ -99,9 +100,10 @@ class OpenMoticsEnergySensors:  # noqa: SIM119
         """Get energy sensor by id.
 
         Args:
+        ----
             sensor_id: int
 
-        Returns
+        Returns:
         -------
             Returns an energy sensor with id
         """

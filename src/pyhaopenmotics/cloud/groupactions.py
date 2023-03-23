@@ -34,9 +34,10 @@ class OpenMoticsGroupActions:  # noqa: SIM119
         """Call lists all GroupAction objects.
 
         Args:
+        ----
             groupactions_filter: Optional filter
 
-        Returns
+        Returns:
         -------
             Dict with all groupactions
 
@@ -78,9 +79,10 @@ class OpenMoticsGroupActions:  # noqa: SIM119
         """Get a specified groupaction object.
 
         Args:
+        ----
             groupaction_id: int
 
-        Returns
+        Returns:
         -------
             Returns a groupaction with id
         """
@@ -96,9 +98,10 @@ class OpenMoticsGroupActions:  # noqa: SIM119
         """Trigger a specified groupaction object.
 
         Args:
+        ----
             groupaction_id: int
 
-        Returns
+        Returns:
         -------
             Returns a groupaction with id
         """
@@ -119,9 +122,10 @@ class OpenMoticsGroupActions:  # noqa: SIM119
         intended usage.
 
         Args:
+        ----
             groupaction_usage: str
 
-        Returns
+        Returns:
         -------
             Returns a groupaction with id
         """

@@ -22,9 +22,10 @@ class Status:
         """Return Status object from OpenMotics API response.
 
         Args:
+        ----
             data: The data from the OpenMotics API.
 
-        Returns
+        Returns:
         -------
             A Status object.
         """
@@ -58,9 +59,10 @@ class Light:
         """Return Output object from OpenMotics API response.
 
         Args:
+        ----
             data: The data from the OpenMotics API.
 
-        Returns
+        Returns:
         -------
             A Output object.
         """

@@ -41,9 +41,10 @@ class GroupAction:
         """Return GroupAction object from OpenMotics API response.
 
         Args:
+        ----
             data: The data from the OpenMotics API.
 
-        Returns
+        Returns:
         -------
             A GroupAction object.
         """

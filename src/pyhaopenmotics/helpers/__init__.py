@@ -9,10 +9,11 @@ def get_key_for_word(dictionary: dict[str, Any], word: str) -> Any:
     """Return the key with value.
 
     Args:
+    ----
         dictionary: dict
         word: str
 
-    Returns
+    Returns:
     -------
         Any
     """
@@ -31,11 +32,12 @@ def merge_dicts(list_a: list[Any], dkey: str, list_b: list[Any]) -> list[Any]:
     """Merge list_b into the key 'dkey' of list_a.
 
     Args:
+    ----
         dkey: str
         list_a: list
         list_b: list
 
-    Returns
+    Returns:
     -------
         result: list
 
@@ -64,9 +66,10 @@ def get_ssl_context(verify_ssl: bool = True) -> ssl.SSLContext:
     """Get ssl_context for local gateway.
 
     Args:
+    ----
         verify_ssl: bool
 
-    Returns
+    Returns:
     -------
         ssl.SSLContext
     """

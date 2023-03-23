@@ -35,9 +35,10 @@ class OpenMoticsShutters:  # noqa: SIM119
         """List all Shutter objects.
 
         Args:
+        ----
             shutter_filter: Optional filter
 
-        Returns
+        Returns:
         -------
             Dict with all shutters
 
@@ -65,9 +66,10 @@ class OpenMoticsShutters:  # noqa: SIM119
         """Get a specified Shutter object.
 
         Args:
+        ----
             shutter_id: int
 
-        Returns
+        Returns:
         -------
             Returns a shutter with id
         """
@@ -83,9 +85,10 @@ class OpenMoticsShutters:  # noqa: SIM119
         """Move the specified Shutter into the upwards position.
 
         Args:
+        ----
             shutter_id: int
 
-        Returns
+        Returns:
         -------
             Returns a shutter with id
         """
@@ -99,9 +102,10 @@ class OpenMoticsShutters:  # noqa: SIM119
         """Move the specified Shutter into the downwards position.
 
         Args:
+        ----
             shutter_id: int
 
-        Returns
+        Returns:
         -------
             Returns a shutter with id
         """
@@ -115,9 +119,10 @@ class OpenMoticsShutters:  # noqa: SIM119
         """Stop any movement of the specified Shutter.
 
         Args:
+        ----
             shutter_id: int
 
-        Returns
+        Returns:
         -------
             Returns a shutter with id
         """
@@ -136,10 +141,11 @@ class OpenMoticsShutters:  # noqa: SIM119
         Not all gateways or shutters support this feature.
 
         Args:
+        ----
             shutter_id: int
             position: int  (in body)
 
-        Returns
+        Returns:
         -------
             Returns a shutter with id
         """
@@ -167,10 +173,11 @@ class OpenMoticsShutters:  # noqa: SIM119
         Not all gateways or shutters support this feature.
 
         Args:
+        ----
             shutter_id: int
             offset: int (in body)
 
-        Returns
+        Returns:
         -------
             Returns a shutter with id
         """
@@ -200,9 +207,10 @@ class OpenMoticsShutters:  # noqa: SIM119
 
 
         Args:
+        ----
             shutter_id: int
 
-        Returns
+        Returns:
         -------
             Returns the lock_type as response.
         """
@@ -216,9 +224,10 @@ class OpenMoticsShutters:  # noqa: SIM119
         """Undo the lock action of the specified Shutter.
 
         Args:
+        ----
             shutter_id: int
 
-        Returns
+        Returns:
         -------
             Returns a shutter with id
         """
@@ -237,10 +246,11 @@ class OpenMoticsShutters:  # noqa: SIM119
         Not all gateways or shutters support this feature.
 
         Args:
+        ----
             shutter_id: int
             position: int (in body)
 
-        Returns
+        Returns:
         -------
             Returns a shutter with id
         """
@@ -261,9 +271,10 @@ class OpenMoticsShutters:  # noqa: SIM119
         Not all gateways or shutters support this feature.
 
         Args:
+        ----
             shutter_id: int
 
-        Returns
+        Returns:
         -------
             Returns a shutter with id
         """

@@ -57,9 +57,10 @@ class OpenMoticsOutputs:  # noqa: SIM119
         """Get a list of all output objects.
 
         Args:
+        ----
             output_filter: str
 
-        Returns
+        Returns:
         -------
             list with all outputs
         """
@@ -88,9 +89,10 @@ class OpenMoticsOutputs:  # noqa: SIM119
         """Get output by id.
 
         Args:
+        ----
             output_id: int
 
-        Returns
+        Returns:
         -------
             Returns a output with id
         """
@@ -106,9 +108,10 @@ class OpenMoticsOutputs:  # noqa: SIM119
         """Toggle a specified Output object.
 
         Args:
+        ----
             output_id: int
 
-        Returns
+        Returns:
         -------
             Returns a output with id
         """
@@ -129,10 +132,11 @@ class OpenMoticsOutputs:  # noqa: SIM119
         """Turn on a specified Output object.
 
         Args:
+        ----
             output_id: int
             value: <0 - 100>
 
-        Returns
+        Returns:
         -------
             Returns a output with id
         """
@@ -153,9 +157,10 @@ class OpenMoticsOutputs:  # noqa: SIM119
         """Turn off a specified Output object.
 
         Args:
+        ----
             output_id: int
 
-        Returns
+        Returns:
         -------
             Returns a output with id
         """
