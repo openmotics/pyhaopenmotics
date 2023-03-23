@@ -33,7 +33,7 @@ jobs:
         run: poetry install --no-interaction
       - name: 🚀 Run mypy
         run: poetry run pre-commit run mypy --all-files
-        
+
   pyright:
     name: pyright
     runs-on: ubuntu-latest
