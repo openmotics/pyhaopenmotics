@@ -19,9 +19,10 @@ class GroupLocation:
         """Return Status object from OpenMotics API response.
 
         Args:
+        ----
             data: The data from the OpenMotics API.
 
-        Returns
+        Returns:
         -------
             A GroupLocation object.
         """
@@ -46,9 +47,10 @@ class UnitLocation:
         """Return Status object from OpenMotics API response.
 
         Args:
+        ----
             data: The data from the OpenMotics API.
 
-        Returns
+        Returns:
         -------
             A UnitLocation object.
         """
@@ -72,9 +74,10 @@ class GroupStatus:
         """Return GroupStatus object from OpenMotics API response.
 
         Args:
+        ----
             data: The data from the OpenMotics API.
 
-        Returns
+        Returns:
         -------
             A GroupStatus object.
         """
@@ -100,9 +103,10 @@ class UnitStatus:
         """Return UnitStatus object from OpenMotics API response.
 
         Args:
+        ----
             data: The data from the OpenMotics API.
 
-        Returns
+        Returns:
         -------
             A UnitStatus object.
         """
@@ -129,9 +133,10 @@ class Presets:
         """Return Presets object from OpenMotics API response.
 
         Args:
+        ----
             data: The data from the OpenMotics API.
 
-        Returns
+        Returns:
         -------
             A Presets object.
         """
@@ -155,9 +160,10 @@ class Schedule:
         """Return Schedule object from OpenMotics API response.
 
         Args:
+        ----
             data: The data from the OpenMotics API.
 
-        Returns
+        Returns:
         -------
             A Schedule object.
         """
@@ -183,9 +189,10 @@ class ConfigurationPreset:
         """Return ConfigurationPreset object from OpenMotics API response.
 
         Args:
+        ----
             data: The data from the OpenMotics API.
 
-        Returns
+        Returns:
         -------
             A ConfigurationPreset object.
         """
@@ -210,9 +217,10 @@ class Allowed:
         """Return Allowed object from OpenMotics API response.
 
         Args:
+        ----
             data: The data from the OpenMotics API.
 
-        Returns
+        Returns:
         -------
             A Allowed object.
         """
@@ -234,9 +242,10 @@ class Acl:
         """Return Acl object from OpenMotics API response.
 
         Args:
+        ----
             data: The data from the OpenMotics API.
 
-        Returns
+        Returns:
         -------
             A Acl object.
         """
@@ -259,9 +268,10 @@ class Configuration:
         """Return Configuration object from OpenMotics API response.
 
         Args:
+        ----
             data: The data from the OpenMotics API.
 
-        Returns
+        Returns:
         -------
             A Configuration object.
         """
@@ -292,9 +302,10 @@ class ThermostatGroup:
         """Return ThermostatGroup object from OpenMotics API response.
 
         Args:
+        ----
             data: The data from the OpenMotics API.
 
-        Returns
+        Returns:
         -------
             A ThermostatGroup object.
         """
@@ -348,9 +359,10 @@ class ThermostatUnit:
         """Return ThermostatUnit object from OpenMotics API response.
 
         Args:
+        ----
             data: The data from the OpenMotics API.
 
-        Returns
+        Returns:
         -------
             A ThermostatUnit object.
         """

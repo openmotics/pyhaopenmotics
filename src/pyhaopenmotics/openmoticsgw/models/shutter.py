@@ -24,9 +24,10 @@ class Status:
         """Return Status object from OpenMotics API response.
 
         Args:
+        ----
             data: The data from the OpenMotics API.
 
-        Returns
+        Returns:
         -------
             A Status object.
         """
@@ -54,9 +55,10 @@ class Attributes:
         """Return Attributes object from OpenMotics API response.
 
         Args:
+        ----
             data: The data from the OpenMotics API.
 
-        Returns
+        Returns:
         -------
             A Attributes object.
         """
@@ -124,9 +126,10 @@ class Shutter:
         """Return Shutter object from OpenMotics API response.
 
         Args:
+        ----
             data: The data from the OpenMotics API.
 
-        Returns
+        Returns:
         -------
             A Shutter object.
         """

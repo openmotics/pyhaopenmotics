@@ -35,9 +35,10 @@ class OpenMoticsInstallations:  # noqa: SIM119
         """List all Installation objects.
 
         Args:
+        ----
             installation_filter: str
 
-        Returns
+        Returns:
         -------
             all installations objects
 
@@ -70,9 +71,10 @@ class OpenMoticsInstallations:  # noqa: SIM119
         """Get a single Installation object.
 
         Args:
+        ----
             installation_id: int
 
-        Returns
+        Returns:
         -------
             a single Installation object
 

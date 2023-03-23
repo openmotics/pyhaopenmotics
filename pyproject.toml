@@ -35,7 +35,12 @@ backoff = ">=1.9.0"
 pydantic = "^1.10.7"
 
 [tool.poetry.group.dev.dependencies]
-pre-commit = "^3.2.0"
+black = "23.1.0"
+pre-commit = "3.2.0"
+pre-commit-hooks = "4.4.0"
+ruff = "0.0.259"
+pylint = "2.17.1"
+pyright = "1.1.300"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.2.2"

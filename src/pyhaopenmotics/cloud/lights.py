@@ -35,9 +35,10 @@ class OpenMoticsLights:  # noqa: SIM119
         """Get a list of all light objects.
 
         Args:
+        ----
             light_filter: str
 
-        Returns
+        Returns:
         -------
             Dict with all lights
         """
@@ -61,9 +62,10 @@ class OpenMoticsLights:  # noqa: SIM119
         """Get light by id.
 
         Args:
+        ----
             light_id: int
 
-        Returns
+        Returns:
         -------
             Returns a light with id
         """
@@ -79,9 +81,10 @@ class OpenMoticsLights:  # noqa: SIM119
         """Toggle a specified light object.
 
         Args:
+        ----
             light_id: int
 
-        Returns
+        Returns:
         -------
             Returns a light with id
         """
@@ -96,10 +99,11 @@ class OpenMoticsLights:  # noqa: SIM119
         """Turn on a specified light object.
 
         Args:
+        ----
             light_id: int
             value: <0 - 100>
 
-        Returns
+        Returns:
         -------
             Returns a light with id
         """
@@ -118,9 +122,10 @@ class OpenMoticsLights:  # noqa: SIM119
         """Turn off a specified light object.
 
         Args:
+        ----
             light_id: int
 
-        Returns
+        Returns:
         -------
             Returns a light with id
         """

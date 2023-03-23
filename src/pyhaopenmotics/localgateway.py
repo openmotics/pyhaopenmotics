@@ -105,17 +105,18 @@ class LocalGateway:
         requests are retryed for up to 10 times or 5 minutes.
 
         Args:
+        ----
             path: path
             method: post
             data: dict
             headers: dict
             **kwargs: extra args
 
-        Returns
+        Returns:
         -------
             response json or text
 
-        Raises
+        Raises:
         ------
             OpenMoticsConnectionError: An error occurred while communication with
                 the OpenMotics API.
@@ -185,11 +186,12 @@ class LocalGateway:
         """Make get request using the underlying aiohttp.ClientSession.
 
         Args:
+        ----
             path: path
             data: dict
             headers: dict
 
-        Returns
+        Returns:
         -------
             response json or text
         """
@@ -254,9 +256,10 @@ class LocalGateway:
         """Update the auth headers to include a working token.
 
         Args:
+        ----
             headers: dict
 
-        Returns
+        Returns:
         -------
             headers
         """

@@ -101,16 +101,17 @@ class OpenMoticsCloud:
         requests are retryed for up to 10 times or 5 minutes.
 
         Args:
+        ----
             path: path
             method: get of post
             params: dict
             **kwargs: extra args
 
-        Returns
+        Returns:
         -------
             response json or text
 
-        Raises
+        Raises:
         ------
             OpenMoticsConnectionError: An error occurred while communication with
                 the OpenMotics API.
@@ -179,10 +180,11 @@ class OpenMoticsCloud:
         """Make get request using the underlying aiohttp.ClientSession.
 
         Args:
+        ----
             path: string
             **kwargs: any
 
-        Returns
+        Returns:
         -------
             response json or text
         """
@@ -197,10 +199,11 @@ class OpenMoticsCloud:
         """Make get request using the underlying aiohttp.ClientSession.
 
         Args:
+        ----
             path: path
             **kwargs: extra args
 
-        Returns
+        Returns:
         -------
             response json or text
         """
