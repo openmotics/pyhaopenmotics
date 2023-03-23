@@ -32,7 +32,7 @@ python = "^3.10"
 aiohttp = ">=3.8.0"
 yarl = ">=1.6.0"
 backoff = ">=1.9.0"
-pydantic = "^1.10.6"
+pydantic = "^1.10.7"
 
 [tool.poetry.group.dev.dependencies]
 black = "23.1.0"
