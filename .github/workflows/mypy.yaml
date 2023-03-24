@@ -10,8 +10,8 @@ env:
   DEFAULT_PYTHON: "3.10"
 
 jobs:
-  ruff:
-    name: Ruff
+  mypy:
+    name: Mypy
     runs-on: ubuntu-latest
     steps:
       - name: ⤵️ Check out code from GitHub
