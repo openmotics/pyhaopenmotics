@@ -58,21 +58,7 @@ Changelog = "https://github.com/openmotics/pyhaopenmotics/releases"
 [tool.ruff]
 line-length = 100
 target-version = "py310"
-select = [
-  "E", # pycodestyle
-  "F", # pyflakes
-  "W", # pycodestyle
-  "S", # bandit
-  "I", # isort  # "RUF", # ruff specific exceptions
-  "ANN", # flake8-annotations
-  "B", # flake8-bugbear
-  "C", # flake8-comprehensions
-  "D", # flake-docstrings
-  "Q", # flake8-quotes
-  "T201",
-  "T203", # flake8-
-  "UP", # pyupgrade
-]
+select = [ "ALL" ]
 
 exclude = [
   '__pycache__',
