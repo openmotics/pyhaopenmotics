@@ -13,9 +13,9 @@ class Status(BaseModel):
     value: int | None
 
 
-class Input(BaseModel):
+class OMInput(BaseModel):
 
-    """Class holding an OpenMotics Output.
+    """Class holding an OpenMotics Input.
 
     # noqa: E800
      # [{
@@ -55,4 +55,4 @@ class Input(BaseModel):
             string
 
         """
-        return f"{self.idx}_{self.name}_{self.input_type}"
+        return f"{self.idx}_{self.name}"

@@ -1,5 +1,6 @@
 """Init file for the models."""
 from pyhaopenmotics.openmoticsgw.models.groupaction import GroupAction
+from pyhaopenmotics.openmoticsgw.models.input import OMInput
 from pyhaopenmotics.openmoticsgw.models.light import Light
 from pyhaopenmotics.openmoticsgw.models.location import Location
 from pyhaopenmotics.openmoticsgw.models.output import Output
@@ -15,6 +16,7 @@ __all__ = [
     "Location",
     "Light",
     "Output",
+    "OMInput",
     "Shutter",
     "Sensor",
     "ThermostatUnit",

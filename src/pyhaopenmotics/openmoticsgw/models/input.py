@@ -35,7 +35,7 @@ class Status:
 
 
 @dataclass
-class Input:
+class OMInput:
 
     """Class holding an OpenMotics Input.
 
@@ -70,7 +70,7 @@ class Input:
     version: str
 
     @staticmethod
-    def from_dict(data: dict[str, Any]) -> Input | None:
+    def from_dict(data: dict[str, Any]) -> OMInput | None:
         """Return Input object from OpenMotics API response.
 
         Args:
@@ -85,7 +85,7 @@ class Input:
         if "status" in data:
             status = Status.from_dict(data.get("status", {}))
 
-        return Input(
+        return OMInput(
             idx=data.get("id", 0),
             local_id=data.get("id", 0),
             name=data.get("name", "None"),

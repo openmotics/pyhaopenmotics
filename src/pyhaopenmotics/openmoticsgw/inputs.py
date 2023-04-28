@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING, Any
 
 from pyhaopenmotics.helpers import merge_dicts
 
-from .models.input import Input
+from .models.input import OMInput
 
 if TYPE_CHECKING:
     from pyhaopenmotics.localgateway import LocalGateway  # pylint: disable=R0401
@@ -53,7 +53,7 @@ class OpenMoticsInputs:
     async def get_all(
         self,
         input_filter: str | None = None,
-    ) -> list[Input]:
+    ) -> list[OMInput]:
         """Get a list of all input objects.
 
         Args:
@@ -78,14 +78,14 @@ class OpenMoticsInputs:
             # implemented later
             pass
 
-        inputs = [Input.from_dict(device) for device in data]
+        inputs = [OMInput.from_dict(device) for device in data]
 
         return inputs  # type: ignore
 
     async def get_by_id(
         self,
         input_id: int,
-    ) -> Input | None:
+    ) -> OMInput | None:
         """Get input by id.
 
         Args:
@@ -96,7 +96,7 @@ class OpenMoticsInputs:
         -------
             Returns a input with id
         """
-        for input in await self.get_all():
-            if input.idx == input_id:
-                return input
+        for ominput in await self.get_all():
+            if ominput.idx == input_id:
+                return ominput
         return None

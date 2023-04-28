@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 
 from pydantic import parse_obj_as
 
-from pyhaopenmotics.cloud.models.input import Input
+from pyhaopenmotics.cloud.models.input import OMInput
 
 if TYPE_CHECKING:
     from pyhaopenmotics.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
@@ -31,7 +31,7 @@ class OpenMoticsInputs:
     async def get_all(
         self,
         input_filter: str | None = None,
-    ) -> list[Input]:
+    ) -> list[OMInput]:
         """Get a list of all input objects.
 
         Args:
@@ -53,12 +53,12 @@ class OpenMoticsInputs:
         else:
             body = await self._omcloud.get(path)
 
-        return parse_obj_as(list[Input], body["data"])
+        return parse_obj_as(list[OMInput], body["data"])
 
     async def get_by_id(
         self,
         input_id: int,
-    ) -> Input:
+    ) -> OMInput:
         """Get input by id.
 
         Args:
@@ -72,4 +72,4 @@ class OpenMoticsInputs:
         path = f"/base/installations/{self._omcloud.installation_id}/inputs/{input_id}"
         body = await self._omcloud.get(path)
 
-        return Input.parse_obj(body["data"])
+        return OMInput.parse_obj(body["data"])
