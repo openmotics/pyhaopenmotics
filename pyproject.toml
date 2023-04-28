@@ -35,10 +35,10 @@ backoff = ">=1.9.0"
 pydantic = "^1.10.7"
 
 [tool.poetry.group.dev.dependencies]
-pre-commit = "3.2.0"
+pre-commit = "3.2.2"
 
 [tool.poetry.group.test.dependencies]
-pytest = "^7.2.2"
+pytest = "^7.3.1"
 pytest-mock = "^3.7.0"
 pytest-socket = "^0.5.1"
 pytest-asyncio = "^0.21.0"
@@ -48,7 +48,7 @@ aresponses = "^2.1.6"
 
 [tool.poetry.group.examples.dependencies]
 authlib = "^1.2.0"
-httpx = "^0.23.3"
+httpx = "^0.24.0"
 python-dotenv = "^1.0.0"
 
 [tool.poetry.urls]
