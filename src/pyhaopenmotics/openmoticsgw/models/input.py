@@ -4,8 +4,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
-# from .location import Location
-
 
 @dataclass
 class Status:
@@ -68,7 +66,7 @@ class Input:
     name: str
     status: Status
     last_state_change: float
-    room: int 
+    room: int
     version: str
 
     @staticmethod
