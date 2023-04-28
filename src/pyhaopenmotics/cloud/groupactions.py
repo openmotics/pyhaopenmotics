@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from pyhaopenmotics.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
 
 
-class OpenMoticsGroupActions:  # noqa: SIM119
+class OpenMoticsGroupActions:
 
     """Object holding information of the OpenMotics groupactions.
 
@@ -87,6 +87,7 @@ class OpenMoticsGroupActions:  # noqa: SIM119
             Returns a groupaction with id
         """
         path = f"/base/installations/{self._omcloud.installation_id}/groupactions/{groupaction_id}"
+
         body = await self._omcloud.get(path)
 
         return GroupAction.parse_obj(body["data"])
@@ -143,5 +144,4 @@ class OpenMoticsGroupActions:  # noqa: SIM119
         -------
             Returns all scenes
         """
-        response = await self.by_usage("SCENE")
-        return response
+        return await self.by_usage("SCENE")

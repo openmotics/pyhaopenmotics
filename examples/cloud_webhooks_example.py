@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# noqa: E800
 """Cloud example.
 
 How to use this script:
@@ -16,12 +15,14 @@ import os
 try:
     from dotenv import load_dotenv
 except ModuleNotFoundError as exc:
-    raise ImportError("You have to run 'pip install python-dotenv' first") from exc
+    msg = "You have to run 'pip install python-dotenv' first"
+    raise ImportError(msg) from exc
 
 try:
     from authlib.integrations.httpx_client import AsyncOAuth2Client
 except ModuleNotFoundError as exc:
-    raise ImportError("You have to run 'pip install httpx authlib' first") from exc
+    msg = "You have to run 'pip install httpx authlib' first"
+    raise ImportError(msg) from exc
 
 
 from pyhaopenmotics import OpenMoticsCloud

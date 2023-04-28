@@ -4,14 +4,14 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from .models.light import Light
-
 if TYPE_CHECKING:
     from pyhaopenmotics.localgateway import LocalGateway  # pylint: disable=R0401
 
+    from .models.light import Light
+
 
 @dataclass
-class OpenMoticsLights:  # noqa: SIM119
+class OpenMoticsLights:
 
     """Object holding information of the OpenMotics lights.
 
@@ -27,7 +27,7 @@ class OpenMoticsLights:  # noqa: SIM119
         """
         self._omcloud = omcloud
 
-    async def get_all(  # noqa: A003
+    async def get_all(
         self,
         light_filter: str | None = None,  # pylint: disable=unused-argument
     ) -> list[Light]:
@@ -40,5 +40,10 @@ class OpenMoticsLights:  # noqa: SIM119
         Returns:
         -------
             list with all lights
+
         """
+        if light_filter is not None:
+            # implemented later
+            pass
+
         return []

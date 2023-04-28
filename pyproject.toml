@@ -59,18 +59,8 @@ Changelog = "https://github.com/openmotics/pyhaopenmotics/releases"
 line-length = 100
 target-version = "py310"
 select = [ "ALL" ]
+src = ['src']
 
-exclude = [
-  '__pycache__',
-  '.cache',
-  '.git',
-  '.md',
-  '.svg',
-  '.png',
-  'venv',
-  '.venv',
-  '.json',
-]
 ignore = [
   "ANN101", # Missing type annotation for `self` in method
   "ANN401", # Dynamically typed expressions (typing.Any) are disallowed in
@@ -78,16 +68,23 @@ ignore = [
   "D417", # Missing argument description in the
   "D211", # no-blank-line-before-class
   "D213", # multi-line-summary-second-line
+  "PLR2004", # Magic value used in comparison, consider replacing 2 with a constant variable
+  "PLR0913", # Too many arguments to function call
+  "PGH003", # Use specific rule codes when ignoring type issues
+  "RET504", # Unnecessary variable assignment before `return` statement
+  "TRY003", # Avoid specifying long messages outside the exception class
+  "TRY300", # Consider moving this statement to an `else` block
+  # FBT001 Boolean positional arg in function definition
+  "FBT001", "FBT002", "FBT003",
 ]
-src = ['src']
 
 [tool.ruff.per-file-ignores]
-"src/**.py" = ['D106']
+"src/pyhaopenmotics/cloud/models/**.py" = ['TCH001']
+# "src/**.py" = ['D106']
 "tests/**.py" = ["S101"]
 
 [tool.ruff.isort]
-known-first-party = ["sage"]
-
+known-first-party = ["pyhaopenmotics"]
 
 [tool.black]
 include = '\.pyi?$'

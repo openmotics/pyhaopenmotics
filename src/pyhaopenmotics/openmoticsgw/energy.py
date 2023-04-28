@@ -10,7 +10,7 @@ if TYPE_CHECKING:
     from pyhaopenmotics.localgateway import LocalGateway  # pylint: disable=R0401
 
 
-class OpenMoticsEnergySensors:  # noqa: SIM119
+class OpenMoticsEnergySensors:
 
     """Object holding information of the OpenMotics energy sensors.
 
@@ -47,7 +47,7 @@ class OpenMoticsEnergySensors:  # noqa: SIM119
         """
         self._sensor_configs = sensor_configs
 
-    async def get_all(  # noqa: A003
+    async def get_all(
         self,
         sensor_filter: str | None = None,
     ) -> list[EnergySensor]:
@@ -81,15 +81,15 @@ class OpenMoticsEnergySensors:  # noqa: SIM119
                         "name": module[f"input{idx}"],
                         "inverted": module[f"inverted{idx}"],
                         "status": status,
-                    }
+                    },
                 )
                 total_idx += 1
-
-        sensors = [EnergySensor.from_dict(device) for device in data]
 
         if sensor_filter is not None:
             # implemented later
             pass
+
+        sensors = [EnergySensor.from_dict(device) for device in data]
 
         return sensors  # type: ignore
 

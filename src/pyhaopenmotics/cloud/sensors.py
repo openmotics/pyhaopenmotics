@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     from pyhaopenmotics.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
 
 
-class OpenMoticsSensors:  # noqa: SIM119
+class OpenMoticsSensors:
 
     """Object holding information of the OpenMotics sensors.
 
@@ -28,7 +28,7 @@ class OpenMoticsSensors:  # noqa: SIM119
         """
         self._omcloud = omcloud
 
-    async def get_all(  # noqa: A003
+    async def get_all(
         self,
         sensor_filter: str | None = None,
     ) -> list[Sensor]:

@@ -1,8 +1,6 @@
 """Shutter Model for the OpenMotics API."""
 from __future__ import annotations
 
-from typing import Any
-
 from pydantic import BaseModel, Field
 
 from .location import Location
@@ -27,6 +25,15 @@ class Attributes(BaseModel):
     azimuth: str | None
     compass_point: str | None
     surface_area: str | None
+    tilt_angle: int | None
+
+
+class Metadata(BaseModel):
+
+    """Class holding the metadata."""
+
+    protocol: str | None
+    controllable_name: str | None
 
 
 class Shutter(BaseModel):
@@ -73,11 +80,11 @@ class Shutter(BaseModel):
     local_id: int | None
     name: str
     shutter_type: str = Field(..., alias="type")
-    capabilities: list[Any] | None
+    capabilities: list[str] | None
     status: Status
     location: Location | None
     attributes: Attributes | None
-    metadata: str | None
+    metadata: Metadata | None
     version: str | None = Field(..., alias="_version")
 
     def __str__(self) -> str:

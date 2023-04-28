@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     from pyhaopenmotics.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
 
 
-class OpenMoticsShutters:  # noqa: SIM119
+class OpenMoticsShutters:
 
     """Object holding information of the OpenMotics shutters.
 
@@ -92,7 +92,7 @@ class OpenMoticsShutters:  # noqa: SIM119
         -------
             Returns a shutter with id
         """
-        path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}/up"
+        path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}/open"
         return await self._omcloud.post(path)
 
     async def move_down(
@@ -109,7 +109,7 @@ class OpenMoticsShutters:  # noqa: SIM119
         -------
             Returns a shutter with id
         """
-        path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}/down"
+        path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}/close"
         return await self._omcloud.post(path)
 
     async def stop(
@@ -157,7 +157,7 @@ class OpenMoticsShutters:  # noqa: SIM119
         payload = json.dumps(
             {
                 "position": position,
-            }
+            },
         )
         return await self._omcloud.post(path, json=payload)
 
@@ -189,7 +189,7 @@ class OpenMoticsShutters:  # noqa: SIM119
         payload = json.dumps(
             {
                 "offset": offset,
-            }
+            },
         )
         return await self._omcloud.post(path, json=payload)
 
@@ -258,7 +258,7 @@ class OpenMoticsShutters:  # noqa: SIM119
         payload = json.dumps(
             {
                 "position": position,
-            }
+            },
         )
         return await self._omcloud.post(path, json=payload)
 

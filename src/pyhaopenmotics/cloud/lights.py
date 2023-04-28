@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     from pyhaopenmotics.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
 
 
-class OpenMoticsLights:  # noqa: SIM119
+class OpenMoticsLights:
 
     """Object holding information of the OpenMotics lights.
 
@@ -28,7 +28,7 @@ class OpenMoticsLights:  # noqa: SIM119
         """
         self._omcloud = omcloud
 
-    async def get_all(  # noqa: A003
+    async def get_all(
         self,
         light_filter: str | None = None,
     ) -> list[Light]:
@@ -134,5 +134,8 @@ class OpenMoticsLights:  # noqa: SIM119
             path = f"/base/installations/{self._omcloud.installation_id}/lights/turn_off"
         else:
             # Turn off light with id
-            path = f"/base/installations/{self._omcloud.installation_id}/lights/{light_id}/turn_off"
+            path = (
+                f"/base/installations/{self._omcloud.installation_id}"
+                f"/lights/{light_id}/turn_off"
+            )
         return await self._omcloud.post(path)
