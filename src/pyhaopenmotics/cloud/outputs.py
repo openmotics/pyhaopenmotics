@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     from pyhaopenmotics.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
 
 
-class OpenMoticsOutputs:  # noqa: SIM119
+class OpenMoticsOutputs:
 
     """Object holding information of the OpenMotics outputs.
 
@@ -28,7 +28,7 @@ class OpenMoticsOutputs:  # noqa: SIM119
         """
         self._omcloud = omcloud
 
-    async def get_all(  # noqa: A003
+    async def get_all(
         self,
         output_filter: str | None = None,
     ) -> list[Output]:
@@ -88,7 +88,7 @@ class OpenMoticsOutputs:  # noqa: SIM119
         -------
             Returns a output with id
         """
-        path = f"/base/installations/{self._omcloud.installation_id}" f"/outputs/{output_id}/toggle"
+        path = f"/base/installations/{self._omcloud.installation_id}/outputs/{output_id}/toggle"
         return await self._omcloud.post(path)
 
     async def turn_on(
@@ -112,9 +112,7 @@ class OpenMoticsOutputs:  # noqa: SIM119
             value = min(value, 100)
             value = max(0, value)
 
-        path = (
-            f"/base/installations/{self._omcloud.installation_id}" f"/outputs/{output_id}/turn_on"
-        )
+        path = f"/base/installations/{self._omcloud.installation_id}/outputs/{output_id}/turn_on"
         payload = {"value": value}
         return await self._omcloud.post(path, json=payload)
 
@@ -134,7 +132,7 @@ class OpenMoticsOutputs:  # noqa: SIM119
         """
         if output_id is None:
             # Turn off all lights
-            path = f"/base/installations/{self._omcloud.installation_id}" f"/outputs/turn_off"
+            path = f"/base/installations/{self._omcloud.installation_id}/outputs/turn_off"
         else:
             # Turn off light with id
             path = (

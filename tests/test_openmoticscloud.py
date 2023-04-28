@@ -41,7 +41,7 @@ async def test_timeout(aresponses: ResponsesMockServer) -> None:
     async with aiohttp.ClientSession() as session:
         open_motics = OpenMoticsCloud(
             session=session,
-            token="12345",  # noqa: S106
+            token="12345",
             request_timeout=1,
         )
         with pytest.raises(OpenMoticsConnectionError):
@@ -61,7 +61,7 @@ async def test_http_error400(aresponses: ResponsesMockServer) -> None:
     )
 
     async with aiohttp.ClientSession() as session:
-        open_motics = OpenMoticsCloud(session=session, token="12345")  # noqa: S106
+        open_motics = OpenMoticsCloud(session=session, token="12345")
         with pytest.raises(OpenMoticsError):
             assert await open_motics._request("/")
 
@@ -83,6 +83,6 @@ async def test_http_error500(aresponses: ResponsesMockServer) -> None:
     )
 
     async with aiohttp.ClientSession() as session:
-        open_motics = OpenMoticsCloud(session=session, token="12345")  # noqa: S106
+        open_motics = OpenMoticsCloud(session=session, token="12345")
         with pytest.raises(OpenMoticsError):
             assert await open_motics._request("/")

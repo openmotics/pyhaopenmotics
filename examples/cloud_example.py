@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# noqa: E800
 """Cloud example.
 
 How to use this script:
@@ -16,12 +15,14 @@ import os
 try:
     from dotenv import load_dotenv
 except ModuleNotFoundError as exc:
-    raise ImportError("You have to run 'pip install python-dotenv' first") from exc
+    msg = "You have to run 'pip install python-dotenv' first"
+    raise ImportError(msg) from exc
 
 try:
     from authlib.integrations.httpx_client import AsyncOAuth2Client
 except ModuleNotFoundError as exc:
-    raise ImportError("You have to run 'pip install httpx authlib' first") from exc
+    msg = "You have to run 'pip install httpx authlib' first"
+    raise ImportError(msg) from exc
 
 
 from pyhaopenmotics import OpenMoticsCloud
@@ -41,11 +42,6 @@ load_dotenv()
 
 client_id = os.environ["CLIENT_ID"]
 client_secret = os.environ["CLIENT_SECRET"]
-
-# base_url = f"{CLOUD_BASE_URL}/{CLOUD_API_VERSION}"
-
-# token_url = f"{base_url}{CLOUD_API_TOKEN_URL}"
-# authorize_url = f"{base_url}{CLOUD_API_AUTHORIZATION_URL}"
 
 
 async def main() -> None:
@@ -76,6 +72,8 @@ async def main() -> None:
         omclient.installation_id = i_id
 
         await omclient.outputs.get_all()
+
+        await omclient.inputs.get_all()
 
         await omclient.sensors.get_all()
 

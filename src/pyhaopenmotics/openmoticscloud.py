@@ -5,8 +5,7 @@ from __future__ import annotations
 import asyncio
 import logging
 import socket
-from collections.abc import Awaitable, Callable
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import aiohttp
 import async_timeout
@@ -14,10 +13,16 @@ import backoff
 from yarl import URL
 
 from .__version__ import __version__
+
+if TYPE_CHECKING:
+    from collections.abc import Awaitable, Callable
+
+    from .cloud.models.installation import Installation
+
 from .cloud.groupactions import OpenMoticsGroupActions
+from .cloud.inputs import OpenMoticsInputs
 from .cloud.installations import OpenMoticsInstallations
 from .cloud.lights import OpenMoticsLights
-from .cloud.models.installation import Installation
 from .cloud.outputs import OpenMoticsOutputs
 from .cloud.sensors import OpenMoticsSensors
 from .cloud.shutters import OpenMoticsShutters
@@ -159,16 +164,14 @@ class OpenMoticsCloud:
             resp.raise_for_status()
 
         except asyncio.TimeoutError as exception:
-            raise OpenMoticsConnectionTimeoutError(
-                "Timeout occurred while connecting to OpenMotics API"
-            ) from exception
+            msg = "Timeout occurred while connecting to OpenMotics API"
+            raise OpenMoticsConnectionTimeoutError(msg) from exception
         except (
             aiohttp.ClientError,
             socket.gaierror,
         ) as exception:
-            raise OpenMoticsConnectionError(
-                "Error occurred while communicating with OpenMotics API."
-            ) from exception
+            msg = "Error occurred while communicating with OpenMotics API."
+            raise OpenMoticsConnectionError(msg) from exception
 
         if "application/json" in resp.headers.get("Content-Type", ""):
             response_data = await resp.json()
@@ -188,12 +191,11 @@ class OpenMoticsCloud:
         -------
             response json or text
         """
-        response = await self._request(
+        return await self._request(
             path,
             method=aiohttp.hdrs.METH_GET,
             **kwargs,
         )
-        return response
 
     async def post(self, path: str, **kwargs: Any) -> Any:
         """Make get request using the underlying aiohttp.ClientSession.
@@ -207,12 +209,11 @@ class OpenMoticsCloud:
         -------
             response json or text
         """
-        response = await self._request(
+        return await self._request(
             path,
             method=aiohttp.hdrs.METH_POST,
             **kwargs,
         )
-        return response
 
     async def subscribe_webhook(self) -> None:
         """Register a webhook with OpenMotics for live updates."""
@@ -253,6 +254,16 @@ class OpenMoticsCloud:
             OpenMoticsInstallations
         """
         return OpenMoticsInstallations(self)
+
+    @property
+    def inputs(self) -> OpenMoticsInputs:
+        """Get inputs.
+
+        Returns
+        -------
+            OpenMoticsInputs
+        """
+        return OpenMoticsInputs(self)
 
     @property
     def outputs(self) -> OpenMoticsOutputs:

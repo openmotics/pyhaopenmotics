@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 
 @dataclass
-class OpenMoticsShutters:  # noqa: SIM119
+class OpenMoticsShutters:
 
     """Object holding information of the OpenMotics shutters.
 
@@ -48,7 +48,7 @@ class OpenMoticsShutters:  # noqa: SIM119
         """
         self._shutter_configs = shutter_configs
 
-    async def get_all(  # noqa: A003
+    async def get_all(
         self,
         shutter_filter: str | None = None,
     ) -> list[Shutter]:

@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     from pyhaopenmotics.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
 
 
-class OpenMoticsThermostats:  # noqa: SIM119
+class OpenMoticsThermostats:
 
     """Object holding information of the OpenMotics thermostats.
 
@@ -68,7 +68,7 @@ class OpenMoticsThermostats:  # noqa: SIM119
         return await self._omcloud.post(path, json=payload)
 
 
-class OpenMoticsThermostatGroups:  # noqa: SIM119
+class OpenMoticsThermostatGroups:
 
     """Object holding information of the OpenMotics thermostats.
 
@@ -84,13 +84,14 @@ class OpenMoticsThermostatGroups:  # noqa: SIM119
         """
         self._omcloud = _omcloud
 
-    async def get_all(  # noqa: A003
+    async def get_all(
         self,
     ) -> list[ThermostatGroup]:
         """Get a list of all thermostatgroup objects.
 
         Args:
         ----
+            None:
 
         Returns:
         -------
@@ -148,7 +149,7 @@ class OpenMoticsThermostatGroups:  # noqa: SIM119
         return await self._omcloud.post(path, json=payload)
 
 
-class OpenMoticsThermostatUnits:  # noqa: SIM119
+class OpenMoticsThermostatUnits:
 
     """Object holding information of the OpenMotics thermostats.
 
@@ -164,13 +165,14 @@ class OpenMoticsThermostatUnits:  # noqa: SIM119
         """
         self._omcloud = _omcloud
 
-    async def get_all(  # noqa: A003
+    async def get_all(
         self,
     ) -> list[ThermostatUnit]:
         """Get a list of all thermostatunit objects.
 
         Args:
         ----
+            None:
 
         Returns:
         -------

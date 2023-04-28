@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 
 
 @dataclass
-class OpenMoticsOutputs:  # noqa: SIM119
+class OpenMoticsOutputs:
 
     """Object holding information of the OpenMotics outputs.
 
@@ -50,7 +50,7 @@ class OpenMoticsOutputs:  # noqa: SIM119
         """
         self._output_configs = output_configs
 
-    async def get_all(  # noqa: A003
+    async def get_all(
         self,
         output_filter: str | None = None,
     ) -> list[Output]:
@@ -74,11 +74,11 @@ class OpenMoticsOutputs:  # noqa: SIM119
 
         data = merge_dicts(self.output_configs, "status", status)
 
-        outputs = [Output.from_dict(device) for device in data]
-
         if output_filter is not None:
             # implemented later
             pass
+
+        outputs = [Output.from_dict(device) for device in data]
 
         return outputs  # type: ignore
 

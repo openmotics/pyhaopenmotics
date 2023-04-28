@@ -5,9 +5,11 @@ from __future__ import annotations
 import asyncio
 import logging
 import socket
-import ssl
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    import ssl
 import time
-from typing import Any
 
 import aiohttp
 import async_timeout
@@ -16,7 +18,7 @@ from yarl import URL
 
 from .__version__ import __version__
 from .errors import (
-    AuthenticationException,
+    AuthenticationError,
     OpenMoticsConnectionError,
     OpenMoticsConnectionSslError,
     OpenMoticsConnectionTimeoutError,
@@ -24,6 +26,7 @@ from .errors import (
 from .helpers import get_ssl_context
 from .openmoticsgw.energy import OpenMoticsEnergySensors
 from .openmoticsgw.groupactions import OpenMoticsGroupActions
+from .openmoticsgw.inputs import OpenMoticsInputs
 from .openmoticsgw.lights import OpenMoticsLights
 from .openmoticsgw.outputs import OpenMoticsOutputs
 from .openmoticsgw.sensors import OpenMoticsSensors
@@ -153,23 +156,21 @@ class LocalGateway:
             resp.raise_for_status()
 
         except asyncio.TimeoutError as exception:
-            raise OpenMoticsConnectionTimeoutError(
-                "Timeout occurred while connecting to OpenMotics API"
-            ) from exception
+            msg = "Timeout occurred while connecting to OpenMotics API."
+            raise OpenMoticsConnectionTimeoutError(msg) from exception
         except aiohttp.ClientConnectorSSLError as exception:  # pyright: ignore
             # Expired certificate / Date ISSUE
             # pylint: disable=bad-exception-context
-            raise OpenMoticsConnectionSslError("Error with SSL certificate.") from exception
+            msg = "Error with SSL certificate."
+            raise OpenMoticsConnectionSslError(msg) from exception
         except aiohttp.ClientResponseError as exception:
             if exception.status in [401, 403]:
-                raise AuthenticationException() from exception
-            raise OpenMoticsConnectionError(
-                "Error occurred while communicating with OpenMotics API."
-            ) from exception
+                raise AuthenticationError from exception
+            msg = "Error occurred while communicating with OpenMotics API."
+            raise OpenMoticsConnectionError(msg) from exception
         except (socket.gaierror, aiohttp.ClientError) as exception:
-            raise OpenMoticsConnectionError(
-                "Error occurred while communicating with OpenMotics API."
-            ) from exception
+            msg = "Error occurred while communicating with OpenMotics API."
+            raise OpenMoticsConnectionError(msg) from exception
 
         if "application/json" in resp.headers.get("Content-Type", ""):
             response_data = await resp.json()
@@ -274,9 +275,19 @@ class LocalGateway:
                 "User-Agent": self.user_agent,
                 "Accept": "application/json, text/plain, */*",
                 "Authorization": f"Bearer {self.token}",
-            }
+            },
         )
         return headers
+
+    @property
+    def inputs(self) -> OpenMoticsInputs:
+        """Get outputs.
+
+        Returns
+        -------
+            OpenMoticsOutputs
+        """
+        return OpenMoticsInputs(self)
 
     @property
     def outputs(self) -> OpenMoticsOutputs:

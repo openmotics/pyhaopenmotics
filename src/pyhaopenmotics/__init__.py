@@ -3,7 +3,7 @@
 from pyhaopenmotics.cloud.models import Installation
 
 from .errors import (
-    AuthenticationException,
+    AuthenticationError,
     OpenMoticsConnectionError,
     OpenMoticsConnectionSslError,
     OpenMoticsConnectionTimeoutError,
@@ -20,7 +20,7 @@ __all__ = [
     "OpenMoticsConnectionError",
     "OpenMoticsConnectionTimeoutError",
     "OpenMoticsConnectionSslError",
-    "AuthenticationException",
+    "AuthenticationError",
     "Installation",
     "get_ssl_context",
 ]

@@ -70,6 +70,32 @@ class Attributes:
 
 
 @dataclass
+class Metadata:
+
+    """Class holding the Metadata."""
+
+    protocol: str
+    controllable_name: str
+
+    @staticmethod
+    def from_dict(data: dict[str, Any]) -> Metadata:
+        """Return Metadata object from OpenMotics API response.
+
+        Args:
+        ----
+            data: The data from the OpenMotics API.
+
+        Returns:
+        -------
+            A Metata object.
+        """
+        return Metadata(
+            protocol=data.get("protocol", "None"),
+            controllable_name=data.get("controllable_name", "None"),
+        )
+
+
+@dataclass
 class Shutter:
 
     """Object holding an OpenMotics Shutter.
@@ -117,7 +143,7 @@ class Shutter:
     location: Location
     capabilities: list[str]
     attributes: Attributes
-    metadata: dict[str, Any]
+    metadata: Metadata
     status: Status
     version: str
 
@@ -145,7 +171,7 @@ class Shutter:
             location=Location.from_dict(data),
             capabilities=data.get("capabilities", "None"),
             attributes=Attributes.from_dict(data),
-            metadata={},
+            metadata=Metadata.from_dict(data),
             status=status,
             version=data.get("version", "0.0"),
         )
