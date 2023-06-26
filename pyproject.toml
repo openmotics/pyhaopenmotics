@@ -47,7 +47,7 @@ coverage = {version = "^7.2", extras = ["toml"]}
 aresponses = "^2.1.6"
 
 [tool.poetry.group.examples.dependencies]
-authlib = "^1.2.0"
+authlib = "^1.2.1"
 httpx = "^0.24.1"
 python-dotenv = "^1.0.0"
 
