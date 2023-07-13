@@ -41,7 +41,7 @@ pre-commit = "3.3.3"
 pytest = "^7.3.2"
 pytest-mock = "^3.11.1"
 pytest-socket = "^0.5.1"
-pytest-asyncio = "^0.21.0"
+pytest-asyncio = "^0.21.1"
 pytest-cov = "^4.1.0"
 coverage = {version = "^7.2", extras = ["toml"]}
 aresponses = "^2.1.6"
