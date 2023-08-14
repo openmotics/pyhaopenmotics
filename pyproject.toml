@@ -43,7 +43,7 @@ pytest-mock = "^3.11.1"
 pytest-socket = "^0.5.1"
 pytest-asyncio = "^0.21.1"
 pytest-cov = "^4.1.0"
-coverage = {version = "^7.2", extras = ["toml"]}
+coverage = {version = "^7.3", extras = ["toml"]}
 aresponses = "^2.1.6"
 
 [tool.poetry.group.examples.dependencies]
