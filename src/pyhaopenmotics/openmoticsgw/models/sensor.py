@@ -85,12 +85,6 @@ class Sensor:
         if "status" in data:
             status = Status.from_dict(data.get("status", {}))
 
-        # Switch can always turn on/OFF
-        capabilities = ["ON_OFF"]
-        # Dimmmer
-        if data.get("module_type") == "D":
-            capabilities.append("RANGE")
-
         return Sensor(
             idx=data.get("id", 0),
             local_id=data.get("id", 0),

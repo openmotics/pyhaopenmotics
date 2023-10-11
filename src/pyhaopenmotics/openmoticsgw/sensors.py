@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
-from pyhaopenmotics.helpers import merge_dicts
 from pyhaopenmotics.openmoticsgw.models.sensor import Sensor
 
 if TYPE_CHECKING:
@@ -67,10 +66,18 @@ class OpenMoticsSensors:
             if goc["success"] is True:
                 self.sensor_configs = goc["config"]
 
-        sensors_status = await self._omcloud.exec_action("get_sensor_status")
-        status = sensors_status["status"]
+        sensors_statuses = await self._omcloud.exec_action("get_sensor_status")
+        statuses = {s["id"]: s for s in sensors_statuses["status"]}
 
-        data = merge_dicts(self.sensor_configs, "status", status)
+        data = []
+        for config in self.sensor_configs:
+            sensor_config = config
+            sensor_status = statuses.get(config["id"])
+            if sensor_status:
+                sensor_config["status"] = {
+                    sensor_config.get("physical_quantity"): sensor_status.get("value"),
+                }
+            data.append(sensor_config)
 
         sensors = [Sensor.from_dict(device) for device in data]
 
