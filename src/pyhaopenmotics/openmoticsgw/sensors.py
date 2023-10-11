@@ -75,7 +75,7 @@ class OpenMoticsSensors:
             sensor_status = statuses.get(config["id"])
             if sensor_status:
                 sensor_config["status"] = {
-                    sensor_config.get("physical_quantity"): sensor_status.get("value")
+                    sensor_config.get("physical_quantity"): sensor_status.get("value"),
                 }
             data.append(sensor_config)
 
