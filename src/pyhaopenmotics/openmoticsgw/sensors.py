@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
-from pyhaopenmotics.helpers import merge_dicts
 from pyhaopenmotics.openmoticsgw.models.sensor import Sensor
 
 if TYPE_CHECKING:
