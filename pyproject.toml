@@ -48,7 +48,7 @@ aresponses = "^2.1.6"
 
 [tool.poetry.group.examples.dependencies]
 authlib = "^1.2.1"
-httpx = "^0.25.0"
+httpx = "^0.25.1"
 python-dotenv = "^1.0.0"
 
 [tool.poetry.urls]
