@@ -176,17 +176,17 @@ tests-no-zope = ["cloudpickle", "hypothesis", "mypy (>=1.1.1)", "pympler", "pyte
 
 [[package]]
 name = "authlib"
-version = "1.2.1"
+version = "1.3.0"
 description = "The ultimate Python library in building OAuth and OpenID Connect servers and clients."
 optional = false
-python-versions = "*"
+python-versions = ">=3.8"
 files = [
-    {file = "Authlib-1.2.1-py2.py3-none-any.whl", hash = "sha256:c88984ea00149a90e3537c964327da930779afa4564e354edfd98410bea01911"},
-    {file = "Authlib-1.2.1.tar.gz", hash = "sha256:421f7c6b468d907ca2d9afede256f068f87e34d23dd221c07d13d4c234726afb"},
+    {file = "Authlib-1.3.0-py2.py3-none-any.whl", hash = "sha256:9637e4de1fb498310a56900b3e2043a206b03cb11c05422014b0302cbc814be3"},
+    {file = "Authlib-1.3.0.tar.gz", hash = "sha256:959ea62a5b7b5123c5059758296122b57cd2585ae2ed1c0622c21b371ffdae06"},
 ]
 
 [package.dependencies]
-cryptography = ">=3.2"
+cryptography = "*"
 
 [[package]]
 name = "backoff"
@@ -1177,4 +1177,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "d9149c2ad1896682ba4dadfadebb20c4bbb8f1bdf3851eb15c1f414dcfa47b43"
+content-hash = "957c8027bb6c2fec0041b2dc4ccaa978f4b818d8d306bd1bb652d20ee17975d5"
