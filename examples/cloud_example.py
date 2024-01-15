@@ -79,9 +79,9 @@ async def main() -> None:
 
         await omclient.groupactions.get_all()
 
-        await omclient.thermostats.groups.get_all()
+        # await omclient.thermostats.groups.get_all()
 
-        await omclient.thermostats.units.get_all()
+        # await omclient.thermostats.units.get_all()
 
         await omclient.shutters.get_all()
 
