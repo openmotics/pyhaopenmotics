@@ -1,10 +1,15 @@
 """Sensor Model for the OpenMotics API."""
 from __future__ import annotations
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 
 from .location import Location
 
+zombie_status = {
+        "humidity" : None,
+        "temperature": None,
+        "brightness": None
+        }
 
 class Status(BaseModel):
 
@@ -46,6 +51,10 @@ class Sensor(BaseModel):
     status: Status
     last_state_change: float | None
     version: str | None = Field(..., alias="_version")
+
+    @validator("status", pre=True)
+    def replace_none(cls, v):
+        return v or zombie_status
 
     def __str__(self) -> str:
         """Represent the class objects as a string.
