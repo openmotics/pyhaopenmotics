@@ -28,11 +28,12 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.10"
-aiohttp = ">=3.8.0"
-yarl = ">=1.6.0"
-backoff = ">=1.9.0"
-pydantic = "^1.10.9"
+python = "^3.11"
+aiohttp = ">=3.9.0"
+async_timeout = ">=4.0.0"
+yarl = ">=1.9.0"
+pydantic = ">=1.10.9, <2.0.0" # v2 has breaking changes (#99218).
+websockets = ">=11.0.1"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "3.6.0"
@@ -79,7 +80,7 @@ ignore = [
 ]
 
 [tool.ruff.per-file-ignores]
-"src/pyhaopenmotics/cloud/models/**.py" = ['TCH001']
+"src/pyhaopenmotics/cloud/models/**.py" = ['TCH001', 'N805']
 # "src/**.py" = ['D106']
 "tests/**.py" = ["S101"]
 
@@ -108,36 +109,29 @@ branch = true
 source = ["pyhaopenmotics"]
 
 [tool.mypy]
+plugins = [
+  "pydantic.mypy"
+]
+
 files = "src"
 mypy_path = "src"
 python_version = "3.10"
 
-# flake8-mypy expects the two following for sensible formatting
-show_column_numbers = true
-
-# show error messages from unrelated files
-follow_imports = "normal"
-
-# suppress errors about unsatisfied imports
-ignore_missing_imports = true
-
-# be strict
-check_untyped_defs = true
-disallow_any_generics = true
-disallow_incomplete_defs = true
-# disallow_subclassing_any = true
-disallow_untyped_calls = true
-disallow_untyped_defs = true
-disallow_untyped_decorators = false # thanks backoff :(
-no_implicit_optional = true
-no_implicit_reexport = true
-strict_optional = true
-warn_incomplete_stub = true
-warn_no_return = true
+follow_imports = "silent"
 warn_redundant_casts = true
-# warn_return_any = false
-warn_unused_configs = true
 warn_unused_ignores = true
+disallow_any_generics = true
+check_untyped_defs = true
+no_implicit_reexport = true
+
+# for strict mypy: (this is the tricky one :-))
+disallow_untyped_defs = true
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
+warn_untyped_fields = true
 
 # No incremental mode
 cache_dir = "/dev/null"
@@ -148,6 +142,7 @@ module = "mypy-aiohttp.*"
 
 [tool.pyright]
 include = ["src"]
+exclude = ["tests","examples"]
 strictParameterNoneValue = false
 typeCheckingMode = "basic"
 

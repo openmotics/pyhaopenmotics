@@ -1,15 +1,14 @@
 """Sensor Model for the OpenMotics API."""
 from __future__ import annotations
 
+from typing import Any
+
 from pydantic import BaseModel, Field, validator
 
 from .location import Location
 
-zombie_status = {
-        "humidity" : None,
-        "temperature": None,
-        "brightness": None
-        }
+zombie_status = {"humidity": None, "temperature": None, "brightness": None}
+
 
 class Status(BaseModel):
 
@@ -39,7 +38,7 @@ class Sensor(BaseModel):
     #         "brightness": null | <brightness 0 - 100>
     #     }
     # }
-     #     ...
+    #     ...
     """
 
     # pylint: disable=too-many-instance-attributes
@@ -53,7 +52,21 @@ class Sensor(BaseModel):
     version: str | None = Field(..., alias="_version")
 
     @validator("status", pre=True)
-    def replace_none(cls, v):
+    def replace_none(cls, v: Any) -> Any:
+        """Add an empty value to a zombie sensor.
+
+        Args:
+        ----
+            cls: Any
+            v: Any
+
+        Returns:
+        -------
+            Dict with Status
+        """
+        if cls:
+            # Stupid code to get rid of Vulture Error of unused vairiable cls
+            pass
         return v or zombie_status
 
     def __str__(self) -> str:

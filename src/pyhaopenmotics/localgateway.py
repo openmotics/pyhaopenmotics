@@ -9,11 +9,11 @@ from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     import ssl
+
 import time
 
 import aiohttp
 import async_timeout
-import backoff
 from yarl import URL
 
 from .__version__ import __version__
@@ -92,7 +92,7 @@ class LocalGateway:
             _LOGGER.debug("LocalGateway setting self.auth")
             self.auth = {"username": self.username, "password": self.password}
 
-    @backoff.on_exception(backoff.expo, OpenMoticsConnectionError, max_tries=3, logger=None)
+    # @backoff.on_exception(backoff.expo, OpenMoticsConnectionError, max_tries=3, logger=None)
     async def _request(
         self,
         path: str,
@@ -365,7 +365,7 @@ class LocalGateway:
         if self.session and self._close_session:
             await self.session.close()
 
-    async def __aenter__(self) -> LocalGateway:
+    async def __aenter__(self) -> Any:
         """Async enter.
 
         Returns
@@ -374,7 +374,7 @@ class LocalGateway:
         """
         return self
 
-    async def __aexit__(self, *_exc_info: Any) -> None:
+    async def __aexit__(self, *_exc_info: object) -> None:
         """Async exit.
 
         Args:
