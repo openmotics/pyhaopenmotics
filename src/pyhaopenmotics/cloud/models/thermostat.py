@@ -122,7 +122,7 @@ class ThermostatGroup(BaseModel):
     schedule: Schedule | None
     capabilities: list[Any] | None
     version: str | None = Field(..., alias="_version")
-    thermostat_ids: dict[str, Any] | None
+    thermostat_ids: list[Any] | None
     status: GroupStatus | None
     acl: Acl | None = Field(..., alias="_acl")
 
@@ -216,7 +216,6 @@ class ThermostatUnit(BaseModel):
     location: UnitLocation | None
     status: UnitStatus | None
     version: str | None = Field(..., alias="_version")
-    acl: str | None = Field(..., alias="_acl")
 
     def __str__(self) -> str:
         """Represent the class objects as a string.

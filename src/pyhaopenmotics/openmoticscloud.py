@@ -9,7 +9,6 @@ from typing import TYPE_CHECKING, Any
 
 import aiohttp
 import async_timeout
-import backoff
 from yarl import URL
 
 from .__version__ import __version__
@@ -91,7 +90,6 @@ class OpenMoticsCloud:
         """
         self._installation_id = installation_id
 
-    @backoff.on_exception(backoff.expo, OpenMoticsConnectionError, max_tries=3, logger=None)
     async def _request(
         self,
         path: str,
@@ -330,7 +328,7 @@ class OpenMoticsCloud:
         if self.session and self._close_session:
             await self.session.close()
 
-    async def __aenter__(self) -> OpenMoticsCloud:
+    async def __aenter__(self) -> Any:
         """Async enter.
 
         Returns
@@ -339,7 +337,7 @@ class OpenMoticsCloud:
         """
         return self
 
-    async def __aexit__(self, *_exc_info: Any) -> None:
+    async def __aexit__(self, *_exc_info: object) -> None:
         """Async exit.
 
         Args:
