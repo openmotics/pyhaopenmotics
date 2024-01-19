@@ -36,10 +36,15 @@ class UnitStatus(BaseModel):
 
     """Class holding the status."""
 
+    state: str | None
+    setpoint: float | None
+    steering_power: float | None
+    active_preset: str | None
+    current_temperature: float | None
+    mode: str | None
+    preset_expiration: str | None
     actual_temperature: float | None
     current_setpoint: float | None
-    output_0: str | None
-    output_1: str | None
     preset: str | None
 
 
@@ -200,12 +205,17 @@ class ThermostatUnit(BaseModel):
     #     },
     #     "name": "<name>",
     #     "status": {
-    #         "actual_temperature": <current measured temperature>,
-    #         "current_setpoint": <desired temperature>,
-    #         "output_0": <level of first output>,
-    #         "output_1": <level of second output>,
-    #         "preset": "AUTO|PARTY|AWAY|VACATION"
-    #     }
+    #           "state":"ON",
+    #           "setpoint":13.0,
+    #           "steering_power":0,
+    #           "active_preset":"AUTO",
+    #           "current_temperature":18.5,
+    #           "mode":"HEATING",
+    #           "preset_expiration":null,
+    #           "actual_temperature":18.5,
+    #           "current_setpoint":13.0,
+    #           "preset":"AUTO"},
+    # #     }
     # }
     """
 
