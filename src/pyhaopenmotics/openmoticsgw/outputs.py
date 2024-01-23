@@ -9,7 +9,8 @@ from pyhaopenmotics.helpers import merge_dicts
 from .models.output import Output
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.localgateway import LocalGateway  # pylint: disable=R0401
+    from pyhaopenmotics.localgateway import \
+        LocalGateway  # pylint: disable=R0401
 
 
 @dataclass
@@ -127,7 +128,7 @@ class OpenMoticsOutputs:
     async def turn_on(
         self,
         output_id: int,
-        value: int | None = 100,
+        value: int | None = None,
     ) -> Any:
         """Turn on a specified Output object.
 

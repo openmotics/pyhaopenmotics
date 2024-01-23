@@ -5,11 +5,11 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any
 
 from pydantic import parse_obj_as
-
 from pyhaopenmotics.cloud.models.light import Light
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
+    from pyhaopenmotics.openmoticscloud import \
+        OpenMoticsCloud  # pylint: disable=R0401
 
 
 class OpenMoticsLights:
@@ -94,7 +94,7 @@ class OpenMoticsLights:
     async def turn_on(
         self,
         light_id: int,
-        value: int | None = 100,
+        value: int | None = None,
     ) -> Any:
         """Turn on a specified light object.
 
@@ -107,12 +107,14 @@ class OpenMoticsLights:
         -------
             Returns a light with id
         """
+        payload = {}
+
         if value is not None:
             value = min(value, 100)
             value = max(0, value)
+            payload = {"value": value}
 
         path = f"/base/installations/{self._omcloud.installation_id}/lights/{light_id}/turn_on"
-        payload = {"value": value}
         return await self._omcloud.post(path, json=payload)
 
     async def turn_off(
