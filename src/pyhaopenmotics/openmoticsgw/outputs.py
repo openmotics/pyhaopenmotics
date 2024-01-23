@@ -127,7 +127,7 @@ class OpenMoticsOutputs:
     async def turn_on(
         self,
         output_id: int,
-        value: int | None = 100,
+        value: int | None = None,
     ) -> Any:
         """Turn on a specified Output object.
 
