@@ -5,11 +5,11 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any
 
 from pydantic import parse_obj_as
+
 from pyhaopenmotics.cloud.models.light import Light
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.openmoticscloud import \
-        OpenMoticsCloud  # pylint: disable=R0401
+    from pyhaopenmotics.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
 
 
 class OpenMoticsLights:

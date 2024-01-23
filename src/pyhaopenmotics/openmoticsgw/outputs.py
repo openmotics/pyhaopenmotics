@@ -9,8 +9,7 @@ from pyhaopenmotics.helpers import merge_dicts
 from .models.output import Output
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.localgateway import \
-        LocalGateway  # pylint: disable=R0401
+    from pyhaopenmotics.localgateway import LocalGateway  # pylint: disable=R0401
 
 
 @dataclass
