@@ -5,10 +5,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
 
 from pyhaopenmotics.helpers import merge_dicts
-from pyhaopenmotics.openmoticsgw.models.thermostat import (
-    ThermostatGroup,
-    ThermostatUnit,
-)
+from pyhaopenmotics.openmoticsgw.models.thermostat import ThermostatGroup, ThermostatUnit
 
 if TYPE_CHECKING:
     from pyhaopenmotics.localgateway import LocalGateway  # pylint: disable=R0401
@@ -229,6 +226,25 @@ class OpenMoticsThermostatUnits:
         -------
             Dict with all ThermostatUnit
         """
+        ###############################################################################
+        # Code has changed in latest version of gateway:
+        #      get_thermostat_configurations does NOT exist anymore
+        # As the gateway is now closed source, we cannot see the new functions.
+        ###############################################################################
+        #
+        # Return an empty config to avoid errors
+        empty_device = [
+            {
+                "id": 0,
+                "name": "None",
+            },
+        ]
+        thermostatunits = [ThermostatUnit.from_dict(device) for device in empty_device]
+        return thermostatunits
+
+        # TO BE FIXED
+        #
+        ###############################################################################
         if len(self.thermostatunit_configs) == 0:
             goc = await self._omcloud.exec_action("get_thermostat_configurations")
             if goc["success"] is True:

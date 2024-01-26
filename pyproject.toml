@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "pyhaopenmotics"
-version = "0.0.4"
+version = "0.0.5"
 description = "Asynchronous Python client for the OpenMotics API."
 authors = ["Wouter Coppens <wouter.coppens@gmail.com>"]
 maintainers = ["Wouter Coppens <wouter.coppens@gmail.com>"]
@@ -32,6 +32,7 @@ python = "^3.11"
 aiohttp = ">=3.9.0"
 async_timeout = ">=4.0.0"
 yarl = ">=1.9.0"
+backoff =">2.2.0"
 pydantic = ">=1.10.9, <2.0.0" # v2 has breaking changes (#99218).
 websockets = ">=11.0.1"
 

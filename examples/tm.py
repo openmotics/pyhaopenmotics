@@ -71,19 +71,13 @@ async def main() -> None:
         await omclient.installations.get_by_id(i_id)
         omclient.installation_id = i_id
 
-        # await omclient.outputs.get_all()
-
-        # await omclient.inputs.get_all()
-
-        # await omclient.sensors.get_all()
-
-        # await omclient.groupactions.get_all()
-
         await omclient.thermostats.groups.get_all()
 
         await omclient.thermostats.units.get_all()
 
-        # await omclient.shutters.get_all()
+        await omclient.thermostats.units.get_by_id(15333)
+
+        # await omclient.thermostats.units.set_temperature(15333, 15)
 
         await omclient.close()
 
