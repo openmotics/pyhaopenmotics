@@ -9,6 +9,7 @@ from typing import TYPE_CHECKING, Any
 
 import aiohttp
 import async_timeout
+import backoff
 from yarl import URL
 
 from .__version__ import __version__
@@ -90,6 +91,7 @@ class OpenMoticsCloud:
         """
         self._installation_id = installation_id
 
+    @backoff.on_exception(backoff.expo, OpenMoticsConnectionError, max_tries=3, logger=None)
     async def _request(
         self,
         path: str,

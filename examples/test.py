@@ -73,7 +73,6 @@ async def main() -> None:
 
         await omclient.outputs.get_by_id(99351)
 
-
         await omclient.close()
 
 
