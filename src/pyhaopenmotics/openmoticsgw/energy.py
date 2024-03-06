@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, Any
 from pyhaopenmotics.openmoticsgw.models.energy import EnergySensor
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.localgateway import LocalGateway  # pylint: disable=R0401
+    from pyhaopenmotics.client.localgateway import LocalGateway  # pylint: disable=R0401
 
 
 class OpenMoticsEnergySensors:

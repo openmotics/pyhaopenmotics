@@ -9,7 +9,7 @@ from pydantic import parse_obj_as
 from pyhaopenmotics.cloud.models.installation import Installation
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
+    from pyhaopenmotics.client.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
 
 
 class OpenMoticsInstallations:

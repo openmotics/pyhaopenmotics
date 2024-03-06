@@ -24,8 +24,6 @@ from pyhaopenmotics.cloud.outputs import OpenMoticsOutputs
 from pyhaopenmotics.cloud.sensors import OpenMoticsSensors
 from pyhaopenmotics.cloud.shutters import OpenMoticsShutters
 from pyhaopenmotics.cloud.thermostats import OpenMoticsThermostats
-from pyhaopenmotics.helpers import base64_encode
-
 from pyhaopenmotics.const import CLOUD_API_URL
 
 # from .helpers import base64_encode

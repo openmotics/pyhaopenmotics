@@ -15,13 +15,17 @@ if TYPE_CHECKING:
 import aiohttp
 import async_timeout
 import backoff
-from pyhaopenmotics.__version__ import __version__
-from pyhaopenmotics.client.errors import (AuthenticationError,
-                                          OpenMoticsConnectionError,
-                                          OpenMoticsConnectionSslError,
-                                          OpenMoticsConnectionTimeoutError)
+
 # import websockets
 from yarl import URL
+
+from pyhaopenmotics.__version__ import __version__
+from pyhaopenmotics.client.errors import (
+    AuthenticationError,
+    OpenMoticsConnectionError,
+    OpenMoticsConnectionSslError,
+    OpenMoticsConnectionTimeoutError,
+)
 
 _LOGGER = logging.getLogger(__name__)
 

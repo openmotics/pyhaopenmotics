@@ -8,7 +8,7 @@ from pyhaopenmotics.helpers import merge_dicts
 from pyhaopenmotics.openmoticsgw.models.thermostat import ThermostatGroup, ThermostatUnit
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.localgateway import LocalGateway  # pylint: disable=R0401
+    from pyhaopenmotics.client.localgateway import LocalGateway  # pylint: disable=R0401
 
 
 @dataclass
