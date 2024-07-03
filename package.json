@@ -11,6 +11,6 @@
   "license": "AGPLv3",
   "devDependencies": {
     "prettier": "^3.3.2",
-    "pyright": "^1.1.369"
+    "pyright": "^1.1.370"
   }
 }
