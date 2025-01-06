@@ -10,7 +10,7 @@
   "author": "Wouter Coppens <wouter.coppens@gmail.com>",
   "license": "AGPLv3",
   "devDependencies": {
-    "prettier": "^3.4.1",
-    "pyright": "^1.1.389"
+    "prettier": "^3.4.2",
+    "pyright": "^1.1.391"
   }
 }
