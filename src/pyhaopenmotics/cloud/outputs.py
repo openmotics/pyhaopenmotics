@@ -13,7 +13,6 @@ if TYPE_CHECKING:
 
 
 class OpenMoticsOutputs:
-
     """Object holding information of the OpenMotics outputs.
 
     All actions related to Outputs or a specific Output.
@@ -25,6 +24,7 @@ class OpenMoticsOutputs:
         Args:
         ----
             omcloud: OpenMoticsCloud
+
         """
         self._omcloud = omcloud
 
@@ -41,6 +41,7 @@ class OpenMoticsOutputs:
         Returns:
         -------
             A list of outputs
+
         """
         path = f"/base/installations/{self._omcloud.installation_id}/outputs"
 
@@ -68,6 +69,7 @@ class OpenMoticsOutputs:
         Returns:
         -------
             Returns a output with id
+
         """
         path = f"/base/installations/{self._omcloud.installation_id}/outputs/{output_id}"
         body = await self._omcloud.get(path)
@@ -87,6 +89,7 @@ class OpenMoticsOutputs:
         Returns:
         -------
             Returns a output with id
+
         """
         path = f"/base/installations/{self._omcloud.installation_id}/outputs/{output_id}/toggle"
         return await self._omcloud.post(path)
@@ -106,6 +109,7 @@ class OpenMoticsOutputs:
         Returns:
         -------
             Returns a output with id
+
         """
         payload = {}
 
@@ -131,6 +135,7 @@ class OpenMoticsOutputs:
         Returns:
         -------
             Returns a output with id
+
         """
         if output_id is None:
             # Turn off all lights

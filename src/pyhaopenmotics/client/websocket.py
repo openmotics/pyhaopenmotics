@@ -1,4 +1,5 @@
 """Code for communication with the OpenMotics websocket."""
+
 from __future__ import annotations
 
 import asyncio
@@ -24,7 +25,6 @@ BaseClientTypes = Union[
 
 
 class WebsocketClient:
-
     """Represents the websocket class."""
 
     def __init__(

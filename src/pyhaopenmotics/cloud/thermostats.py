@@ -13,7 +13,6 @@ if TYPE_CHECKING:
 
 
 class OpenMoticsThermostats:
-
     """Object holding information of the OpenMotics thermostats.
 
     All actions related to thermostats or a specific thermostat.
@@ -25,6 +24,7 @@ class OpenMoticsThermostats:
         Args:
         ----
             omcloud: OpenMoticsCloud
+
         """
         self._omcloud = omcloud
 
@@ -44,6 +44,7 @@ class OpenMoticsThermostats:
         Returns:
         -------
             Returns something
+
         """
         path = f"/base/installations/{self._omcloud.installation_id}/thermostats/mode"
         payload = {"mode": mode}
@@ -62,6 +63,7 @@ class OpenMoticsThermostats:
         Returns:
         -------
             Returns something
+
         """
         path = f"/base/installations/{self._omcloud.installation_id}/thermostats/state"
         payload = {"state": state}
@@ -69,7 +71,6 @@ class OpenMoticsThermostats:
 
 
 class OpenMoticsThermostatGroups:
-
     """Object holding information of the OpenMotics thermostats.
 
     All actions related to thermostats or a specific thermostat.
@@ -81,6 +82,7 @@ class OpenMoticsThermostatGroups:
         Args:
         ----
             _omcloud: _omcloud
+
         """
         self._omcloud = _omcloud
 
@@ -96,6 +98,7 @@ class OpenMoticsThermostatGroups:
         Returns:
         -------
             Dict with all thermostats
+
         """
         path = f"/base/installations/{self._omcloud.installation_id}/thermostats/groups"
 
@@ -116,6 +119,7 @@ class OpenMoticsThermostatGroups:
         Returns:
         -------
             Returns a thermostatgroup_id with id
+
         """
         path = (
             f"/base/installations/{self._omcloud.installation_id}"
@@ -140,6 +144,7 @@ class OpenMoticsThermostatGroups:
         Returns:
         -------
             Returns a output with id
+
         """
         path = (
             f"/base/installations/{self._omcloud.installation_id}"
@@ -150,7 +155,6 @@ class OpenMoticsThermostatGroups:
 
 
 class OpenMoticsThermostatUnits:
-
     """Object holding information of the OpenMotics thermostats.
 
     All actions related to thermostats or a specific thermostat.
@@ -162,6 +166,7 @@ class OpenMoticsThermostatUnits:
         Args:
         ----
             _omcloud: _omcloud
+
         """
         self._omcloud = _omcloud
 
@@ -177,6 +182,7 @@ class OpenMoticsThermostatUnits:
         Returns:
         -------
             Dict with all thermostatunits
+
         """
         path = f"/base/installations/{self._omcloud.installation_id}/thermostats/units"
 
@@ -197,6 +203,7 @@ class OpenMoticsThermostatUnits:
         Returns:
         -------
             Returns a thermostatunit with id
+
         """
         path = (
             f"/base/installations/{self._omcloud.installation_id}"
@@ -221,6 +228,7 @@ class OpenMoticsThermostatUnits:
         Returns:
         -------
             Returns a thermostatunit with id
+
         """
         path = (
             f"/base/installations/{self._omcloud.installation_id}"
@@ -244,6 +252,7 @@ class OpenMoticsThermostatUnits:
         Returns:
         -------
             Returns a thermostatunit with id
+
         """
         path = (
             f"/base/installations/{self._omcloud.installation_id}"
@@ -267,6 +276,7 @@ class OpenMoticsThermostatUnits:
         Returns:
         -------
             Returns a thermostatunit with id
+
         """
         path = (
             f"/base/installations/{self._omcloud.installation_id}"
@@ -300,6 +310,7 @@ class OpenMoticsThermostatUnits:
         Returns:
         -------
             Returns a thermostatunit with id
+
         """
         path = (
             f"/base/installations/{self._omcloud.installation_id}"

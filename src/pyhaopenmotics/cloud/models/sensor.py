@@ -1,9 +1,10 @@
 """Sensor Model for the OpenMotics API."""
+
 from __future__ import annotations
 
 from typing import Any
 
-from pydantic import BaseModel, Field, validator
+from pydantic import field_validator, BaseModel, Field
 
 from .location import Location
 
@@ -11,16 +12,14 @@ zombie_status = {"humidity": None, "temperature": None, "brightness": None}
 
 
 class Status(BaseModel):
-
     """Class holding the status."""
 
-    humidity: float | None
-    temperature: float | None
-    brightness: int | None
+    humidity: float | None = None
+    temperature: float | None = None
+    brightness: int | None = None
 
 
 class Sensor(BaseModel):
-
     """Class holding an OpenMotics Sensor.
 
     # noqa: E800
@@ -43,15 +42,16 @@ class Sensor(BaseModel):
 
     # pylint: disable=too-many-instance-attributes
     idx: int = Field(..., alias="id")
-    local_id: int | None
+    local_id: int | None = None
     name: str
-    location: Location | None
-    physical_quantity: str | None
+    location: Location | None = None
+    physical_quantity: str | None = None
     status: Status
-    last_state_change: float | None
+    last_state_change: float | None = None
     version: str | None = Field(..., alias="_version")
 
-    @validator("status", pre=True)
+    @field_validator("status", mode="before")
+    @classmethod
     def replace_none(cls, v: Any) -> Any:
         """Add an empty value to a zombie sensor.
 
@@ -63,6 +63,7 @@ class Sensor(BaseModel):
         Returns:
         -------
             Dict with Status
+
         """
         if cls:
             # Stupid code to get rid of Vulture Error of unused vairiable cls

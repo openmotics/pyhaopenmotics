@@ -1,20 +1,19 @@
 """Output Model for the OpenMotics API."""
+
 from __future__ import annotations
 
 from pydantic import BaseModel, Field
 
 
 class Status(BaseModel):
-
     """Class holding the status."""
 
     on: bool
-    locked: bool | None
-    value: int | None
+    locked: bool | None = None
+    value: int | None = None
 
 
 class OMInput(BaseModel):
-
     """Class holding an OpenMotics Input.
 
     # noqa: E800
@@ -40,11 +39,11 @@ class OMInput(BaseModel):
 
     # pylint: disable=too-many-instance-attributes
     idx: int = Field(..., alias="id")
-    local_id: int | None
+    local_id: int | None = None
     name: str
-    status: Status | None
-    last_state_change: float | None
-    room: int | None
+    status: Status | None = None
+    last_state_change: float | None = None
+    room: int | None = None
     version: str = Field(..., alias="_version")
 
     def __str__(self) -> str:

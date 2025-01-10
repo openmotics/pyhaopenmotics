@@ -13,14 +13,14 @@ from pyhaopenmotics.client.websocket import WebsocketClient
 from pyhaopenmotics.cloud.models import Installation
 
 __all__ = [
-    "OpenMoticsCloud",
-    "LocalGateway",
-    "OpenMoticsError",
-    "OpenMoticsConnectionError",
-    "OpenMoticsConnectionTimeoutError",
-    "OpenMoticsConnectionSslError",
     "AuthenticationError",
     "Installation",
+    "LocalGateway",
+    "OpenMoticsCloud",
+    "OpenMoticsConnectionError",
+    "OpenMoticsConnectionSslError",
+    "OpenMoticsConnectionTimeoutError",
+    "OpenMoticsError",
     "WebsocketClient",
     # "get_ssl_context",
 ]

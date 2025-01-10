@@ -13,7 +13,6 @@ if TYPE_CHECKING:
 
 
 class OpenMoticsSensors:
-
     """Object holding information of the OpenMotics sensors.
 
     All actions related to Sensors or a specific Sensor.
@@ -25,6 +24,7 @@ class OpenMoticsSensors:
         Args:
         ----
             omcloud: OpenMoticsCloud
+
         """
         self._omcloud = omcloud
 
@@ -41,6 +41,7 @@ class OpenMoticsSensors:
         Returns:
         -------
             Dict with all sensors
+
         """
         path = f"/base/installations/{self._omcloud.installation_id}/sensors"
 
@@ -68,6 +69,7 @@ class OpenMoticsSensors:
         Returns:
         -------
             Returns a sensor with id
+
         """
         path = f"/base/installations/{self._omcloud.installation_id}/sensors/{sensor_id}"
         body = await self._omcloud.get(path)

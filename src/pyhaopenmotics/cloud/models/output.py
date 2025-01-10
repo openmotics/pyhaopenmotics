@@ -1,4 +1,5 @@
 """Output Model for the OpenMotics API."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -9,17 +10,15 @@ from .location import Location
 
 
 class Status(BaseModel):
-
     """Class holding the status."""
 
     on: bool
-    locked: bool | None
-    manual_override: bool | None
-    value: int | None
+    locked: bool | None = None
+    manual_override: bool | None = None
+    value: int | None = None
 
 
 class Output(BaseModel):
-
     """Class holding an OpenMotics Output.
 
     # noqa: E800
@@ -45,14 +44,14 @@ class Output(BaseModel):
 
     # pylint: disable=too-many-instance-attributes
     idx: int = Field(..., alias="id")
-    local_id: int | None
+    local_id: int | None = None
     name: str
     output_type: str = Field(..., alias="type")
-    location: Location | None
-    capabilities: list[Any] | None
-    metadata: dict[str, Any] | None
+    location: Location | None = None
+    capabilities: list[Any] | None = None
+    metadata: dict[str, Any] | None = None
     status: Status
-    last_state_change: float | None
+    last_state_change: float | None = None
     version: str = Field(..., alias="_version")
 
     def __str__(self) -> str:

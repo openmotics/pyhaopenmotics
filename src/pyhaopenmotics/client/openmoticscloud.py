@@ -32,7 +32,6 @@ _LOGGER = logging.getLogger(__name__)
 
 
 class OpenMoticsCloud(BaseClient):
-
     """Docstring."""
 
     _installations: list[Installation] | None
@@ -57,6 +56,7 @@ class OpenMoticsCloud(BaseClient):
             token_refresh_method: token refresh function
             installation_id: int
             base_url: str
+
         """
         super().__init__(
             token=token,
@@ -73,6 +73,7 @@ class OpenMoticsCloud(BaseClient):
         Returns
         -------
             The installation id that will be used for this session.
+
         """
         return self._installation_id
 
@@ -84,6 +85,7 @@ class OpenMoticsCloud(BaseClient):
         ----
             installation_id: The installation id that will be used
                 for this session.
+
         """
         self._installation_id = installation_id
 
@@ -98,6 +100,7 @@ class OpenMoticsCloud(BaseClient):
         Returns:
         -------
             url: str
+
         """
         url = URL(f"{self.base_url}{path}")
         if scheme != "https":
@@ -138,6 +141,7 @@ class OpenMoticsCloud(BaseClient):
         Returns:
         -------
             headers
+
         """
         # if self.token is None or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC:
 
@@ -183,6 +187,7 @@ class OpenMoticsCloud(BaseClient):
         Returns:
         -------
             headers
+
         """
         # if self.token is None or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC:
 
@@ -422,6 +427,7 @@ class OpenMoticsCloud(BaseClient):
         Returns
         -------
             OpenMoticsInstallations
+
         """
         return OpenMoticsInstallations(self)
 
@@ -432,6 +438,7 @@ class OpenMoticsCloud(BaseClient):
         Returns
         -------
             OpenMoticsInputs
+
         """
         return OpenMoticsInputs(self)
 
@@ -442,6 +449,7 @@ class OpenMoticsCloud(BaseClient):
         Returns
         -------
             OpenMoticsOutputs
+
         """
         return OpenMoticsOutputs(self)
 
@@ -452,6 +460,7 @@ class OpenMoticsCloud(BaseClient):
         Returns
         -------
             OpenMoticsGroupActions
+
         """
         return OpenMoticsGroupActions(self)
 
@@ -462,6 +471,7 @@ class OpenMoticsCloud(BaseClient):
         Returns
         -------
             OpenMoticsLights
+
         """
         return OpenMoticsLights(self)
 
@@ -472,6 +482,7 @@ class OpenMoticsCloud(BaseClient):
         Returns
         -------
             OpenMoticsSensors
+
         """
         return OpenMoticsSensors(self)
 
@@ -482,6 +493,7 @@ class OpenMoticsCloud(BaseClient):
         Returns
         -------
             OpenMoticsShutters
+
         """
         return OpenMoticsShutters(self)
 
@@ -492,6 +504,7 @@ class OpenMoticsCloud(BaseClient):
         Returns
         -------
             OpenMoticsThermostats
+
         """
         return OpenMoticsThermostats(self)
 
@@ -506,6 +519,7 @@ class OpenMoticsCloud(BaseClient):
         Returns:
         -------
             response json or text
+
         """
         headers = await self._get_auth_headers(headers)
         return await self._request(
@@ -526,6 +540,7 @@ class OpenMoticsCloud(BaseClient):
         Returns:
         -------
             response json or text
+
         """
         headers = await self._get_auth_headers(headers)
         return await self._request(
@@ -545,6 +560,7 @@ class OpenMoticsCloud(BaseClient):
         Returns
         -------
             OpenMoticsCloud: The OpenMoticsCloud object.
+
         """
         return self
 
@@ -554,5 +570,6 @@ class OpenMoticsCloud(BaseClient):
         Args:
         ----
             *_exc_info: Exec type.
+
         """
         await self.close()

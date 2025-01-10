@@ -1,4 +1,5 @@
 """Thermostat Model for the OpenMotics API."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -7,100 +8,89 @@ from pydantic import BaseModel, Field
 
 
 class GroupLocation(BaseModel):
-
     """Class holding the location."""
 
-    thermostat_group_id: int | None
-    installation_id: int | None
-    room_id: int | None
+    thermostat_group_id: int | None = None
+    installation_id: int | None = None
+    room_id: int | None = None
 
 
 class UnitLocation(BaseModel):
-
     """Class holding the location."""
 
-    thermostat_group_id: int | None
-    installation_id: int | None
-    room_id: int | None
+    thermostat_group_id: int | None = None
+    installation_id: int | None = None
+    room_id: int | None = None
 
 
 class GroupStatus(BaseModel):
-
     """Class holding the status."""
 
-    mode: str | None
-    state: bool | None
+    mode: str | None = None
+    state: bool | None = None
 
 
 class UnitStatus(BaseModel):
-
     """Class holding the status."""
 
-    state: str | None
-    setpoint: float | None
-    steering_power: float | None
-    active_preset: str | None
-    current_temperature: float | None
-    mode: str | None
-    preset_expiration: str | None
-    actual_temperature: float | None
-    current_setpoint: float | None
-    preset: str | None
+    state: str | None = None
+    setpoint: float | None = None
+    steering_power: float | None = None
+    active_preset: str | None = None
+    current_temperature: float | None = None
+    mode: str | None = None
+    preset_expiration: str | None = None
+    actual_temperature: float | None = None
+    current_setpoint: float | None = None
+    preset: str | None = None
 
 
 class Presets(BaseModel):
-
     """Class holding the status."""
 
-    away: str | None
-    party: str | None
-    vacation: str | None
+    away: str | None = None
+    party: str | None = None
+    vacation: str | None = None
 
 
 class Schedule(BaseModel):
-
     """Class holding the schedule."""
 
-    data: dict[str, Any] | None
-    start: str | None
+    data: dict[str, Any] | None = None
+    start: str | None = None
 
 
 class ConfigurationPreset(BaseModel):
-
     """Class holding the configuration presets."""
 
-    output_0_id: int | None
-    output_1_id: int | None
-    presets: Presets | None
-    schedule: Schedule | None
-    sensor_id: int | None
+    output_0_id: int | None = None
+    output_1_id: int | None = None
+    presets: Presets | None = None
+    schedule: Schedule | None = None
+    sensor_id: int | None = None
 
 
 class Configuration(BaseModel):
-
     """Class holding the configuration."""
 
-    heating: ConfigurationPreset | None
-    cooling: ConfigurationPreset | None
+    heating: ConfigurationPreset | None = None
+    cooling: ConfigurationPreset | None = None
 
 
 class Allowed(BaseModel):
-
     """Object holding allowed."""
 
-    allowed: bool | None
+    allowed: bool | None = None
 
 
 class Acl(BaseModel):
-
     """Object holding an acl."""
 
-    set_state: Allowed | None
-    set_mode: Allowed | None
+    set_state: Allowed | None = None
+    set_mode: Allowed | None = None
 
 
 class ThermostatGroup(BaseModel):
-
     """Class holding an OpenMotics ThermostatGroup .
 
         # noqa: E800
@@ -124,11 +114,11 @@ class ThermostatGroup(BaseModel):
     idx: int = Field(..., alias="id")
     local_id: int
     name: str
-    schedule: Schedule | None
-    capabilities: list[Any] | None
+    schedule: Schedule | None = None
+    capabilities: list[Any] | None = None
     version: str | None = Field(..., alias="_version")
-    thermostat_ids: list[Any] | None
-    status: GroupStatus | None
+    thermostat_ids: list[Any] | None = None
+    status: GroupStatus | None = None
     acl: Acl | None = Field(..., alias="_acl")
 
     def __str__(self) -> str:
@@ -143,7 +133,6 @@ class ThermostatGroup(BaseModel):
 
 
 class ThermostatUnit(BaseModel):
-
     """Class holding an OpenMotics ThermostatUnit.
 
     # noqa: E800
@@ -221,10 +210,10 @@ class ThermostatUnit(BaseModel):
 
     # pylint: disable=too-many-instance-attributes
     idx: int = Field(..., alias="id")
-    local_id: int | None
+    local_id: int | None = None
     name: str
-    location: UnitLocation | None
-    status: UnitStatus | None
+    location: UnitLocation | None = None
+    status: UnitStatus | None = None
     version: str | None = Field(..., alias="_version")
 
     def __str__(self) -> str:

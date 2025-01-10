@@ -1,4 +1,5 @@
 """Module containing the base of an output."""
+
 from __future__ import annotations
 
 import json
@@ -13,7 +14,6 @@ if TYPE_CHECKING:
 
 
 class OpenMoticsShutters:
-
     """Object holding information of the OpenMotics shutters.
 
     All actions related to Shutters or a specific Shutter.
@@ -25,6 +25,7 @@ class OpenMoticsShutters:
         Args:
         ----
             omcloud: OpenMoticsCloud
+
         """
         self._omcloud = omcloud
 
@@ -46,6 +47,7 @@ class OpenMoticsShutters:
             intended usage.
             CONTROL: These Shutters can be controlled directly and are not
                 managed by an internal process.
+
         """
         path = f"/base/installations/{self._omcloud.installation_id}/shutters"
         if shutter_filter:
@@ -72,6 +74,7 @@ class OpenMoticsShutters:
         Returns:
         -------
             Returns a shutter with id
+
         """
         path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}"
         body = await self._omcloud.get(path)
@@ -91,6 +94,7 @@ class OpenMoticsShutters:
         Returns:
         -------
             Returns a shutter with id
+
         """
         path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}/open"
         return await self._omcloud.post(path)
@@ -108,6 +112,7 @@ class OpenMoticsShutters:
         Returns:
         -------
             Returns a shutter with id
+
         """
         path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}/close"
         return await self._omcloud.post(path)
@@ -125,6 +130,7 @@ class OpenMoticsShutters:
         Returns:
         -------
             Returns a shutter with id
+
         """
         path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}/stop"
         return await self._omcloud.post(path)
@@ -148,6 +154,7 @@ class OpenMoticsShutters:
         Returns:
         -------
             Returns a shutter with id
+
         """
         # E501 line too long
         path = (
@@ -180,6 +187,7 @@ class OpenMoticsShutters:
         Returns:
         -------
             Returns a shutter with id
+
         """
         # E501 line too long
         path = (
@@ -213,6 +221,7 @@ class OpenMoticsShutters:
         Returns:
         -------
             Returns the lock_type as response.
+
         """
         path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}/lock"
         return await self._omcloud.post(path)
@@ -230,6 +239,7 @@ class OpenMoticsShutters:
         Returns:
         -------
             Returns a shutter with id
+
         """
         path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}/unlock"
         return await self._omcloud.post(path)
@@ -253,6 +263,7 @@ class OpenMoticsShutters:
         Returns:
         -------
             Returns a shutter with id
+
         """
         path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}/preset"
         payload = json.dumps(
@@ -277,6 +288,7 @@ class OpenMoticsShutters:
         Returns:
         -------
             Returns a shutter with id
+
         """
         path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}/move"
         return await self._omcloud.post(path)

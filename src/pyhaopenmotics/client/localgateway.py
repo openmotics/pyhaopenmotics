@@ -28,7 +28,6 @@ CLOCK_OUT_OF_SYNC_MAX_SEC = 20
 
 
 class LocalGateway(BaseClient):
-
     """Docstring."""
 
     def __init__(
@@ -55,6 +54,7 @@ class LocalGateway(BaseClient):
             tls: True, when TLS/SSL should be used.
             username: Username for HTTP auth, if enabled.
             ssl_context: ssl.SSLContext.
+
         """
         super().__init__(
             request_timeout=request_timeout,
@@ -94,6 +94,7 @@ class LocalGateway(BaseClient):
         Returns:
         -------
             response json or text
+
         """
         # Try to execute the action.
         return await self._request(
@@ -127,6 +128,7 @@ class LocalGateway(BaseClient):
         Returns:
         -------
             url: str
+
         """
         url = str(
             URL.build(scheme=scheme, host=self.localgw, port=self.port, path="/").join(URL(path)),
@@ -169,6 +171,7 @@ class LocalGateway(BaseClient):
         Returns:
         -------
             headers
+
         """
         if self.token is None or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC:
             await self.get_token()
@@ -205,6 +208,7 @@ class LocalGateway(BaseClient):
         Returns:
         -------
             headers
+
         """
         if self.token is None or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC:
             await self.get_token()
@@ -342,6 +346,7 @@ class LocalGateway(BaseClient):
         Returns
         -------
             OpenMoticsOutputs
+
         """
         return OpenMoticsInputs(self)
 
@@ -352,6 +357,7 @@ class LocalGateway(BaseClient):
         Returns
         -------
             OpenMoticsOutputs
+
         """
         return OpenMoticsOutputs(self)
 
@@ -362,6 +368,7 @@ class LocalGateway(BaseClient):
         Returns
         -------
             OpenMoticsGroupActions
+
         """
         return OpenMoticsGroupActions(self)
 
@@ -372,6 +379,7 @@ class LocalGateway(BaseClient):
         Returns
         -------
             OpenMoticsLights
+
         """
         # implemented to be compatible with cloud
         return OpenMoticsLights(self)
@@ -383,6 +391,7 @@ class LocalGateway(BaseClient):
         Returns
         -------
             OpenMoticsSensors
+
         """
         return OpenMoticsSensors(self)
 
@@ -393,6 +402,7 @@ class LocalGateway(BaseClient):
         Returns
         -------
             OpenMoticsEnergySensors
+
         """
         return OpenMoticsEnergySensors(self)
 
@@ -403,6 +413,7 @@ class LocalGateway(BaseClient):
         Returns
         -------
             OpenMoticsShutters
+
         """
         return OpenMoticsShutters(self)
 
@@ -413,6 +424,7 @@ class LocalGateway(BaseClient):
         Returns
         -------
             OpenMoticsThermostats
+
         """
         return OpenMoticsThermostats(self)
 
@@ -427,6 +439,7 @@ class LocalGateway(BaseClient):
         Returns
         -------
             LocalGateway: The LocalGateway object.
+
         """
         return self
 
@@ -436,5 +449,6 @@ class LocalGateway(BaseClient):
         Args:
         ----
             *_exc_info: Exec type.
+
         """
         await self.close()

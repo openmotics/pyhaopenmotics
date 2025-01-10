@@ -33,7 +33,6 @@ StrOrURL = Union[str, URL]
 
 
 class BaseClient(abc.ABC):
-
     """Docstring."""
 
     _wsclient: aiohttp.ClientWebSocketResponse | None = None
@@ -63,6 +62,7 @@ class BaseClient(abc.ABC):
             tls: True, when TLS/SSL should be used.
             username: Username for HTTP auth, if enabled.
             ssl_context: ssl.SSLContext.
+
         """
         self.user_agent = f"PyHAOpenMotics/{__version__}"
         self.token = None if token is None else token.strip()
@@ -113,6 +113,7 @@ class BaseClient(abc.ABC):
             OpenMoticsConnectionTimeoutError: A timeout occurred while communicating
                 with the OpenMotics API.
             AuthenticationException: raised when token is expired.
+
         """
         if self.token_refresh_method is not None:
             self.token = await self.token_refresh_method()
@@ -193,6 +194,7 @@ class BaseClient(abc.ABC):
         Returns:
         -------
             url: str
+
         """
         # Base class should implement this
         raise NotImplementedError
@@ -213,6 +215,7 @@ class BaseClient(abc.ABC):
         Returns:
         -------
             headers
+
         """
         # Base class should implement this
         raise NotImplementedError
@@ -228,6 +231,7 @@ class BaseClient(abc.ABC):
         Returns
         -------
             LocalGateway: The LocalGateway object.
+
         """
         return self
 
@@ -237,5 +241,6 @@ class BaseClient(abc.ABC):
         Args:
         ----
             *_exc_info: Exec type.
+
         """
         await self.close()

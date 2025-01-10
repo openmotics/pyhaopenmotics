@@ -1,4 +1,5 @@
 """Location Model for the OpenMotics API."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -7,7 +8,6 @@ from typing import Any
 
 @dataclass
 class FloorCoordinates:
-
     """Class holding the floor_coordinates."""
 
     x: int  # pylint: disable-msg=C0103
@@ -24,6 +24,7 @@ class FloorCoordinates:
         Returns:
         -------
             FloorCoordinates object
+
         """
         if "x" not in data or "y" not in data:
             return None
@@ -36,7 +37,6 @@ class FloorCoordinates:
 
 @dataclass
 class Location:
-
     """Class holding the location."""
 
     floor_coordinates: FloorCoordinates | None
@@ -56,6 +56,7 @@ class Location:
         Returns:
         -------
             Location object
+
         """
         _floor_coordinates: FloorCoordinates | None
         _room_id: int

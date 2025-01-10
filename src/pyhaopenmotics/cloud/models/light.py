@@ -1,4 +1,5 @@
 """Light Model for the OpenMotics API."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -9,17 +10,15 @@ from .location import Location
 
 
 class Status(BaseModel):
-
     """Class holding the status."""
 
     on: bool
-    locked: bool | None
-    manual_override: bool | None
-    value: int | None
+    locked: bool | None = None
+    manual_override: bool | None = None
+    value: int | None = None
 
 
 class Light(BaseModel):
-
     """Class holding an OpenMotics Light.
 
     # noqa: E800
@@ -48,14 +47,14 @@ class Light(BaseModel):
 
     # pylint: disable=too-many-instance-attributes
     idx: int = Field(..., alias="id")
-    local_id: int | None
-    name: str | None
-    capabilities: list[Any] | None
-    location: Location | None
-    status: Status | None
+    local_id: int | None = None
+    name: str | None = None
+    capabilities: list[Any] | None = None
+    location: Location | None = None
+    status: Status | None = None
     version: str | None = Field(None, alias="_version")
 
-    _brightness: int | None
+    _brightness: int | None = None
 
     def __str__(self) -> str:
         """Represent the class objects as a string.

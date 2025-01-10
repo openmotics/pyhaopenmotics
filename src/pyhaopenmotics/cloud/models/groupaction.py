@@ -1,4 +1,5 @@
 """Groupaction Model for the OpenMotics API."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -9,7 +10,6 @@ from .location import Location
 
 
 class GroupAction(BaseModel):
-
     """Object holding an OpenMotics GroupAction.
 
     # noqa: E800
@@ -29,10 +29,10 @@ class GroupAction(BaseModel):
     """
 
     idx: int = Field(..., alias="id")
-    local_id: int | None
-    name: str | None
-    actions: list[Any] | None
-    location: Location | None
+    local_id: int | None = None
+    name: str | None = None
+    actions: list[Any] | None = None
+    location: Location | None = None
     version: str | None = Field(None, alias="_version")
 
     def __str__(self) -> str:

@@ -13,7 +13,6 @@ if TYPE_CHECKING:
 
 
 class OpenMoticsInstallations:
-
     """Object holding information of the OpenMotics installation.
 
     All actions related to Installations or a specific Installation.
@@ -25,6 +24,7 @@ class OpenMoticsInstallations:
         Args:
         ----
             omcloud: OpenMoticsCloud
+
         """
         self._omcloud = omcloud
 

@@ -13,7 +13,6 @@ if TYPE_CHECKING:
 
 
 class OpenMoticsInputs:
-
     """Object holding information of the OpenMotics inputs.
 
     All actions related to Inputs or a specific Input.
@@ -25,6 +24,7 @@ class OpenMoticsInputs:
         Args:
         ----
             omcloud: OpenMoticsCloud
+
         """
         self._omcloud = omcloud
 
@@ -41,6 +41,7 @@ class OpenMoticsInputs:
         Returns:
         -------
             A list of inputs
+
         """
         path = f"/base/installations/{self._omcloud.installation_id}/inputs"
 
@@ -68,6 +69,7 @@ class OpenMoticsInputs:
         Returns:
         -------
             Returns a input with id
+
         """
         path = f"/base/installations/{self._omcloud.installation_id}/inputs/{input_id}"
         body = await self._omcloud.get(path)

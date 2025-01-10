@@ -1,4 +1,5 @@
 """Asynchronous Python client for the OpenMotics API."""
+
 from __future__ import annotations
 
 CLOUD_API_HOST = "api.openmotics.com"
