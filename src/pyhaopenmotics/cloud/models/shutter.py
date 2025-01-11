@@ -2,39 +2,46 @@
 
 from __future__ import annotations
 
-from pydantic import BaseModel, Field
+from dataclasses import dataclass, field
+
+from mashumaro import field_options
+from mashumaro.mixins.orjson import DataClassORJSONMixin
 
 from .location import Location
 
 
-class Status(BaseModel):
+@dataclass
+class Status(DataClassORJSONMixin):
     """Class holding the status."""
 
-    locked: bool | None = None
-    manual_override: bool | None = None
-    state: str | None = None
-    position: int | None = None
-    last_change: float | None = None
-    preset_position: int | None = None
+    locked: bool | None = field(default=None)
+    manual_override: bool | None = field(default=None)
+    state: str | None = field(default=None)
+    position: int | None = field(default=None)
+    last_change: float | None = field(default=None)
+    preset_position: int | None = field(default=None)
 
 
-class Attributes(BaseModel):
+@dataclass
+class Attributes(DataClassORJSONMixin):
     """Class holding the attributes."""
 
-    azimuth: str | None = None
-    compass_point: str | None = None
-    surface_area: str | None = None
-    tilt_angle: int | None = None
+    azimuth: str | None = field(default=None)
+    compass_point: str | None = field(default=None)
+    surface_area: str | None = field(default=None)
+    tilt_angle: int | None = field(default=None)
 
 
-class Metadata(BaseModel):
+@dataclass
+class Metadata(DataClassORJSONMixin):
     """Class holding the metadata."""
 
-    protocol: str | None = None
-    controllable_name: str | None = None
+    protocol: str | None = field(default=None)
+    controllable_name: str | None = field(default=None)
 
 
-class Shutter(BaseModel):
+@dataclass
+class Shutter(DataClassORJSONMixin):
     """Object holding an OpenMotics Shutter.
 
     # noqa: E800
@@ -73,16 +80,19 @@ class Shutter(BaseModel):
     """
 
     # pylint: disable=too-many-instance-attributes
-    idx: int = Field(..., alias="id")
-    local_id: int | None = None
     name: str
-    shutter_type: str = Field(..., alias="type")
-    capabilities: list[str] | None = None
+    idx: int = field(metadata=field_options(alias="id"))
     status: Status
-    location: Location | None = None
-    attributes: Attributes | None = None
-    metadata: Metadata | None = None
-    version: str | None = Field(..., alias="_version")
+    shutter_type: str = field(metadata=field_options(alias="type"))
+    local_id: int | None = field(default=None)
+    capabilities: list[str] | None = field(default=None)
+    location: Location | None = field(default=None)
+    attributes: Attributes | None = field(default=None)
+    metadata: Metadata | None = field(default=None)
+    version: str | None = field(
+        default=None,
+        metadata=field_options(alias="_version"),
+    )
 
     def __str__(self) -> str:
         """Represent the class objects as a string.

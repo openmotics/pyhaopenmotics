@@ -2,21 +2,25 @@
 
 from __future__ import annotations
 
-from pydantic import BaseModel
+from dataclasses import dataclass, field
+
+from mashumaro.mixins.orjson import DataClassORJSONMixin
 
 
-class FloorCoordinates(BaseModel):
+@dataclass
+class FloorCoordinates(DataClassORJSONMixin):
     """Class holding the floor_coordinates."""
 
-    x: int | None = None
-    y: int | None = None
+    x: int | None = field(default=None)
+    y: int | None = field(default=None)
 
 
-class Location(BaseModel):
+@dataclass
+class Location(DataClassORJSONMixin):
     """Class holding the location."""
 
-    floor_coordinates: FloorCoordinates | None = None
-    installation_id: int | None = None
-    gateway_id: int | None = None
-    floor_id: int | None = None
-    room_id: int | None = None
+    floor_coordinates: FloorCoordinates | None = field(default=None)
+    installation_id: int | None = field(default=None)
+    gateway_id: int | None = field(default=None)
+    floor_id: int | None = field(default=None)
+    room_id: int | None = field(default=None)

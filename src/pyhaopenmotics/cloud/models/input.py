@@ -2,18 +2,23 @@
 
 from __future__ import annotations
 
-from pydantic import BaseModel, Field
+from dataclasses import dataclass, field
+
+from mashumaro import field_options
+from mashumaro.mixins.orjson import DataClassORJSONMixin
 
 
-class Status(BaseModel):
+@dataclass
+class Status(DataClassORJSONMixin):
     """Class holding the status."""
 
     on: bool
-    locked: bool | None = None
-    value: int | None = None
+    locked: bool | None = field(default=None)
+    value: int | None = field(default=None)
 
 
-class OMInput(BaseModel):
+@dataclass
+class OMInput(DataClassORJSONMixin):
     """Class holding an OpenMotics Input.
 
     # noqa: E800
@@ -38,13 +43,17 @@ class OMInput(BaseModel):
     """
 
     # pylint: disable=too-many-instance-attributes
-    idx: int = Field(..., alias="id")
-    local_id: int | None = None
     name: str
-    status: Status | None = None
-    last_state_change: float | None = None
-    room: int | None = None
-    version: str = Field(..., alias="_version")
+    idx: int = field(metadata=field_options(alias="id"))
+    local_id: int | None = field(default=None)
+
+    status: Status | None = field(default=None)
+    last_state_change: float | None = field(default=None)
+    room: int | None = field(default=None)
+    version: str | None = field(
+        default=None,
+        metadata=field_options(alias="_version"),
+    )
 
     def __str__(self) -> str:
         """Represent the class objects as a string.

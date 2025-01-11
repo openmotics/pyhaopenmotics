@@ -2,9 +2,8 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
-
-from pydantic import parse_obj_as
 
 from pyhaopenmotics.cloud.models.groupaction import GroupAction
 
@@ -12,6 +11,7 @@ if TYPE_CHECKING:
     from pyhaopenmotics.client.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
 
 
+@dataclass
 class OpenMoticsGroupActions:
     """Object holding information of the OpenMotics groupactions.
 
@@ -72,7 +72,7 @@ class OpenMoticsGroupActions:
         else:
             body = await self._omcloud.get(path)
 
-        return parse_obj_as(list[GroupAction], body["data"])
+        return [GroupAction.from_dict(groupaction) for groupaction in body["data"]]
 
     async def get_by_id(
         self,
@@ -93,7 +93,7 @@ class OpenMoticsGroupActions:
 
         body = await self._omcloud.get(path)
 
-        return GroupAction.parse_obj(body["data"])
+        return GroupAction.from_dict(body["data"])
 
     async def trigger(
         self,

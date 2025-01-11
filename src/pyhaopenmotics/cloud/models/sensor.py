@@ -2,24 +2,27 @@
 
 from __future__ import annotations
 
-from typing import Any
+from dataclasses import dataclass, field
 
-from pydantic import field_validator, BaseModel, Field
+from mashumaro import field_options
+from mashumaro.mixins.orjson import DataClassORJSONMixin
 
 from .location import Location
 
 zombie_status = {"humidity": None, "temperature": None, "brightness": None}
 
 
-class Status(BaseModel):
+@dataclass
+class Status(DataClassORJSONMixin):
     """Class holding the status."""
 
-    humidity: float | None = None
-    temperature: float | None = None
-    brightness: int | None = None
+    humidity: float | None = field(default=None)
+    temperature: float | None = field(default=None)
+    brightness: int | None = field(default=None)
 
 
-class Sensor(BaseModel):
+@dataclass
+class Sensor(DataClassORJSONMixin):
     """Class holding an OpenMotics Sensor.
 
     # noqa: E800
@@ -41,34 +44,27 @@ class Sensor(BaseModel):
     """
 
     # pylint: disable=too-many-instance-attributes
-    idx: int = Field(..., alias="id")
-    local_id: int | None = None
+    idx: int = field(metadata=field_options(alias="id"))
     name: str
-    location: Location | None = None
-    physical_quantity: str | None = None
-    status: Status
-    last_state_change: float | None = None
-    version: str | None = Field(..., alias="_version")
+    local_id: int | None = field(default=None)
+    location: Location | None = field(default=None)
+    physical_quantity: str | None = field(default=None)
+    last_state_change: float | None = field(default=None)
+    version: str | None = field(
+        default=None,
+        metadata=field_options(alias="_version"),
+    )
+    status: Status | None = field(default=None)
 
-    @field_validator("status", mode="before")
     @classmethod
-    def replace_none(cls, v: Any) -> Any:
-        """Add an empty value to a zombie sensor.
-
-        Args:
-        ----
-            cls: Any
-            v: Any
-
-        Returns:
-        -------
-            Dict with Status
-
-        """
-        if cls:
-            # Stupid code to get rid of Vulture Error of unused vairiable cls
-            pass
-        return v or zombie_status
+    def __post_deserialize__(
+        cls,
+        obj: Sensor,
+    ) -> Sensor:
+        """Post deserialize hook for Output object."""
+        if not obj.status:
+            obj.status = Status.from_dict(zombie_status)
+        return obj
 
     def __str__(self) -> str:
         """Represent the class objects as a string.

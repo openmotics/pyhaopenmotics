@@ -3,9 +3,8 @@
 from __future__ import annotations
 
 import json
+from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
-
-from pydantic import parse_obj_as
 
 from .models.shutter import Shutter
 
@@ -13,6 +12,7 @@ if TYPE_CHECKING:
     from pyhaopenmotics.client.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
 
 
+@dataclass
 class OpenMoticsShutters:
     """Object holding information of the OpenMotics shutters.
 
@@ -59,7 +59,7 @@ class OpenMoticsShutters:
         else:
             body = await self._omcloud.get(path)
 
-        return parse_obj_as(list[Shutter], body["data"])
+        return [Shutter.from_dict(shutter) for shutter in body["data"]]
 
     async def get_by_id(
         self,
@@ -79,7 +79,7 @@ class OpenMoticsShutters:
         path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}"
         body = await self._omcloud.get(path)
 
-        return Shutter.parse_obj(body["data"])
+        return Shutter.from_dict(body["data"])
 
     async def move_up(
         self,

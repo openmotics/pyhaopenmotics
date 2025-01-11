@@ -2,43 +2,38 @@
 
 from __future__ import annotations
 
-# from pydantic import BaseModel, Field
 from dataclasses import dataclass, field
 from typing import Any
 
 from mashumaro import field_options
-
-# from mashumaro.config import BaseConfig
 from mashumaro.mixins.orjson import DataClassORJSONMixin
 
-# from mashumaro.types import SerializableType, SerializationStrategy
 
 @dataclass
 class Allowed(DataClassORJSONMixin):
-
     """Object holding an OpenMotics Installation."""
 
     allowed: bool | None = field(default=None)
 
+
 @dataclass
 class Acl(DataClassORJSONMixin):
-
     """Object holding an OpenMotics Installation."""
 
     configure: Allowed | None = field(default=None)
     view: Allowed | None = field(default=None)
     control: Allowed | None = field(default=None)
 
+
 @dataclass
 class Network(DataClassORJSONMixin):
-
     """Object holding an OpenMotics Installation."""
 
     local_ip_address: str | None = field(default=None)
 
+
 @dataclass
 class Installation(DataClassORJSONMixin):
-
     """Object holding an OpenMotics Installation.
 
     # noqa: E800
@@ -75,21 +70,23 @@ class Installation(DataClassORJSONMixin):
 
     # pylint: disable=too-many-instance-attributes
     name: str
-    idx: int | None = field(
-        default=None, metadata=field_options(alias="id"),
-    )
+    idx: int = field(metadata=field_options(alias="id"))
     description: str | None = field(default=None)
     gateway_model: str | None = field(default=None)
     acl: Acl | None = field(
-        default=None, metadata=field_options(alias="_acl"),
+        default=None,
+        metadata=field_options(alias="_acl"),
     )
     version: str | None = field(
-        default=None, metadata=field_options(alias="_version"),
+        default=None,
+        metadata=field_options(alias="_version"),
     )
+
     user_role: dict[str, Any] | None = field(default=None)
     registration_key: str | None = field(default=None)
     platform: str | None = field(default=None)
-    building_roles: dict[str, Any] | None = field(default=None)
+    # TODO @woutercoppens: fix later
+    # building_roles: dict[str, Any]  | None = field(default=None)
     network: Network | None = field(default=None)
     flags: dict[str, Any] | None = field(default=None)
     features: dict[str, Any] | None = field(default=None)

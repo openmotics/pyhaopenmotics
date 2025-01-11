@@ -2,9 +2,8 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
-
-from pydantic import parse_obj_as
 
 from pyhaopenmotics.cloud.models.output import Output
 
@@ -12,6 +11,7 @@ if TYPE_CHECKING:
     from pyhaopenmotics.client.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
 
 
+@dataclass
 class OpenMoticsOutputs:
     """Object holding information of the OpenMotics outputs.
 
@@ -54,7 +54,7 @@ class OpenMoticsOutputs:
         else:
             body = await self._omcloud.get(path)
 
-        return parse_obj_as(list[Output], body["data"])
+        return [Output.from_dict(output) for output in body["data"]]
 
     async def get_by_id(
         self,
@@ -74,7 +74,7 @@ class OpenMoticsOutputs:
         path = f"/base/installations/{self._omcloud.installation_id}/outputs/{output_id}"
         body = await self._omcloud.get(path)
 
-        return Output.parse_obj(body["data"])
+        return Output.from_dict(body["data"])
 
     async def toggle(
         self,

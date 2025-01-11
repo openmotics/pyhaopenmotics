@@ -2,23 +2,27 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass, field
 from typing import Any
 
-from pydantic import BaseModel, Field
+from mashumaro import field_options
+from mashumaro.mixins.orjson import DataClassORJSONMixin
 
 from .location import Location
 
 
-class Status(BaseModel):
+@dataclass
+class Status(DataClassORJSONMixin):
     """Class holding the status."""
 
     on: bool
-    locked: bool | None = None
-    manual_override: bool | None = None
-    value: int | None = None
+    locked: bool | None = field(default=None)
+    manual_override: bool | None = field(default=None)
+    value: int | None = field(default=None)
 
 
-class Light(BaseModel):
+@dataclass
+class Light(DataClassORJSONMixin):
     """Class holding an OpenMotics Light.
 
     # noqa: E800
@@ -46,15 +50,18 @@ class Light(BaseModel):
     """
 
     # pylint: disable=too-many-instance-attributes
-    idx: int = Field(..., alias="id")
-    local_id: int | None = None
-    name: str | None = None
-    capabilities: list[Any] | None = None
-    location: Location | None = None
-    status: Status | None = None
-    version: str | None = Field(None, alias="_version")
+    idx: int = field(metadata=field_options(alias="id"))
+    local_id: int | None = field(default=None)
+    name: str | None = field(default=None)
+    capabilities: list[Any] | None = field(default=None)
+    location: Location | None = field(default=None)
+    status: Status | None = field(default=None)
+    version: str | None = field(
+        default=None,
+        metadata=field_options(alias="_version"),
+    )
 
-    _brightness: int | None = None
+    _brightness: int | None = field(default=None)
 
     def __str__(self) -> str:
         """Represent the class objects as a string.
