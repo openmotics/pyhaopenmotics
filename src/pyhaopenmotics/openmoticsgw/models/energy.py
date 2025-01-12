@@ -1,5 +1,4 @@
 """Output Model for the OpenMotics API."""
-
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -8,6 +7,7 @@ from typing import Any
 
 @dataclass
 class Status:
+
     """Class holding the status."""
 
     voltage: float
@@ -26,7 +26,6 @@ class Status:
         Returns:
         -------
             A Status object.
-
         """
         return Status(
             voltage=data[0] if len(data) > 0 else 0,
@@ -38,6 +37,7 @@ class Status:
 
 @dataclass
 class EnergySensor:
+
     """Class holding an OpenMotics Energy Sensor.
 
     # noqa: E800
@@ -73,7 +73,6 @@ class EnergySensor:
         Returns:
         -------
             A EnergySensor object.
-
         """
         status = Status.from_list([])
         if "status" in data:

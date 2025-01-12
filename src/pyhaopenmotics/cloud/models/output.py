@@ -1,30 +1,25 @@
 """Output Model for the OpenMotics API."""
-
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from typing import Any
 
-from mashumaro import field_options
-from mashumaro.mixins.orjson import DataClassORJSONMixin
+from pydantic import BaseModel, Field
 
 from .location import Location
 
-zombie_status = {"on": None, "locked": None, "manual_override": None, "value": None}
 
+class Status(BaseModel):
 
-@dataclass
-class Status(DataClassORJSONMixin):
     """Class holding the status."""
 
-    on: bool | None = field(default=None)
-    locked: bool | None = field(default=None)
-    manual_override: bool | None = field(default=None)
-    value: int | None = field(default=None)
+    on: bool
+    locked: bool | None
+    manual_override: bool | None
+    value: int | None
 
 
-@dataclass
-class Output(DataClassORJSONMixin):
+class Output(BaseModel):
+
     """Class holding an OpenMotics Output.
 
     # noqa: E800
@@ -49,29 +44,16 @@ class Output(DataClassORJSONMixin):
     """
 
     # pylint: disable=too-many-instance-attributes
+    idx: int = Field(..., alias="id")
+    local_id: int | None
     name: str
-    idx: int = field(metadata=field_options(alias="id"))
-    output_type: str = field(metadata=field_options(alias="type"))
-    local_id: int | None = field(default=None)
-    location: Location | None = field(default=None)
-    capabilities: list[Any] | None = field(default=None)
-    metadata: dict[str, Any] | None = field(default=None)
-    last_state_change: float | None = field(default=None)
-    version: str | None = field(
-        default=None,
-        metadata=field_options(alias="_version"),
-    )
-    status: Status | None = field(default=None)
-
-    @classmethod
-    def __post_deserialize__(
-        cls,
-        obj: Output,
-    ) -> Output:
-        """Post deserialize hook for Output object."""
-        if not obj.status:
-            obj.status = Status.from_dict(zombie_status)
-        return obj
+    output_type: str = Field(..., alias="type")
+    location: Location | None
+    capabilities: list[Any] | None
+    metadata: dict[str, Any] | None
+    status: Status
+    last_state_change: float | None
+    version: str = Field(..., alias="_version")
 
     def __str__(self) -> str:
         """Represent the class objects as a string.

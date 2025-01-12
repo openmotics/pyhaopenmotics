@@ -1,5 +1,4 @@
 """Asynchronous client for the OpenMotics API."""
-
 # flake8: noqa
 # pylint: disable=protected-access
 # # mypy: ignore-errors

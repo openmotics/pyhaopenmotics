@@ -1,5 +1,4 @@
 """Output Model for the OpenMotics API."""
-
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -8,6 +7,7 @@ from typing import Any
 
 @dataclass
 class Status:
+
     """Class holding the status."""
 
     on: bool
@@ -25,7 +25,6 @@ class Status:
         Returns:
         -------
             A Status object.
-
         """
         return Status(
             # on = True if status = 1
@@ -37,6 +36,7 @@ class Status:
 
 @dataclass
 class OMInput:
+
     """Class holding an OpenMotics Input.
 
     # noqa: E800
@@ -80,7 +80,6 @@ class OMInput:
         Returns:
         -------
             A INput object.
-
         """
         status = Status.from_dict({})
         if "status" in data:
@@ -91,7 +90,7 @@ class OMInput:
             local_id=data.get("id", 0),
             name=data.get("name", "None"),
             status=status,
-            last_state_change=data.get("last_state_change"),
+            last_state_change=data.get("last_state_change", None),
             room=data.get("room", "None"),
             version=data.get("version", "0.0"),
         )

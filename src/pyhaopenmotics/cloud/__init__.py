@@ -1,5 +1,4 @@
 """Directory holding cloud."""
-
 from pyhaopenmotics.cloud.groupactions import OpenMoticsGroupActions
 from pyhaopenmotics.cloud.inputs import OpenMoticsInputs
 from pyhaopenmotics.cloud.installations import OpenMoticsInstallations
@@ -10,12 +9,12 @@ from pyhaopenmotics.cloud.shutters import OpenMoticsShutters
 from pyhaopenmotics.cloud.thermostats import OpenMoticsThermostats
 
 __all__ = [
-    "OpenMoticsGroupActions",
-    "OpenMoticsInputs",
     "OpenMoticsInstallations",
-    "OpenMoticsLights",
     "OpenMoticsOutputs",
-    "OpenMoticsSensors",
+    "OpenMoticsInputs",
+    "OpenMoticsGroupActions",
     "OpenMoticsShutters",
+    "OpenMoticsLights",
+    "OpenMoticsSensors",
     "OpenMoticsThermostats",
 ]

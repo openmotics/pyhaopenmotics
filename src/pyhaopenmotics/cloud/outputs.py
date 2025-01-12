@@ -2,17 +2,18 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
+
+from pydantic import parse_obj_as
 
 from pyhaopenmotics.cloud.models.output import Output
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.client.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
+    from pyhaopenmotics.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
 
 
-@dataclass
 class OpenMoticsOutputs:
+
     """Object holding information of the OpenMotics outputs.
 
     All actions related to Outputs or a specific Output.
@@ -24,7 +25,6 @@ class OpenMoticsOutputs:
         Args:
         ----
             omcloud: OpenMoticsCloud
-
         """
         self._omcloud = omcloud
 
@@ -41,7 +41,6 @@ class OpenMoticsOutputs:
         Returns:
         -------
             A list of outputs
-
         """
         path = f"/base/installations/{self._omcloud.installation_id}/outputs"
 
@@ -54,7 +53,7 @@ class OpenMoticsOutputs:
         else:
             body = await self._omcloud.get(path)
 
-        return [Output.from_dict(output) for output in body["data"]]
+        return parse_obj_as(list[Output], body["data"])
 
     async def get_by_id(
         self,
@@ -69,12 +68,11 @@ class OpenMoticsOutputs:
         Returns:
         -------
             Returns a output with id
-
         """
         path = f"/base/installations/{self._omcloud.installation_id}/outputs/{output_id}"
         body = await self._omcloud.get(path)
 
-        return Output.from_dict(body["data"])
+        return Output.parse_obj(body["data"])
 
     async def toggle(
         self,
@@ -89,7 +87,6 @@ class OpenMoticsOutputs:
         Returns:
         -------
             Returns a output with id
-
         """
         path = f"/base/installations/{self._omcloud.installation_id}/outputs/{output_id}/toggle"
         return await self._omcloud.post(path)
@@ -109,7 +106,6 @@ class OpenMoticsOutputs:
         Returns:
         -------
             Returns a output with id
-
         """
         payload = {}
 
@@ -135,7 +131,6 @@ class OpenMoticsOutputs:
         Returns:
         -------
             Returns a output with id
-
         """
         if output_id is None:
             # Turn off all lights

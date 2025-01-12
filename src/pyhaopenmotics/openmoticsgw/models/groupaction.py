@@ -1,5 +1,4 @@
 """Groupaction Model for the OpenMotics API."""
-
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -10,6 +9,7 @@ from .location import Location
 
 @dataclass
 class GroupAction:
+
     """Class holding an OpenMotics GroupAction.
 
     # noqa: E800
@@ -47,7 +47,6 @@ class GroupAction:
         Returns:
         -------
             A GroupAction object.
-
         """
         actions = [""]
 

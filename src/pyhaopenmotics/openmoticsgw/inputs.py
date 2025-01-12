@@ -1,5 +1,4 @@
 """Module containing the base of an output."""
-
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -10,11 +9,12 @@ from pyhaopenmotics.helpers import merge_dicts
 from .models.input import OMInput
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.client.localgateway import LocalGateway  # pylint: disable=R0401
+    from pyhaopenmotics.localgateway import LocalGateway  # pylint: disable=R0401
 
 
 @dataclass
 class OpenMoticsInputs:
+
     """Object holding information of the OpenMotics outputs.
 
     All actions related to Outputs or a specific Output.
@@ -26,7 +26,6 @@ class OpenMoticsInputs:
         Args:
         ----
             omcloud: LocalGateway
-
         """
         self._omcloud = omcloud
         self._input_configs: list[Any] = []
@@ -38,7 +37,6 @@ class OpenMoticsInputs:
         Returns
         -------
             list of all input confs
-
         """
         return self._input_configs
 
@@ -49,7 +47,6 @@ class OpenMoticsInputs:
         Args:
         ----
             input_configs: list
-
         """
         self._input_configs = input_configs
 
@@ -66,7 +63,6 @@ class OpenMoticsInputs:
         Returns:
         -------
             list with all inputs
-
         """
         if len(self.input_configs) == 0:
             goc = await self._omcloud.exec_action("get_input_configurations")
@@ -99,7 +95,6 @@ class OpenMoticsInputs:
         Returns:
         -------
             Returns a input with id
-
         """
         for ominput in await self.get_all():
             if ominput.idx == input_id:

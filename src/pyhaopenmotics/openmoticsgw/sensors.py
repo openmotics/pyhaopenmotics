@@ -7,10 +7,11 @@ from typing import TYPE_CHECKING, Any
 from pyhaopenmotics.openmoticsgw.models.sensor import Sensor
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.client.localgateway import LocalGateway  # pylint: disable=R0401
+    from pyhaopenmotics.localgateway import LocalGateway  # pylint: disable=R0401
 
 
 class OpenMoticsSensors:
+
     """Object holding information of the OpenMotics sensors.
 
     All actions related to Sensors or a specific Sensor.
@@ -22,7 +23,6 @@ class OpenMoticsSensors:
         Args:
         ----
             omcloud: LocalGateway
-
         """
         self._omcloud = omcloud
         self._sensor_configs: list[Any] = []
@@ -34,7 +34,6 @@ class OpenMoticsSensors:
         Returns
         -------
             list of all sensor confs
-
         """
         return self._sensor_configs
 
@@ -45,7 +44,6 @@ class OpenMoticsSensors:
         Args:
         ----
             sensor_configs: list
-
         """
         self._sensor_configs = sensor_configs
 
@@ -62,7 +60,6 @@ class OpenMoticsSensors:
         Returns:
         -------
             Dict with all sensors
-
         """
         if len(self.sensor_configs) == 0:
             goc = await self._omcloud.exec_action("get_sensor_configurations")
@@ -103,7 +100,6 @@ class OpenMoticsSensors:
         Returns:
         -------
             Returns a sensor with id
-
         """
         for sensor in await self.get_all():
             if sensor.idx == sensor_id:

@@ -1,109 +1,106 @@
 """Thermostat Model for the OpenMotics API."""
-
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from typing import Any
 
-from mashumaro import field_options
-from mashumaro.mixins.orjson import DataClassORJSONMixin
+from pydantic import BaseModel, Field
 
 
-@dataclass
-class GroupLocation(DataClassORJSONMixin):
+class GroupLocation(BaseModel):
+
     """Class holding the location."""
 
-    thermostat_group_id: int | None = field(default=None)
-    installation_id: int | None = field(default=None)
-    room_id: int | None = field(default=None)
+    thermostat_group_id: int | None
+    installation_id: int | None
+    room_id: int | None
 
 
-@dataclass
-class UnitLocation(DataClassORJSONMixin):
+class UnitLocation(BaseModel):
+
     """Class holding the location."""
 
-    thermostat_group_id: int | None = field(default=None)
-    installation_id: int | None = field(default=None)
-    room_id: int | None = field(default=None)
+    thermostat_group_id: int | None
+    installation_id: int | None
+    room_id: int | None
 
 
-@dataclass
-class GroupStatus(DataClassORJSONMixin):
+class GroupStatus(BaseModel):
+
     """Class holding the status."""
 
-    mode: str | None = field(default=None)
-    state: bool | None = field(default=None)
+    mode: str | None
+    state: bool | None
 
 
-@dataclass
-class UnitStatus(DataClassORJSONMixin):
+class UnitStatus(BaseModel):
+
     """Class holding the status."""
 
-    state: str | None = field(default=None)
-    setpoint: float | None = field(default=None)
-    steering_power: float | None = field(default=None)
-    active_preset: str | None = field(default=None)
-    current_temperature: float | None = field(default=None)
-    mode: str | None = field(default=None)
-    preset_expiration: str | None = field(default=None)
-    actual_temperature: float | None = field(default=None)
-    current_setpoint: float | None = field(default=None)
-    preset: str | None = field(default=None)
+    state: str | None
+    setpoint: float | None
+    steering_power: float | None
+    active_preset: str | None
+    current_temperature: float | None
+    mode: str | None
+    preset_expiration: str | None
+    actual_temperature: float | None
+    current_setpoint: float | None
+    preset: str | None
 
 
-@dataclass
-class Presets(DataClassORJSONMixin):
+class Presets(BaseModel):
+
     """Class holding the status."""
 
-    away: str | None = field(default=None)
-    party: str | None = field(default=None)
-    vacation: str | None = field(default=None)
+    away: str | None
+    party: str | None
+    vacation: str | None
 
 
-@dataclass
-class Schedule(DataClassORJSONMixin):
+class Schedule(BaseModel):
+
     """Class holding the schedule."""
 
-    data: dict[str, Any] | None = field(default=None)
-    start: str | None = field(default=None)
+    data: dict[str, Any] | None
+    start: str | None
 
 
-@dataclass
-class ConfigurationPreset(DataClassORJSONMixin):
+class ConfigurationPreset(BaseModel):
+
     """Class holding the configuration presets."""
 
-    output_0_id: int | None = field(default=None)
-    output_1_id: int | None = field(default=None)
-    presets: Presets | None = field(default=None)
-    schedule: Schedule | None = field(default=None)
-    sensor_id: int | None = field(default=None)
+    output_0_id: int | None
+    output_1_id: int | None
+    presets: Presets | None
+    schedule: Schedule | None
+    sensor_id: int | None
 
 
-@dataclass
-class Configuration(DataClassORJSONMixin):
+class Configuration(BaseModel):
+
     """Class holding the configuration."""
 
-    heating: ConfigurationPreset | None = field(default=None)
-    cooling: ConfigurationPreset | None = field(default=None)
+    heating: ConfigurationPreset | None
+    cooling: ConfigurationPreset | None
 
 
-@dataclass
-class Allowed(DataClassORJSONMixin):
+class Allowed(BaseModel):
+
     """Object holding allowed."""
 
-    allowed: bool | None = field(default=None)
+    allowed: bool | None
 
 
-@dataclass
-class Acl(DataClassORJSONMixin):
+class Acl(BaseModel):
+
     """Object holding an acl."""
 
-    set_state: Allowed | None = field(default=None)
-    set_mode: Allowed | None = field(default=None)
+    set_state: Allowed | None
+    set_mode: Allowed | None
 
 
-@dataclass
-class ThermostatGroup(DataClassORJSONMixin):
+class ThermostatGroup(BaseModel):
+
     """Class holding an OpenMotics ThermostatGroup .
 
         # noqa: E800
@@ -124,21 +121,15 @@ class ThermostatGroup(DataClassORJSONMixin):
     """
 
     # pylint: disable=too-many-instance-attributes
-    idx: int = field(metadata=field_options(alias="id"))
+    idx: int = Field(..., alias="id")
     local_id: int
     name: str
-    schedule: Schedule | None = field(default=None)
-    capabilities: list[Any] | None = field(default=None)
-    version: str | None = field(
-        default=None,
-        metadata=field_options(alias="_version"),
-    )
-    thermostat_ids: list[Any] | None = field(default=None)
-    status: GroupStatus | None = field(default=None)
-    acl: Acl | None = field(
-        default=None,
-        metadata=field_options(alias="_acl"),
-    )
+    schedule: Schedule | None
+    capabilities: list[Any] | None
+    version: str | None = Field(..., alias="_version")
+    thermostat_ids: list[Any] | None
+    status: GroupStatus | None
+    acl: Acl | None = Field(..., alias="_acl")
 
     def __str__(self) -> str:
         """Represent the class objects as a string.
@@ -151,8 +142,8 @@ class ThermostatGroup(DataClassORJSONMixin):
         return f"{self.idx}_{self.name}"
 
 
-@dataclass
-class ThermostatUnit(DataClassORJSONMixin):
+class ThermostatUnit(BaseModel):
+
     """Class holding an OpenMotics ThermostatUnit.
 
     # noqa: E800
@@ -229,15 +220,12 @@ class ThermostatUnit(DataClassORJSONMixin):
     """
 
     # pylint: disable=too-many-instance-attributes
+    idx: int = Field(..., alias="id")
+    local_id: int | None
     name: str
-    idx: int = field(metadata=field_options(alias="id"))
-    local_id: int | None = field(default=None)
-    location: UnitLocation | None = field(default=None)
-    status: UnitStatus | None = field(default=None)
-    version: str | None = field(
-        default=None,
-        metadata=field_options(alias="_version"),
-    )
+    location: UnitLocation | None
+    status: UnitStatus | None
+    version: str | None = Field(..., alias="_version")
 
     def __str__(self) -> str:
         """Represent the class objects as a string.
