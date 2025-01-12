@@ -7,10 +7,11 @@ from typing import TYPE_CHECKING, Any
 from pyhaopenmotics.openmoticsgw.models.energy import EnergySensor
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.client.localgateway import LocalGateway  # pylint: disable=R0401
+    from pyhaopenmotics.localgateway import LocalGateway  # pylint: disable=R0401
 
 
 class OpenMoticsEnergySensors:
+
     """Object holding information of the OpenMotics energy sensors.
 
     All actions related to Sensors or a specific Sensor.
@@ -22,7 +23,6 @@ class OpenMoticsEnergySensors:
         Args:
         ----
             omcloud: LocalGateway
-
         """
         self._omcloud = omcloud
         self._sensor_configs: list[Any] = []
@@ -34,7 +34,6 @@ class OpenMoticsEnergySensors:
         Returns
         -------
             list of all sensor confs
-
         """
         return self._sensor_configs
 
@@ -45,7 +44,6 @@ class OpenMoticsEnergySensors:
         Args:
         ----
             sensor_configs: list
-
         """
         self._sensor_configs = sensor_configs
 
@@ -62,7 +60,6 @@ class OpenMoticsEnergySensors:
         Returns:
         -------
             List with all energy sensors
-
         """
         if len(self.sensor_configs) == 0:
             goc = await self._omcloud.exec_action("get_power_modules")
@@ -109,7 +106,6 @@ class OpenMoticsEnergySensors:
         Returns:
         -------
             Returns an energy sensor with id
-
         """
         for sensor in await self.get_all():
             if sensor.idx == sensor_id:

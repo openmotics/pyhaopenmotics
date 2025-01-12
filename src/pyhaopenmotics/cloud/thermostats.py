@@ -2,17 +2,18 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
+
+from pydantic import parse_obj_as
 
 from pyhaopenmotics.cloud.models.thermostat import ThermostatGroup, ThermostatUnit
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.client.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
+    from pyhaopenmotics.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
 
 
-@dataclass
 class OpenMoticsThermostats:
+
     """Object holding information of the OpenMotics thermostats.
 
     All actions related to thermostats or a specific thermostat.
@@ -24,7 +25,6 @@ class OpenMoticsThermostats:
         Args:
         ----
             omcloud: OpenMoticsCloud
-
         """
         self._omcloud = omcloud
 
@@ -44,7 +44,6 @@ class OpenMoticsThermostats:
         Returns:
         -------
             Returns something
-
         """
         path = f"/base/installations/{self._omcloud.installation_id}/thermostats/mode"
         payload = {"mode": mode}
@@ -63,15 +62,14 @@ class OpenMoticsThermostats:
         Returns:
         -------
             Returns something
-
         """
         path = f"/base/installations/{self._omcloud.installation_id}/thermostats/state"
         payload = {"state": state}
         return await self._omcloud.post(path, json=payload)
 
 
-@dataclass
 class OpenMoticsThermostatGroups:
+
     """Object holding information of the OpenMotics thermostats.
 
     All actions related to thermostats or a specific thermostat.
@@ -83,7 +81,6 @@ class OpenMoticsThermostatGroups:
         Args:
         ----
             _omcloud: _omcloud
-
         """
         self._omcloud = _omcloud
 
@@ -99,13 +96,12 @@ class OpenMoticsThermostatGroups:
         Returns:
         -------
             Dict with all thermostats
-
         """
         path = f"/base/installations/{self._omcloud.installation_id}/thermostats/groups"
 
         body = await self._omcloud.get(path)
 
-        return [ThermostatGroup.from_dict(thermostatgroup) for thermostatgroup in body["data"]]
+        return parse_obj_as(list[ThermostatGroup], body["data"])
 
     async def get_by_id(
         self,
@@ -120,7 +116,6 @@ class OpenMoticsThermostatGroups:
         Returns:
         -------
             Returns a thermostatgroup_id with id
-
         """
         path = (
             f"/base/installations/{self._omcloud.installation_id}"
@@ -128,7 +123,7 @@ class OpenMoticsThermostatGroups:
         )
         body = await self._omcloud.get(path)
 
-        return ThermostatGroup.from_dict(body["data"])
+        return ThermostatGroup.parse_obj(body["data"])
 
     async def set_mode(
         self,
@@ -145,7 +140,6 @@ class OpenMoticsThermostatGroups:
         Returns:
         -------
             Returns a output with id
-
         """
         path = (
             f"/base/installations/{self._omcloud.installation_id}"
@@ -156,6 +150,7 @@ class OpenMoticsThermostatGroups:
 
 
 class OpenMoticsThermostatUnits:
+
     """Object holding information of the OpenMotics thermostats.
 
     All actions related to thermostats or a specific thermostat.
@@ -167,7 +162,6 @@ class OpenMoticsThermostatUnits:
         Args:
         ----
             _omcloud: _omcloud
-
         """
         self._omcloud = _omcloud
 
@@ -183,13 +177,12 @@ class OpenMoticsThermostatUnits:
         Returns:
         -------
             Dict with all thermostatunits
-
         """
         path = f"/base/installations/{self._omcloud.installation_id}/thermostats/units"
 
         body = await self._omcloud.get(path)
 
-        return [ThermostatUnit.from_dict(thermostatunit) for thermostatunit in body["data"]]
+        return parse_obj_as(list[ThermostatUnit], body["data"])
 
     async def get_by_id(
         self,
@@ -204,7 +197,6 @@ class OpenMoticsThermostatUnits:
         Returns:
         -------
             Returns a thermostatunit with id
-
         """
         path = (
             f"/base/installations/{self._omcloud.installation_id}"
@@ -212,7 +204,7 @@ class OpenMoticsThermostatUnits:
         )
         body = await self._omcloud.get(path)
 
-        return ThermostatUnit.from_dict(body["data"])
+        return ThermostatUnit.parse_obj(body["data"])
 
     async def set_state(
         self,
@@ -229,7 +221,6 @@ class OpenMoticsThermostatUnits:
         Returns:
         -------
             Returns a thermostatunit with id
-
         """
         path = (
             f"/base/installations/{self._omcloud.installation_id}"
@@ -253,7 +244,6 @@ class OpenMoticsThermostatUnits:
         Returns:
         -------
             Returns a thermostatunit with id
-
         """
         path = (
             f"/base/installations/{self._omcloud.installation_id}"
@@ -277,7 +267,6 @@ class OpenMoticsThermostatUnits:
         Returns:
         -------
             Returns a thermostatunit with id
-
         """
         path = (
             f"/base/installations/{self._omcloud.installation_id}"
@@ -311,7 +300,6 @@ class OpenMoticsThermostatUnits:
         Returns:
         -------
             Returns a thermostatunit with id
-
         """
         path = (
             f"/base/installations/{self._omcloud.installation_id}"

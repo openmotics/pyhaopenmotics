@@ -1,5 +1,4 @@
 """Module containing the base of an thermostat."""
-
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -9,11 +8,12 @@ from pyhaopenmotics.helpers import merge_dicts
 from pyhaopenmotics.openmoticsgw.models.thermostat import ThermostatGroup, ThermostatUnit
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.client.localgateway import LocalGateway  # pylint: disable=R0401
+    from pyhaopenmotics.localgateway import LocalGateway  # pylint: disable=R0401
 
 
 @dataclass
 class OpenMoticsThermostats:
+
     """Object holding information of the OpenMotics thermostats.
 
     All actions related to thermostats or a specific thermostat.
@@ -25,7 +25,6 @@ class OpenMoticsThermostats:
         Args:
         ----
             omcloud: LocalGateway
-
         """
         self._omcloud = omcloud
         self._thermostat_configs: list[Any] = []
@@ -46,7 +45,6 @@ class OpenMoticsThermostats:
         Returns:
         -------
             Returns None
-
         """
         if mode:
             pass
@@ -64,13 +62,13 @@ class OpenMoticsThermostats:
         Returns:
         -------
             Returns None
-
         """
         if state:
             pass
 
 
 class OpenMoticsThermostatGroups:
+
     """Object holding information of the OpenMotics thermostats.
 
     All actions related to thermostats or a specific thermostat.
@@ -82,7 +80,6 @@ class OpenMoticsThermostatGroups:
         Args:
         ----
             omcloud: LocalGateway
-
         """
         self._omcloud = omcloud
         self._thermostatgroup_configs: list[Any] = []
@@ -94,7 +91,6 @@ class OpenMoticsThermostatGroups:
         Returns
         -------
             list of all thermostatgroup_configs
-
         """
         return self._thermostatgroup_configs
 
@@ -105,7 +101,6 @@ class OpenMoticsThermostatGroups:
         Args:
         ----
             thermostatgroup_configs: list
-
         """
         self._thermostatgroup_configs = thermostatgroup_configs
 
@@ -122,7 +117,6 @@ class OpenMoticsThermostatGroups:
         Returns:
         -------
             Dict with all ThermostatGroup
-
         """
         if len(self.thermostatgroup_configs) == 0:
             goc = await self._omcloud.exec_action("get_thermostat_group_configurations")
@@ -155,7 +149,6 @@ class OpenMoticsThermostatGroups:
         Returns:
         -------
             Returns a thermostatgroup with id
-
         """
         for thermostatgroup in await self.get_all():
             if thermostatgroup.idx == thermostatgroup_id:
@@ -177,13 +170,13 @@ class OpenMoticsThermostatGroups:
         Returns:
         -------
             Returns a output with id
-
         """
         if thermostatgroup_id or mode:
             pass
 
 
 class OpenMoticsThermostatUnits:
+
     """Object holding information of the OpenMotics thermostats.
 
     All actions related to thermostats or a specific thermostat.
@@ -195,7 +188,6 @@ class OpenMoticsThermostatUnits:
         Args:
         ----
             _omcloud: LocalGateway
-
         """
         self._omcloud = _omcloud
         self._thermostatunit_configs: list[Any] = []
@@ -207,7 +199,6 @@ class OpenMoticsThermostatUnits:
         Returns
         -------
             list of all thermostatunit_configs
-
         """
         return self._thermostatunit_configs
 
@@ -218,7 +209,6 @@ class OpenMoticsThermostatUnits:
         Args:
         ----
             thermostatunit_configs: list
-
         """
         self._thermostatunit_configs = thermostatunit_configs
 
@@ -235,7 +225,6 @@ class OpenMoticsThermostatUnits:
         Returns:
         -------
             Dict with all ThermostatUnit
-
         """
         ###############################################################################
         # Code has changed in latest version of gateway:
@@ -287,7 +276,6 @@ class OpenMoticsThermostatUnits:
         Returns:
         -------
             Returns a thermostatunit with id
-
         """
         for thermostatunit in await self.get_all():
             if thermostatunit.idx == thermostatunit_id:
@@ -309,7 +297,6 @@ class OpenMoticsThermostatUnits:
         Returns:
         -------
             Returns a thermostatunit with id
-
         """
         if thermostatunit_id or state:
             pass
@@ -329,7 +316,6 @@ class OpenMoticsThermostatUnits:
         Returns:
         -------
             Returns a thermostatunit with id
-
         """
         if thermostatunit_id or temperature:
             pass
@@ -349,7 +335,6 @@ class OpenMoticsThermostatUnits:
         Returns:
         -------
             Returns a thermostatunit with id
-
         """
         if thermostatunit_id or preset:
             pass
@@ -379,7 +364,6 @@ class OpenMoticsThermostatUnits:
         Returns:
         -------
             Returns a thermostatunit with id
-
         """
         payload = {
             "heating": {

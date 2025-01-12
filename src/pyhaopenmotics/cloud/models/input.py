@@ -1,24 +1,20 @@
 """Output Model for the OpenMotics API."""
-
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-
-from mashumaro import field_options
-from mashumaro.mixins.orjson import DataClassORJSONMixin
+from pydantic import BaseModel, Field
 
 
-@dataclass
-class Status(DataClassORJSONMixin):
+class Status(BaseModel):
+
     """Class holding the status."""
 
     on: bool
-    locked: bool | None = field(default=None)
-    value: int | None = field(default=None)
+    locked: bool | None
+    value: int | None
 
 
-@dataclass
-class OMInput(DataClassORJSONMixin):
+class OMInput(BaseModel):
+
     """Class holding an OpenMotics Input.
 
     # noqa: E800
@@ -43,17 +39,13 @@ class OMInput(DataClassORJSONMixin):
     """
 
     # pylint: disable=too-many-instance-attributes
+    idx: int = Field(..., alias="id")
+    local_id: int | None
     name: str
-    idx: int = field(metadata=field_options(alias="id"))
-    local_id: int | None = field(default=None)
-
-    status: Status | None = field(default=None)
-    last_state_change: float | None = field(default=None)
-    room: int | None = field(default=None)
-    version: str | None = field(
-        default=None,
-        metadata=field_options(alias="_version"),
-    )
+    status: Status | None
+    last_state_change: float | None
+    room: int | None
+    version: str = Field(..., alias="_version")
 
     def __str__(self) -> str:
         """Represent the class objects as a string.

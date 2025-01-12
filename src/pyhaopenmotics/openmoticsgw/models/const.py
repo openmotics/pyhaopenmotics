@@ -4,7 +4,6 @@
     'output': list of module types (O,R,D) and
     'input': list of input module types (I,T,L).
 """
-
 OPENMOTICS_OUTPUT_TYPES = ["O", "R", "D"]
 OPENMOTICS_INPUT_TYPES = ["I", "T", "L"]
 

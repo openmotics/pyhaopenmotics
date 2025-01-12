@@ -2,17 +2,18 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
+
+from pydantic import parse_obj_as
 
 from pyhaopenmotics.cloud.models.light import Light
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.client.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
+    from pyhaopenmotics.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
 
 
-@dataclass
 class OpenMoticsLights:
+
     """Object holding information of the OpenMotics lights.
 
     All actions related to lights or a specific light.
@@ -24,7 +25,6 @@ class OpenMoticsLights:
         Args:
         ----
             omcloud: OpenMoticsCloud
-
         """
         self._omcloud = omcloud
 
@@ -41,7 +41,6 @@ class OpenMoticsLights:
         Returns:
         -------
             Dict with all lights
-
         """
         path = f"/base/installations/{self._omcloud.installation_id}/lights"
 
@@ -54,7 +53,7 @@ class OpenMoticsLights:
         else:
             body = await self._omcloud.get(path)
 
-        return [Light.from_dict(light) for light in body["data"]]
+        return parse_obj_as(list[Light], body["data"])
 
     async def get_by_id(
         self,
@@ -69,12 +68,11 @@ class OpenMoticsLights:
         Returns:
         -------
             Returns a light with id
-
         """
         path = f"/base/installations/{self._omcloud.installation_id}/lights/{light_id}"
         body = await self._omcloud.get(path)
 
-        return Light.from_dict(body["data"])
+        return Light.parse_obj(body["data"])
 
     async def toggle(
         self,
@@ -89,7 +87,6 @@ class OpenMoticsLights:
         Returns:
         -------
             Returns a light with id
-
         """
         path = f"/base/installations/{self._omcloud.installation_id}/lights/{light_id}/toggle"
         return await self._omcloud.post(path)
@@ -109,7 +106,6 @@ class OpenMoticsLights:
         Returns:
         -------
             Returns a light with id
-
         """
         payload = {}
 
@@ -134,7 +130,6 @@ class OpenMoticsLights:
         Returns:
         -------
             Returns a light with id
-
         """
         if light_id is None:
             # Turn off all lights

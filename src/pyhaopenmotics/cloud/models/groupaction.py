@@ -1,18 +1,15 @@
 """Groupaction Model for the OpenMotics API."""
-
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from typing import Any
 
-from mashumaro import field_options
-from mashumaro.mixins.orjson import DataClassORJSONMixin
+from pydantic import BaseModel, Field
 
 from .location import Location
 
 
-@dataclass
-class GroupAction(DataClassORJSONMixin):
+class GroupAction(BaseModel):
+
     """Object holding an OpenMotics GroupAction.
 
     # noqa: E800
@@ -31,15 +28,12 @@ class GroupAction(DataClassORJSONMixin):
     # }
     """
 
-    idx: int = field(metadata=field_options(alias="id"))
-    local_id: int | None = field(default=None)
-    name: str | None = field(default=None)
-    actions: list[Any] | None = field(default=None)
-    location: Location | None = field(default=None)
-    version: str | None = field(
-        default=None,
-        metadata=field_options(alias="_version"),
-    )
+    idx: int = Field(..., alias="id")
+    local_id: int | None
+    name: str | None
+    actions: list[Any] | None
+    location: Location | None
+    version: str | None = Field(None, alias="_version")
 
     def __str__(self) -> str:
         """Represent the class objects as a string.

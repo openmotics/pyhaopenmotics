@@ -1,5 +1,4 @@
 """Module containing the base of an shutters."""
-
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -8,11 +7,12 @@ from typing import TYPE_CHECKING, Any
 from .models.shutter import Shutter
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.client.localgateway import LocalGateway  # pylint: disable=R0401
+    from pyhaopenmotics.localgateway import LocalGateway  # pylint: disable=R0401
 
 
 @dataclass
 class OpenMoticsShutters:
+
     """Object holding information of the OpenMotics shutters.
 
     All actions related to Shutters or a specific Shutter.
@@ -24,7 +24,6 @@ class OpenMoticsShutters:
         Args:
         ----
             omcloud: LocalGateway
-
         """
         self._omcloud = omcloud
         self._shutter_configs: list[Any] = []
@@ -36,7 +35,6 @@ class OpenMoticsShutters:
         Returns
         -------
             list of all shutter confs
-
         """
         return self._shutter_configs
 
@@ -47,7 +45,6 @@ class OpenMoticsShutters:
         Args:
         ----
             shutter_configs: list
-
         """
         self._shutter_configs = shutter_configs
 
@@ -64,7 +61,6 @@ class OpenMoticsShutters:
         Returns:
         -------
             list with all shutters
-
         """
         if len(self.shutter_configs) == 0:
             goc = await self._omcloud.exec_action("get_shutter_configurations")
@@ -103,7 +99,6 @@ class OpenMoticsShutters:
         Returns:
         -------
             Returns a shutter with id
-
         """
         for shutter in await self.get_all():
             if shutter.idx == shutter_id:
@@ -123,7 +118,6 @@ class OpenMoticsShutters:
         Returns:
         -------
             Returns a shutter with id
-
         """
         data = {"id": shutter_id}
         return await self._omcloud.exec_action("do_shutter_up", data=data)
@@ -141,7 +135,6 @@ class OpenMoticsShutters:
         Returns:
         -------
             Returns a shutter with id
-
         """
         data = {"id": shutter_id}
         return await self._omcloud.exec_action("do_shutter_down", data=data)
@@ -159,7 +152,6 @@ class OpenMoticsShutters:
         Returns:
         -------
             Returns a shutter with id
-
         """
         data = {"id": shutter_id}
         return await self._omcloud.exec_action("do_shutter_stop", data=data)
@@ -183,7 +175,6 @@ class OpenMoticsShutters:
         Returns:
         -------
             Returns a shutter with id
-
         """
         data = {"id": shutter_id, "position": position}
         return await self._omcloud.exec_action("do_shutter_goto", data=data)

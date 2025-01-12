@@ -1,26 +1,23 @@
 """Location Model for the OpenMotics API."""
-
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-
-from mashumaro.mixins.orjson import DataClassORJSONMixin
+from pydantic import BaseModel
 
 
-@dataclass
-class FloorCoordinates(DataClassORJSONMixin):
+class FloorCoordinates(BaseModel):
+
     """Class holding the floor_coordinates."""
 
-    x: int | None = field(default=None)
-    y: int | None = field(default=None)
+    x: int | None
+    y: int | None
 
 
-@dataclass
-class Location(DataClassORJSONMixin):
+class Location(BaseModel):
+
     """Class holding the location."""
 
-    floor_coordinates: FloorCoordinates | None = field(default=None)
-    installation_id: int | None = field(default=None)
-    gateway_id: int | None = field(default=None)
-    floor_id: int | None = field(default=None)
-    room_id: int | None = field(default=None)
+    floor_coordinates: FloorCoordinates | None
+    installation_id: int | None
+    gateway_id: int | None
+    floor_id: int | None
+    room_id: int | None

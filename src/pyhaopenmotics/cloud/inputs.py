@@ -2,17 +2,18 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 from typing import TYPE_CHECKING
+
+from pydantic import parse_obj_as
 
 from pyhaopenmotics.cloud.models.input import OMInput
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.client.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
+    from pyhaopenmotics.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
 
 
-@dataclass
 class OpenMoticsInputs:
+
     """Object holding information of the OpenMotics inputs.
 
     All actions related to Inputs or a specific Input.
@@ -24,7 +25,6 @@ class OpenMoticsInputs:
         Args:
         ----
             omcloud: OpenMoticsCloud
-
         """
         self._omcloud = omcloud
 
@@ -41,7 +41,6 @@ class OpenMoticsInputs:
         Returns:
         -------
             A list of inputs
-
         """
         path = f"/base/installations/{self._omcloud.installation_id}/inputs"
 
@@ -54,7 +53,7 @@ class OpenMoticsInputs:
         else:
             body = await self._omcloud.get(path)
 
-        return [OMInput.from_dict(ominput) for ominput in body["data"]]
+        return parse_obj_as(list[OMInput], body["data"])
 
     async def get_by_id(
         self,
@@ -69,9 +68,8 @@ class OpenMoticsInputs:
         Returns:
         -------
             Returns a input with id
-
         """
         path = f"/base/installations/{self._omcloud.installation_id}/inputs/{input_id}"
         body = await self._omcloud.get(path)
 
-        return OMInput.from_dict(body["data"])
+        return OMInput.parse_obj(body["data"])

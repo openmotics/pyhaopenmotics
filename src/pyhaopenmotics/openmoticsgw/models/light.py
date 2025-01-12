@@ -1,5 +1,4 @@
 """Output Model for the OpenMotics API."""
-
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -10,6 +9,7 @@ from .location import Location
 
 @dataclass
 class Status:
+
     """Class holding the status."""
 
     on: bool
@@ -28,7 +28,6 @@ class Status:
         Returns:
         -------
             A Status object.
-
         """
         return Status(
             # on = True if status = 1
@@ -41,6 +40,7 @@ class Status:
 
 @dataclass
 class Light:
+
     """Class holding an OpenMotics Light."""
 
     # pylint: disable=too-many-instance-attributes
@@ -65,7 +65,6 @@ class Light:
         Returns:
         -------
             A Output object.
-
         """
         status = Status.from_dict({})
         if "status" in data:
@@ -85,7 +84,7 @@ class Light:
             capabilities=capabilities,
             metadata={},
             status=status,
-            last_state_change=data.get("last_state_change"),
+            last_state_change=data.get("last_state_change", None),
             version=data.get("version", "0.0"),
         )
 

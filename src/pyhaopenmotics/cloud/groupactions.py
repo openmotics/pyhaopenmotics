@@ -1,18 +1,18 @@
 """Module containing the base of an output."""
-
 from __future__ import annotations
 
-from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
+
+from pydantic import parse_obj_as
 
 from pyhaopenmotics.cloud.models.groupaction import GroupAction
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.client.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
+    from pyhaopenmotics.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
 
 
-@dataclass
 class OpenMoticsGroupActions:
+
     """Object holding information of the OpenMotics groupactions.
 
     All actions related to groupaction or a specific groupaction.
@@ -24,7 +24,6 @@ class OpenMoticsGroupActions:
         Args:
         ----
             omcloud: OpenMoticsCloud
-
         """
         self._omcloud = omcloud
 
@@ -60,7 +59,6 @@ class OpenMoticsGroupActions:
         #  },
         #  "name": "<name>"
         #  }
-
         """
         path = f"/base/installations/{self._omcloud.installation_id}/groupactions"
         if groupactions_filter:
@@ -72,7 +70,7 @@ class OpenMoticsGroupActions:
         else:
             body = await self._omcloud.get(path)
 
-        return [GroupAction.from_dict(groupaction) for groupaction in body["data"]]
+        return parse_obj_as(list[GroupAction], body["data"])
 
     async def get_by_id(
         self,
@@ -87,13 +85,12 @@ class OpenMoticsGroupActions:
         Returns:
         -------
             Returns a groupaction with id
-
         """
         path = f"/base/installations/{self._omcloud.installation_id}/groupactions/{groupaction_id}"
 
         body = await self._omcloud.get(path)
 
-        return GroupAction.from_dict(body["data"])
+        return GroupAction.parse_obj(body["data"])
 
     async def trigger(
         self,
@@ -108,7 +105,6 @@ class OpenMoticsGroupActions:
         Returns:
         -------
             Returns a groupaction with id
-
         """
         # E501 line too long
         path = (
@@ -133,7 +129,6 @@ class OpenMoticsGroupActions:
         Returns:
         -------
             Returns a groupaction with id
-
         """
         path = f"/base/installations/{self._omcloud.installation_id}/groupactions"
         query_params = {"usage": groupaction_usage.upper()}
@@ -148,6 +143,5 @@ class OpenMoticsGroupActions:
         Returns
         -------
             Returns all scenes
-
         """
         return await self.by_usage("SCENE")
