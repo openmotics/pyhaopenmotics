@@ -1,4 +1,5 @@
 """Module containing the base of an output."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -9,12 +10,11 @@ from pyhaopenmotics.helpers import merge_dicts
 from .models.output import Output
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.localgateway import LocalGateway  # pylint: disable=R0401
+    from pyhaopenmotics.client.localgateway import LocalGateway  # pylint: disable=R0401
 
 
 @dataclass
 class OpenMoticsOutputs:
-
     """Object holding information of the OpenMotics outputs.
 
     All actions related to Outputs or a specific Output.
@@ -26,6 +26,7 @@ class OpenMoticsOutputs:
         Args:
         ----
             omcloud: LocalGateway
+
         """
         self._omcloud = omcloud
         self._output_configs: list[Any] = []
@@ -37,6 +38,7 @@ class OpenMoticsOutputs:
         Returns
         -------
             list of all output confs
+
         """
         return self._output_configs
 
@@ -47,6 +49,7 @@ class OpenMoticsOutputs:
         Args:
         ----
             output_configs: list
+
         """
         self._output_configs = output_configs
 
@@ -63,6 +66,7 @@ class OpenMoticsOutputs:
         Returns:
         -------
             list with all outputs
+
         """
         if len(self.output_configs) == 0:
             goc = await self._omcloud.exec_action("get_output_configurations")
@@ -95,6 +99,7 @@ class OpenMoticsOutputs:
         Returns:
         -------
             Returns a output with id
+
         """
         for output in await self.get_all():
             if output.idx == output_id:
@@ -114,6 +119,7 @@ class OpenMoticsOutputs:
         Returns:
         -------
             Returns a output with id
+
         """
         if (output := await self.get_by_id(output_id)) is None:
             return None
@@ -139,6 +145,7 @@ class OpenMoticsOutputs:
         Returns:
         -------
             Returns a output with id
+
         """
         if value is not None:
             # value: <0 - 100>
@@ -163,6 +170,7 @@ class OpenMoticsOutputs:
         Returns:
         -------
             Returns a output with id
+
         """
         data = {"id": output_id, "is_on": False}
         return await self._omcloud.exec_action("set_output", data=data)

@@ -1,18 +1,18 @@
 """Module containing the base of an light."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.localgateway import LocalGateway  # pylint: disable=R0401
+    from pyhaopenmotics.client.localgateway import LocalGateway  # pylint: disable=R0401
 
     from .models.light import Light
 
 
 @dataclass
 class OpenMoticsLights:
-
     """Object holding information of the OpenMotics lights.
 
     All actions related to lights or a specific light.
@@ -24,6 +24,7 @@ class OpenMoticsLights:
         Args:
         ----
             omcloud: LocalGateway
+
         """
         self._omcloud = omcloud
 

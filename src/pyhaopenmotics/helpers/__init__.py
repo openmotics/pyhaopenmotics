@@ -16,6 +16,7 @@ def get_key_for_word(dictionary: dict[str, Any], word: str) -> Any:
     Returns:
     -------
         Any
+
     """
     try:
         for key, value in dictionary.items():
@@ -54,6 +55,7 @@ def merge_dicts(list_a: list[Any], dkey: str, list_b: list[Any]) -> list[Any]:
                 'status': {'status': 0, 'dimmer': 100, 'ctimer': 0, 'id': 0, 'locked': False}},
               {'name': 'Boom', 'room': 255, 'module_type': 'O', 'id': 1,
               status': {'status': 0, 'dimmer': 100, 'ctimer': 0, 'id': 1, 'locked': False}}]
+
     """
     if len(list_a) == 0:
         return []
@@ -73,6 +75,7 @@ def get_ssl_context(verify_ssl: bool = True) -> ssl.SSLContext:
     Returns:
     -------
         ssl.SSLContext
+
     """
     if verify_ssl:
         ssl_context = ssl.create_default_context()

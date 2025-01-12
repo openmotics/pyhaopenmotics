@@ -1,4 +1,5 @@
 """Shutter Model for the OpenMotics API."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -9,7 +10,6 @@ from .location import Location
 
 @dataclass
 class Status:
-
     """Class holding the status."""
 
     locked: bool
@@ -30,6 +30,7 @@ class Status:
         Returns:
         -------
             A Status object.
+
         """
         return Status(
             locked=data.get("locked", False),
@@ -43,7 +44,6 @@ class Status:
 
 @dataclass
 class Attributes:
-
     """Class holding the Attributes."""
 
     azimuth: str
@@ -61,6 +61,7 @@ class Attributes:
         Returns:
         -------
             A Attributes object.
+
         """
         return Attributes(
             azimuth=data.get("azimuth", "None"),
@@ -71,7 +72,6 @@ class Attributes:
 
 @dataclass
 class Metadata:
-
     """Class holding the Metadata."""
 
     protocol: str
@@ -88,6 +88,7 @@ class Metadata:
         Returns:
         -------
             A Metata object.
+
         """
         return Metadata(
             protocol=data.get("protocol", "None"),
@@ -97,7 +98,6 @@ class Metadata:
 
 @dataclass
 class Shutter:
-
     """Object holding an OpenMotics Shutter.
 
     # noqa: E800
@@ -158,6 +158,7 @@ class Shutter:
         Returns:
         -------
             A Shutter object.
+
         """
         status = Status.from_dict({})
         if "status" in data:

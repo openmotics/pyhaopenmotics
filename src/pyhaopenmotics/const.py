@@ -1,7 +1,10 @@
 """Asynchronous Python client for the OpenMotics API."""
+
 from __future__ import annotations
 
-CLOUD_BASE_URL = "https://api.openmotics.com/api"
+CLOUD_API_HOST = "api.openmotics.com"
+CLOUD_PORTAL_HOST = "portal.openmotics.com"
+CLOUD_BASE_URL = f"https://{CLOUD_API_HOST}/api"
 CLOUD_API_VERSION = "v1.1"
 
 #   "configure.outputs configure view.sensors control view.thermostats " \

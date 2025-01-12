@@ -1,4 +1,5 @@
 """Module containing the base of an groupaction."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -7,12 +8,11 @@ from typing import TYPE_CHECKING, Any
 from .models.groupaction import GroupAction
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.localgateway import LocalGateway  # pylint: disable=R0401
+    from pyhaopenmotics.client.localgateway import LocalGateway  # pylint: disable=R0401
 
 
 @dataclass
 class OpenMoticsGroupActions:
-
     """Object holding information of the OpenMotics groupactions.
 
     All actions related to groupaction or a specific groupaction.
@@ -24,6 +24,7 @@ class OpenMoticsGroupActions:
         Args:
         ----
             omcloud: LocalGateway
+
         """
         self._omcloud = omcloud
 
@@ -45,6 +46,7 @@ class OpenMoticsGroupActions:
             their intended usage.
             SCENE: These GroupActions can be considered a scene,
                 e.g. watching tv or romantic dinner.
+
         """
         data = await self._omcloud.exec_action("get_group_action_configurations")
 
@@ -69,6 +71,7 @@ class OpenMoticsGroupActions:
         Returns:
         -------
             Returns a groupaction with id
+
         """
         for groupaction in await self.get_all():
             if groupaction.idx == groupaction_id:
@@ -88,6 +91,7 @@ class OpenMoticsGroupActions:
         Returns:
         -------
             Returns a groupaction with id
+
         """
         data = {"group_action_id": groupaction_id}
         return await self._omcloud.exec_action("do_group_action", data=data)
@@ -108,6 +112,7 @@ class OpenMoticsGroupActions:
         Returns:
         -------
             Returns a groupaction with id
+
         """
         groupaction_list = [
             groupaction
@@ -125,6 +130,7 @@ class OpenMoticsGroupActions:
         Returns
         -------
             Returns all scenes
+
         """
         if (response := await self.by_usage("SCENE")) is None:
             return None

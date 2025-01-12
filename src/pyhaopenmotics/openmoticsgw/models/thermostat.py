@@ -1,4 +1,5 @@
 """Output Model for the OpenMotics API."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -7,7 +8,6 @@ from typing import Any
 
 @dataclass
 class GroupLocation:
-
     """Class holding the location."""
 
     thermostat_group_id: int
@@ -25,6 +25,7 @@ class GroupLocation:
         Returns:
         -------
             A GroupLocation object.
+
         """
         return GroupLocation(
             thermostat_group_id=data.get("thermostat_group_id", 0),
@@ -35,7 +36,6 @@ class GroupLocation:
 
 @dataclass
 class UnitLocation:
-
     """Class holding the location."""
 
     thermostat_group_id: int
@@ -53,6 +53,7 @@ class UnitLocation:
         Returns:
         -------
             A UnitLocation object.
+
         """
         return UnitLocation(
             thermostat_group_id=data.get("thermostat_group_id", 0),
@@ -63,7 +64,6 @@ class UnitLocation:
 
 @dataclass
 class GroupStatus:
-
     """Class holding the status."""
 
     mode: str
@@ -80,6 +80,7 @@ class GroupStatus:
         Returns:
         -------
             A GroupStatus object.
+
         """
         return GroupStatus(
             mode=data.get("mode", "None"),
@@ -89,7 +90,6 @@ class GroupStatus:
 
 @dataclass
 class UnitStatus:
-
     """Class holding the status."""
 
     actual_temperature: float
@@ -109,6 +109,7 @@ class UnitStatus:
         Returns:
         -------
             A UnitStatus object.
+
         """
         return UnitStatus(
             actual_temperature=data.get("actual_temperature", 0),
@@ -121,7 +122,6 @@ class UnitStatus:
 
 @dataclass
 class Presets:
-
     """Class holding the status."""
 
     away: str
@@ -139,6 +139,7 @@ class Presets:
         Returns:
         -------
             A Presets object.
+
         """
         return Presets(
             away=data.get("away", "None"),
@@ -149,7 +150,6 @@ class Presets:
 
 @dataclass
 class Schedule:
-
     """Class holding the Schedule."""
 
     data: dict[str, Any]
@@ -166,6 +166,7 @@ class Schedule:
         Returns:
         -------
             A Schedule object.
+
         """
         return Schedule(
             data=data.get("data", "None"),
@@ -175,7 +176,6 @@ class Schedule:
 
 @dataclass
 class ConfigurationPreset:
-
     """Class holding the ConfigurationPreset."""
 
     output_0_id: int
@@ -195,6 +195,7 @@ class ConfigurationPreset:
         Returns:
         -------
             A ConfigurationPreset object.
+
         """
         return ConfigurationPreset(
             output_0_id=data.get("output_0_id", 0),
@@ -207,7 +208,6 @@ class ConfigurationPreset:
 
 @dataclass
 class Allowed:
-
     """Class holding the Configuration."""
 
     allowed: bool
@@ -223,6 +223,7 @@ class Allowed:
         Returns:
         -------
             A Allowed object.
+
         """
         return Allowed(
             allowed=data.get("allowed", False),
@@ -231,7 +232,6 @@ class Allowed:
 
 @dataclass
 class Acl:
-
     """Class holding the Acl."""
 
     set_state: Allowed
@@ -248,6 +248,7 @@ class Acl:
         Returns:
         -------
             A Acl object.
+
         """
         return Acl(
             set_state=Allowed.from_dict(data),
@@ -257,7 +258,6 @@ class Acl:
 
 @dataclass
 class Configuration:
-
     """Class holding the Configuration."""
 
     heating: ConfigurationPreset
@@ -274,6 +274,7 @@ class Configuration:
         Returns:
         -------
             A Configuration object.
+
         """
         return Configuration(
             heating=ConfigurationPreset.from_dict(data),
@@ -283,7 +284,6 @@ class Configuration:
 
 @dataclass
 class ThermostatGroup:
-
     """Class holding an OpenMotics ThermostatGroup."""
 
     # pylint: disable=too-many-instance-attributes
@@ -308,6 +308,7 @@ class ThermostatGroup:
         Returns:
         -------
             A ThermostatGroup object.
+
         """
         status = GroupStatus.from_dict({})
         if "status" in data:
@@ -342,7 +343,6 @@ class ThermostatGroup:
 
 @dataclass
 class ThermostatUnit:
-
     """Class holding an OpenMotics ThermostatUnit."""
 
     # pylint: disable=too-many-instance-attributes
@@ -365,6 +365,7 @@ class ThermostatUnit:
         Returns:
         -------
             A ThermostatUnit object.
+
         """
         status = UnitStatus.from_dict({})
         if "status" in data:
