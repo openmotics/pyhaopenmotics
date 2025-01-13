@@ -9,7 +9,7 @@ from mashumaro import field_options
 from mashumaro.mixins.orjson import DataClassORJSONMixin
 
 zombie_groupstatus = {
-    "state":  None,
+    "state": False,
     "mode": None,
 }
 
@@ -174,7 +174,7 @@ class ThermostatGroup(DataClassORJSONMixin):
         obj: ThermostatGroup,
     ) -> ThermostatGroup:
         """Post deserialize hook for ThermostatUnit object."""
-        if not obj.status:
+        if not obj.status or obj.status is None:
             obj.status = GroupStatus.from_dict(zombie_groupstatus)
         return obj
 
@@ -284,7 +284,7 @@ class ThermostatUnit(DataClassORJSONMixin):
         obj: ThermostatUnit,
     ) -> ThermostatUnit:
         """Post deserialize hook for ThermostatUnit object."""
-        if not obj.status:
+        if not obj.status or obj.status is None:
             obj.status = UnitStatus.from_dict(zombie_unitstatus)
         return obj
 

@@ -13,6 +13,7 @@ if TYPE_CHECKING:
 
 @dataclass
 class OpenMoticsThermostats:
+
     """Object holding information of the OpenMotics thermostats.
 
     All actions related to thermostats or a specific thermostat.
@@ -72,6 +73,7 @@ class OpenMoticsThermostats:
 
 @dataclass
 class OpenMoticsThermostatGroups:
+
     """Object holding information of the OpenMotics thermostats.
 
     All actions related to thermostats or a specific thermostat.
@@ -156,6 +158,7 @@ class OpenMoticsThermostatGroups:
 
 
 class OpenMoticsThermostatUnits:
+
     """Object holding information of the OpenMotics thermostats.
 
     All actions related to thermostats or a specific thermostat.
