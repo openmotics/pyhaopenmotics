@@ -4,22 +4,22 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "pyhaopenmotics"
-version = "0.0.5"
+version = "0.0.7"
 description = "Asynchronous Python client for the OpenMotics API."
 authors = ["Wouter Coppens <wouter.coppens@gmail.com>"]
 maintainers = ["Wouter Coppens <wouter.coppens@gmail.com>"]
 license = "AGPLv3"
 readme = "README.md"
-homepage = "https://github.com/openmotics/pyhaopenmotics"
-repository = "https://github.com/openmotics/pyhaopenmotics"
-documentation = "https://github.com/openmotics/pyhaopenmotics"
+homepage = "https://github.com/rensongroup/pyhaopenmotics"
+repository = "https://github.com/rensongroup/pyhaopenmotics"
+documentation = "https://github.com/rensongroup/pyhaopenmotics"
 keywords = ["openmotics", "api", "async", "client", "homeassistant"]
 classifiers = [
   "Development Status :: 4 - Beta",
   "Framework :: AsyncIO",
   "Intended Audience :: Developers",
   "Natural Language :: English",
-  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3",
   "Topic :: Software Development :: Libraries :: Python Modules",
 ]
@@ -28,12 +28,13 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.12"
 aiohttp = ">=3.9.0"
 async_timeout = ">=4.0.0"
 yarl = ">=1.9.0"
 backoff =">2.2.0"
-pydantic = ">=1.10.9, <2.0.0" # v2 has breaking changes (#99218).
+mashumaro = ">=3.10"
+orjson = ">=3.10.12"
 websockets = ">=11.0.1"
 
 [tool.poetry.group.dev.dependencies]
@@ -54,8 +55,8 @@ httpx = "^0.28.1"
 python-dotenv = "^1.0.1"
 
 [tool.poetry.urls]
-"Bug Tracker" = "https://github.com/openmotics/pyhaopenmotics/issues"
-Changelog = "https://github.com/openmotics/pyhaopenmotics/releases"
+"Bug Tracker" = "https://github.com/rensongroup/pyhaopenmotics/issues"
+Changelog = "https://github.com/rensongroup/pyhaopenmotics/releases"
 
 [tool.ruff]
 line-length = 100

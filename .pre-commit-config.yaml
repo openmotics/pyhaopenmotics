@@ -1,17 +1,17 @@
 ---
 repos:
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: v0.15
+    rev: v0.23
     hooks:
       - id: validate-pyproject
 
   - repo: https://github.com/python-poetry/poetry
-    rev: 1.7.1
+    rev: 2.0.0
     hooks:
       - id: poetry-check
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v5.0.0
     hooks:
       - id: check-ast
       - id: check-builtin-literals
@@ -48,7 +48,7 @@ repos:
       - id: rm-unneeded-f-str
 
   - repo: https://github.com/psf/black
-    rev: 23.12.1
+    rev: 24.10.0
     hooks:
       - id: black
         args:
@@ -62,7 +62,7 @@ repos:
   #       - id: isort
 
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.1.13
+    rev: v0.8.6
     hooks:
       - id: ruff
         args:
@@ -71,12 +71,12 @@ repos:
         files: ^((src|examples)/.+)?[^/]+\.py$
 
   - repo: https://github.com/adrienverge/yamllint
-    rev: v1.33.0
+    rev: v1.35.1
     hooks:
       - id: yamllint
 
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.6
+    rev: v2.3.0
     hooks:
       - id: codespell
         args:
@@ -86,7 +86,7 @@ repos:
         exclude_types: [csv, json]
 
   - repo: https://github.com/jendrikseipp/vulture
-    rev: v2.10
+    rev: v2.14
     hooks:
       - id: vulture
 
@@ -96,7 +96,7 @@ repos:
       - id: prettier
 
   - repo: https://github.com/cdce8p/python-typing-update
-    rev: v0.6.0
+    rev: v0.7.0
     hooks:
       # Run `python-typing-update` hook manually from time to time
       # to update python typing syntax.
@@ -111,12 +111,12 @@ repos:
         files: ^(src|tests|examples)/.+\.py$
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.15.0
+    rev: v3.19.1
     hooks:
       - id: pyupgrade
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.8.0
+    rev: v1.14.1
     hooks:
       - id: mypy
         args: [--strict, --ignore-missing-imports]
@@ -124,7 +124,7 @@ repos:
         additional_dependencies: [pydantic]
 
   - repo: https://github.com/ComPWA/mirrors-pyright
-    rev: v1.1.347
+    rev: v1.1.391
     hooks:
       - id: pyright
 
