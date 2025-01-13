@@ -174,7 +174,7 @@ class ThermostatGroup(DataClassORJSONMixin):
         obj: ThermostatGroup,
     ) -> ThermostatGroup:
         """Post deserialize hook for ThermostatUnit object."""
-        if not obj.status or obj.status is None:
+        if not obj.status:
             obj.status = GroupStatus.from_dict(zombie_groupstatus)
         return obj
 
@@ -284,7 +284,7 @@ class ThermostatUnit(DataClassORJSONMixin):
         obj: ThermostatUnit,
     ) -> ThermostatUnit:
         """Post deserialize hook for ThermostatUnit object."""
-        if not obj.status or obj.status is None:
+        if not obj.status:
             obj.status = UnitStatus.from_dict(zombie_unitstatus)
         return obj
 
