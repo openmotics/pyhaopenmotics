@@ -9,7 +9,7 @@ from mashumaro import field_options
 from mashumaro.mixins.orjson import DataClassORJSONMixin
 
 zombie_groupstatus = {
-    "state":  None,
+    "state": False,
     "mode": None,
 }
 
