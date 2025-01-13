@@ -1,4 +1,5 @@
 """Init file for the models."""
+
 from pyhaopenmotics.openmoticsgw.models.groupaction import GroupAction
 from pyhaopenmotics.openmoticsgw.models.input import OMInput
 from pyhaopenmotics.openmoticsgw.models.light import Light
@@ -13,12 +14,12 @@ from pyhaopenmotics.openmoticsgw.models.thermostat import (
 
 __all__ = [
     "GroupAction",
-    "Location",
     "Light",
-    "Output",
+    "Location",
     "OMInput",
-    "Shutter",
+    "Output",
     "Sensor",
-    "ThermostatUnit",
+    "Shutter",
     "ThermostatGroup",
+    "ThermostatUnit",
 ]

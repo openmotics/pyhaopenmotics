@@ -6,6 +6,7 @@ How to use this script:
     export CLIENT_SECRET="djfqsdkfjqsdkfjqsdkfjqsdkfjkqsdjfkjdkfqjdskf"
     python cloud_example.py
 """
+
 from __future__ import annotations
 
 import asyncio

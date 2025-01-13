@@ -34,7 +34,6 @@ _LOGGER = logging.getLogger(__name__)
 
 
 class OpenMoticsCloud:
-
     """Docstring."""
 
     _installations: list[Installation] | None
@@ -60,6 +59,7 @@ class OpenMoticsCloud:
             token_refresh_method: token refresh function
             installation_id: int
             base_url: str
+
         """
         self.session = session
         self.token = None if token is None else token.strip()
@@ -77,6 +77,7 @@ class OpenMoticsCloud:
         Returns
         -------
             The installation id that will be used for this session.
+
         """
         return self._installation_id
 
@@ -88,6 +89,7 @@ class OpenMoticsCloud:
         ----
             installation_id: The installation id that will be used
                 for this session.
+
         """
         self._installation_id = installation_id
 
@@ -122,6 +124,7 @@ class OpenMoticsCloud:
                 the OpenMotics API.
             OpenMoticsConnectionTimeoutError: A timeout occurred while communicating
                 with the OpenMotics API.
+
         """
         if self.token_refresh_method is not None:
             self.token = await self.token_refresh_method()
@@ -190,6 +193,7 @@ class OpenMoticsCloud:
         Returns:
         -------
             response json or text
+
         """
         return await self._request(
             path,
@@ -208,6 +212,7 @@ class OpenMoticsCloud:
         Returns:
         -------
             response json or text
+
         """
         return await self._request(
             path,
@@ -252,6 +257,7 @@ class OpenMoticsCloud:
         Returns
         -------
             OpenMoticsInstallations
+
         """
         return OpenMoticsInstallations(self)
 
@@ -262,6 +268,7 @@ class OpenMoticsCloud:
         Returns
         -------
             OpenMoticsInputs
+
         """
         return OpenMoticsInputs(self)
 
@@ -272,6 +279,7 @@ class OpenMoticsCloud:
         Returns
         -------
             OpenMoticsOutputs
+
         """
         return OpenMoticsOutputs(self)
 
@@ -282,6 +290,7 @@ class OpenMoticsCloud:
         Returns
         -------
             OpenMoticsGroupActions
+
         """
         return OpenMoticsGroupActions(self)
 
@@ -292,6 +301,7 @@ class OpenMoticsCloud:
         Returns
         -------
             OpenMoticsLights
+
         """
         return OpenMoticsLights(self)
 
@@ -302,6 +312,7 @@ class OpenMoticsCloud:
         Returns
         -------
             OpenMoticsSensors
+
         """
         return OpenMoticsSensors(self)
 
@@ -312,6 +323,7 @@ class OpenMoticsCloud:
         Returns
         -------
             OpenMoticsShutters
+
         """
         return OpenMoticsShutters(self)
 
@@ -322,6 +334,7 @@ class OpenMoticsCloud:
         Returns
         -------
             OpenMoticsThermostats
+
         """
         return OpenMoticsThermostats(self)
 
@@ -336,6 +349,7 @@ class OpenMoticsCloud:
         Returns
         -------
             OpenMoticsCloud: The OpenMoticsCloud object.
+
         """
         return self
 
@@ -345,5 +359,6 @@ class OpenMoticsCloud:
         Args:
         ----
             *_exc_info: Exec type.
+
         """
         await self.close()

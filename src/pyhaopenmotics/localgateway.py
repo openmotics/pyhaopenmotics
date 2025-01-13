@@ -40,7 +40,6 @@ CLOCK_OUT_OF_SYNC_MAX_SEC = 20
 
 
 class LocalGateway:
-
     """Docstring."""
 
     _close_session: bool = False
@@ -69,6 +68,7 @@ class LocalGateway:
             tls: True, when TLS/SSL should be used.
             username: Username for HTTP auth, if enabled.
             ssl_context: ssl.SSLContext.
+
         """
         self.session = session
         self.token = None
@@ -127,6 +127,7 @@ class LocalGateway:
             OpenMoticsConnectionTimeoutError: A timeout occurred while communicating
                 with the OpenMotics API.
             AuthenticationException: raised when token is expired.
+
         """
         url = URL.build(scheme="https", host=self.localgw, port=self.port, path="/").join(URL(path))
 
@@ -195,6 +196,7 @@ class LocalGateway:
         Returns:
         -------
             response json or text
+
         """
         # Try to execute the action.
         return await self._request(
@@ -263,6 +265,7 @@ class LocalGateway:
         Returns:
         -------
             headers
+
         """
         if self.token is None or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC:
             await self.get_token()
@@ -286,6 +289,7 @@ class LocalGateway:
         Returns
         -------
             OpenMoticsOutputs
+
         """
         return OpenMoticsInputs(self)
 
@@ -296,6 +300,7 @@ class LocalGateway:
         Returns
         -------
             OpenMoticsOutputs
+
         """
         return OpenMoticsOutputs(self)
 
@@ -306,6 +311,7 @@ class LocalGateway:
         Returns
         -------
             OpenMoticsGroupActions
+
         """
         return OpenMoticsGroupActions(self)
 
@@ -316,6 +322,7 @@ class LocalGateway:
         Returns
         -------
             OpenMoticsLights
+
         """
         # implemented to be compatible with cloud
         return OpenMoticsLights(self)
@@ -327,6 +334,7 @@ class LocalGateway:
         Returns
         -------
             OpenMoticsSensors
+
         """
         return OpenMoticsSensors(self)
 
@@ -337,6 +345,7 @@ class LocalGateway:
         Returns
         -------
             OpenMoticsEnergySensors
+
         """
         return OpenMoticsEnergySensors(self)
 
@@ -347,6 +356,7 @@ class LocalGateway:
         Returns
         -------
             OpenMoticsShutters
+
         """
         return OpenMoticsShutters(self)
 
@@ -357,6 +367,7 @@ class LocalGateway:
         Returns
         -------
             OpenMoticsThermostats
+
         """
         return OpenMoticsThermostats(self)
 
@@ -371,6 +382,7 @@ class LocalGateway:
         Returns
         -------
             LocalGateway: The LocalGateway object.
+
         """
         return self
 
@@ -380,5 +392,6 @@ class LocalGateway:
         Args:
         ----
             *_exc_info: Exec type.
+
         """
         await self.close()

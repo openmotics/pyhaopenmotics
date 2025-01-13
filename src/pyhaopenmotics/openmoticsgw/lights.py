@@ -1,4 +1,5 @@
 """Module containing the base of an light."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -12,7 +13,6 @@ if TYPE_CHECKING:
 
 @dataclass
 class OpenMoticsLights:
-
     """Object holding information of the OpenMotics lights.
 
     All actions related to lights or a specific light.
@@ -24,6 +24,7 @@ class OpenMoticsLights:
         Args:
         ----
             omcloud: LocalGateway
+
         """
         self._omcloud = omcloud
 

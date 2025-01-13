@@ -1,4 +1,5 @@
 """Output Model for the OpenMotics API."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -9,7 +10,6 @@ from .location import Location
 
 @dataclass
 class Status:
-
     """Class holding the status."""
 
     humidity: float
@@ -27,6 +27,7 @@ class Status:
         Returns:
         -------
             A Status object.
+
         """
         return Status(
             # on = True if status = 1
@@ -38,7 +39,6 @@ class Status:
 
 @dataclass
 class Sensor:
-
     """Class holding an OpenMotics Sensor.
 
     # noqa: E800
@@ -80,6 +80,7 @@ class Sensor:
         Returns:
         -------
             A Output object.
+
         """
         status = Status.from_dict({})
         if "status" in data:
@@ -92,7 +93,7 @@ class Sensor:
             location=Location.from_dict(data),
             physical_quantity=data.get("physical_quantity", "None"),
             status=status,
-            last_state_change=data.get("last_state_change", None),
+            last_state_change=data.get("last_state_change"),
             version=data.get("version", "0.0"),
         )
 
