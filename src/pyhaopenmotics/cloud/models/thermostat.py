@@ -8,6 +8,11 @@ from typing import Any
 from mashumaro import field_options
 from mashumaro.mixins.orjson import DataClassORJSONMixin
 
+zombie_groupstatus = {
+    "state":  None,
+    "mode": None,
+}
+
 zombie_unitstatus = {
     "state":  None,
     "setpoint": None,
@@ -163,6 +168,16 @@ class ThermostatGroup(DataClassORJSONMixin):
         metadata=field_options(alias="_acl"),
     )
 
+    @classmethod
+    def __post_deserialize__(
+        cls,
+        obj: ThermostatGroup,
+    ) -> ThermostatGroup:
+        """Post deserialize hook for ThermostatUnit object."""
+        if not obj.status:
+            obj.status = UnitStatus.from_dict(zombie_groupstatus)
+        return obj
+
     def __str__(self) -> str:
         """Represent the class objects as a string.
 
@@ -268,7 +283,7 @@ class ThermostatUnit(DataClassORJSONMixin):
         cls,
         obj: ThermostatUnit,
     ) -> ThermostatUnit:
-        """Post deserialize hook for Output object."""
+        """Post deserialize hook for ThermostatUnit object."""
         if not obj.status:
             obj.status = UnitStatus.from_dict(zombie_unitstatus)
         return obj
