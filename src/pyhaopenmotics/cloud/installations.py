@@ -2,18 +2,17 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import TYPE_CHECKING
-
-from pydantic import parse_obj_as
 
 from pyhaopenmotics.cloud.models.installation import Installation
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
+    from pyhaopenmotics.client.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
 
 
+@dataclass
 class OpenMoticsInstallations:
-
     """Object holding information of the OpenMotics installation.
 
     All actions related to Installations or a specific Installation.
@@ -25,6 +24,7 @@ class OpenMoticsInstallations:
         Args:
         ----
             omcloud: OpenMoticsCloud
+
         """
         self._omcloud = omcloud
 
@@ -62,7 +62,7 @@ class OpenMoticsInstallations:
         else:
             body = await self._omcloud.get(path)
 
-        return parse_obj_as(list[Installation], body["data"])
+        return [Installation.from_dict(installation) for installation in body["data"]]
 
     async def get_by_id(
         self,
@@ -82,4 +82,4 @@ class OpenMoticsInstallations:
         path = f"/base/installations/{installation_id}"
         body = await self._omcloud.get(path)
 
-        return Installation.parse_obj(body["data"])
+        return Installation.from_dict(body["data"])

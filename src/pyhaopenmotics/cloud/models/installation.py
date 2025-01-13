@@ -1,36 +1,39 @@
 """Installation Model for the OpenMotics API."""
+
 from __future__ import annotations
 
+from dataclasses import dataclass, field
 from typing import Any
 
-from pydantic import BaseModel, Field
+from mashumaro import field_options
+from mashumaro.mixins.orjson import DataClassORJSONMixin
 
 
-class Allowed(BaseModel):
-
+@dataclass
+class Allowed(DataClassORJSONMixin):
     """Object holding an OpenMotics Installation."""
 
-    allowed: bool | None
+    allowed: bool | None = field(default=None)
 
 
-class Acl(BaseModel):
-
+@dataclass
+class Acl(DataClassORJSONMixin):
     """Object holding an OpenMotics Installation."""
 
-    configure: Allowed | None
-    view: Allowed | None
-    control: Allowed | None
+    configure: Allowed | None = field(default=None)
+    view: Allowed | None = field(default=None)
+    control: Allowed | None = field(default=None)
 
 
-class Network(BaseModel):
-
+@dataclass
+class Network(DataClassORJSONMixin):
     """Object holding an OpenMotics Installation."""
 
-    local_ip_address: str | None
+    local_ip_address: str | None = field(default=None)
 
 
-class Installation(BaseModel):
-
+@dataclass
+class Installation(DataClassORJSONMixin):
     """Object holding an OpenMotics Installation.
 
     # noqa: E800
@@ -66,19 +69,27 @@ class Installation(BaseModel):
     """
 
     # pylint: disable=too-many-instance-attributes
-    idx: int = Field(..., alias="id")
     name: str
-    description: str | None
-    gateway_model: str | None
-    acl: Acl = Field(..., alias="_acl")
-    version: str = Field(..., alias="_version")
-    user_role: dict[str, Any] | None
-    registration_key: str | None
-    platform: str | None
-    building_roles: dict[str, Any] | None
-    network: Network | None
-    flags: dict[str, Any] | None
-    features: dict[str, Any] | None
+    idx: int = field(metadata=field_options(alias="id"))
+    description: str | None = field(default=None)
+    gateway_model: str | None = field(default=None)
+    acl: Acl | None = field(
+        default=None,
+        metadata=field_options(alias="_acl"),
+    )
+    version: str | None = field(
+        default=None,
+        metadata=field_options(alias="_version"),
+    )
+
+    user_role: dict[str, Any] | None = field(default=None)
+    registration_key: str | None = field(default=None)
+    platform: str | None = field(default=None)
+    # TODO @woutercoppens: fix later
+    # building_roles: dict[str, Any]  | None = field(default=None)
+    network: Network | None = field(default=None)
+    flags: dict[str, Any] | None = field(default=None)
+    features: dict[str, Any] | None = field(default=None)
 
     def __str__(self) -> str:
         """Represent the class objects as a string.

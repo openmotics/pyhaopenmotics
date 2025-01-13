@@ -1,4 +1,5 @@
 """Init file for the models."""
+
 from pyhaopenmotics.cloud.models.groupaction import GroupAction
 from pyhaopenmotics.cloud.models.input import OMInput
 from pyhaopenmotics.cloud.models.installation import Installation
@@ -10,14 +11,14 @@ from pyhaopenmotics.cloud.models.shutter import Shutter
 from pyhaopenmotics.cloud.models.thermostat import ThermostatGroup, ThermostatUnit
 
 __all__ = [
-    "Installation",
     "GroupAction",
+    "Installation",
     "Light",
     "Location",
-    "Output",
     "OMInput",
-    "Shutter",
+    "Output",
     "Sensor",
-    "ThermostatUnit",
+    "Shutter",
     "ThermostatGroup",
+    "ThermostatUnit",
 ]
