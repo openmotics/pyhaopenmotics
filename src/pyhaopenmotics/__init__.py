@@ -14,13 +14,13 @@ from .localgateway import LocalGateway
 from .openmoticscloud import OpenMoticsCloud
 
 __all__ = [
-    "OpenMoticsCloud",
-    "LocalGateway",
-    "OpenMoticsError",
-    "OpenMoticsConnectionError",
-    "OpenMoticsConnectionTimeoutError",
-    "OpenMoticsConnectionSslError",
     "AuthenticationError",
     "Installation",
+    "LocalGateway",
+    "OpenMoticsCloud",
+    "OpenMoticsConnectionError",
+    "OpenMoticsConnectionSslError",
+    "OpenMoticsConnectionTimeoutError",
+    "OpenMoticsError",
     "get_ssl_context",
 ]

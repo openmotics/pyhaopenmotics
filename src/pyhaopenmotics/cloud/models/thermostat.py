@@ -8,9 +8,27 @@ from typing import Any
 from mashumaro import field_options
 from mashumaro.mixins.orjson import DataClassORJSONMixin
 
+zombie_groupstatus = {
+    "state":  None,
+    "mode": None,
+}
+
+zombie_unitstatus = {
+    "state":  None,
+    "setpoint": None,
+    "steering_power": None,
+    "active_preset": None,
+    "current_temperature": None,
+    "mode": None,
+    "preset_expiration": None,
+    "actual_temperature": None,
+    "current_setpoint": None,
+    "preset": None,
+}
 
 @dataclass
 class GroupLocation(DataClassORJSONMixin):
+
     """Class holding the location."""
 
     thermostat_group_id: int | None = field(default=None)
@@ -20,6 +38,7 @@ class GroupLocation(DataClassORJSONMixin):
 
 @dataclass
 class UnitLocation(DataClassORJSONMixin):
+
     """Class holding the location."""
 
     thermostat_group_id: int | None = field(default=None)
@@ -29,6 +48,7 @@ class UnitLocation(DataClassORJSONMixin):
 
 @dataclass
 class GroupStatus(DataClassORJSONMixin):
+
     """Class holding the status."""
 
     mode: str | None = field(default=None)
@@ -37,6 +57,7 @@ class GroupStatus(DataClassORJSONMixin):
 
 @dataclass
 class UnitStatus(DataClassORJSONMixin):
+
     """Class holding the status."""
 
     state: str | None = field(default=None)
@@ -53,6 +74,7 @@ class UnitStatus(DataClassORJSONMixin):
 
 @dataclass
 class Presets(DataClassORJSONMixin):
+
     """Class holding the status."""
 
     away: str | None = field(default=None)
@@ -62,6 +84,7 @@ class Presets(DataClassORJSONMixin):
 
 @dataclass
 class Schedule(DataClassORJSONMixin):
+
     """Class holding the schedule."""
 
     data: dict[str, Any] | None = field(default=None)
@@ -70,6 +93,7 @@ class Schedule(DataClassORJSONMixin):
 
 @dataclass
 class ConfigurationPreset(DataClassORJSONMixin):
+
     """Class holding the configuration presets."""
 
     output_0_id: int | None = field(default=None)
@@ -81,6 +105,7 @@ class ConfigurationPreset(DataClassORJSONMixin):
 
 @dataclass
 class Configuration(DataClassORJSONMixin):
+
     """Class holding the configuration."""
 
     heating: ConfigurationPreset | None = field(default=None)
@@ -89,6 +114,7 @@ class Configuration(DataClassORJSONMixin):
 
 @dataclass
 class Allowed(DataClassORJSONMixin):
+
     """Object holding allowed."""
 
     allowed: bool | None = field(default=None)
@@ -96,6 +122,7 @@ class Allowed(DataClassORJSONMixin):
 
 @dataclass
 class Acl(DataClassORJSONMixin):
+
     """Object holding an acl."""
 
     set_state: Allowed | None = field(default=None)
@@ -104,6 +131,7 @@ class Acl(DataClassORJSONMixin):
 
 @dataclass
 class ThermostatGroup(DataClassORJSONMixin):
+
     """Class holding an OpenMotics ThermostatGroup .
 
         # noqa: E800
@@ -140,6 +168,16 @@ class ThermostatGroup(DataClassORJSONMixin):
         metadata=field_options(alias="_acl"),
     )
 
+    @classmethod
+    def __post_deserialize__(
+        cls,
+        obj: ThermostatGroup,
+    ) -> ThermostatGroup:
+        """Post deserialize hook for ThermostatUnit object."""
+        if not obj.status:
+            obj.status = UnitStatus.from_dict(zombie_groupstatus)
+        return obj
+
     def __str__(self) -> str:
         """Represent the class objects as a string.
 
@@ -153,6 +191,7 @@ class ThermostatGroup(DataClassORJSONMixin):
 
 @dataclass
 class ThermostatUnit(DataClassORJSONMixin):
+
     """Class holding an OpenMotics ThermostatUnit.
 
     # noqa: E800
@@ -238,6 +277,16 @@ class ThermostatUnit(DataClassORJSONMixin):
         default=None,
         metadata=field_options(alias="_version"),
     )
+
+    @classmethod
+    def __post_deserialize__(
+        cls,
+        obj: ThermostatUnit,
+    ) -> ThermostatUnit:
+        """Post deserialize hook for ThermostatUnit object."""
+        if not obj.status:
+            obj.status = UnitStatus.from_dict(zombie_unitstatus)
+        return obj
 
     def __str__(self) -> str:
         """Represent the class objects as a string.
