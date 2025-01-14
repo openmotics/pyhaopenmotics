@@ -91,7 +91,10 @@ class OpenMoticsGroupActions:
             Returns a groupaction with id
 
         """
-        path = f"/base/installations/{self._omcloud.installation_id}/groupactions/{groupaction_id}"
+        path = (
+            f"/base/installations/{self._omcloud.installation_id}"
+            f"/groupactions/{groupaction_id}"
+        )
 
         body = await self._omcloud.get(path)
 

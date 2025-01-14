@@ -179,8 +179,7 @@ class OpenMoticsCloud:
             raise OpenMoticsConnectionError(msg) from exception
 
         if "application/json" in resp.headers.get("Content-Type", ""):
-            response_data = await resp.json()
-            return response_data
+            return await resp.json()
 
         return await resp.text()
 

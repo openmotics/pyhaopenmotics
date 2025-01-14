@@ -92,9 +92,7 @@ class OpenMoticsEnergySensors:
             # implemented later
             pass
 
-        sensors = [EnergySensor.from_dict(device) for device in data]
-
-        return sensors  # type: ignore
+        return [EnergySensor.from_dict(device) for device in data]
 
     async def get_by_id(
         self,

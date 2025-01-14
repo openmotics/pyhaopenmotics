@@ -82,9 +82,7 @@ class OpenMoticsOutputs:
             # implemented later
             pass
 
-        outputs = [Output.from_dict(device) for device in data]
-
-        return outputs  # type: ignore
+        return [Output.from_dict(device) for device in data]
 
     async def get_by_id(
         self,

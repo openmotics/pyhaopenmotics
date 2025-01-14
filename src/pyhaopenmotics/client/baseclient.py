@@ -12,6 +12,8 @@ if TYPE_CHECKING:
     import ssl
     from collections.abc import Awaitable, Callable
 
+    from typing_extensions import Self
+
 import aiohttp
 import async_timeout
 import backoff
@@ -168,8 +170,7 @@ class BaseClient(abc.ABC):
             raise OpenMoticsConnectionError(msg) from exception
 
         if "application/json" in resp.headers.get("Content-Type", ""):
-            response_data = await resp.json()
-            return response_data
+            return await resp.json()
 
         return await resp.text()
 
@@ -227,7 +228,7 @@ class BaseClient(abc.ABC):
         if self.session and self._close_session:
             await self.session.close()
 
-    async def __aenter__(self) -> BaseClient:
+    async def __aenter__(self) -> Self:
         """Async enter.
 
         Returns

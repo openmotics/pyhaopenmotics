@@ -138,7 +138,9 @@ ignore = [
   "D203",    # Conflicts with other rules
   "D213",    # Conflicts with other rules
   "D417",    # False positives in some occasions
+  "PGH003",  # Use specific rule codes when ignoring type issues
   "PLR2004", # Just annoying, not really useful
+  'PLR0913', # very noisy
   "SLOT000", # Has a bug with enums: https://github.com/astral-sh/ruff/issues/5748
 
   # Conflicts with the Ruff formatter

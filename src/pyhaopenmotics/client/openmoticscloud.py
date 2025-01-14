@@ -14,12 +14,15 @@ from yarl import URL
 if TYPE_CHECKING:
     from collections.abc import Awaitable, Callable
 
+    from typing_extensions import Self
+
+    from pyhaopenmotics.cloud.models.installation import Installation
+
 from pyhaopenmotics.client.baseclient import BaseClient
 from pyhaopenmotics.cloud.groupactions import OpenMoticsGroupActions
 from pyhaopenmotics.cloud.inputs import OpenMoticsInputs
 from pyhaopenmotics.cloud.installations import OpenMoticsInstallations
 from pyhaopenmotics.cloud.lights import OpenMoticsLights
-from pyhaopenmotics.cloud.models.installation import Installation
 from pyhaopenmotics.cloud.outputs import OpenMoticsOutputs
 from pyhaopenmotics.cloud.sensors import OpenMoticsSensors
 from pyhaopenmotics.cloud.shutters import OpenMoticsShutters
@@ -168,11 +171,10 @@ class OpenMoticsCloud(BaseClient):
         return headers
 
     async def _get_ws_connection_url(self) -> str:
-        uri = await self._get_url(
+        return await self._get_url(
             path="/ws/events",
             scheme="wss",
         )
-        return uri
 
     async def _get_ws_headers(
         self,
@@ -558,7 +560,7 @@ class OpenMoticsCloud(BaseClient):
         if self.session and self._close_session:
             await self.session.close()
 
-    async def __aenter__(self) -> OpenMoticsCloud:
+    async def __aenter__(self) -> Self:
         """Async enter.
 
         Returns

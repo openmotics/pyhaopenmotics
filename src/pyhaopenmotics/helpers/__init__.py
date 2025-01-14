@@ -61,8 +61,7 @@ def merge_dicts(list_a: list[Any], dkey: str, list_b: list[Any]) -> list[Any]:
         return []
     if len(list_b) == 0:
         return list_a
-    result = [d1 | {dkey: d2} for d1, d2 in zip(list_a, list_b, strict=False)]
-    return result
+    return [d1 | {dkey: d2} for d1, d2 in zip(list_a, list_b, strict=False)]
 
 
 def get_ssl_context(verify_ssl: bool = True) -> ssl.SSLContext:

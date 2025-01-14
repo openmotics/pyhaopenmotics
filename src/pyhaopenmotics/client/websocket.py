@@ -5,12 +5,13 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
-import ssl
 from typing import TYPE_CHECKING, Union
 
 import websockets
 
 if TYPE_CHECKING:
+    import ssl
+
     from pyhaopenmotics.client.localgateway import LocalGateway
     from pyhaopenmotics.client.openmoticscloud import OpenMoticsCloud
 
@@ -51,14 +52,13 @@ class WebsocketClient:
         #     Callable[[Union[str, bytes]], Awaitable],
         close_timeout: int = 1,
         **kwargs,
-    ):
+    ) -> None:
         """Connect to websocket server and run `processor(msg)` on every new `msg`.
 
         :param processor: The callback to process messages.
         :param close_timeout: How long to wait for handshake when calling .close.
         :raises AuthError: If invalid API key is supplied.
         """
-        reconnects = 0
         self.connection_url = await self.baseclient._get_ws_connection_url()
 
         _LOGGER.debug("connect: %s", self.connection_url)

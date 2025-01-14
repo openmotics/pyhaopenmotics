@@ -255,8 +255,7 @@ class OpenMoticsThermostatUnits:
                 "name": "None",
             },
         ]
-        thermostatunits = [ThermostatUnit.from_dict(device) for device in empty_device]
-        return thermostatunits
+        return [ThermostatUnit.from_dict(device) for device in empty_device]  # type: ignore
 
         # TO BE FIXED
         #
