@@ -508,7 +508,9 @@ class OpenMoticsCloud(BaseClient):
         """
         return OpenMoticsThermostats(self)
 
-    async def get(self, path: str, headers: dict[str, Any] | None = None, **kwargs: Any) -> Any:
+    async def get(
+        self, path: str, headers: dict[str, Any] | None = None, **kwargs: Any
+    ) -> Any:
         """Make get request using the underlying aiohttp.ClientSession.
 
         Args:
@@ -529,7 +531,9 @@ class OpenMoticsCloud(BaseClient):
             **kwargs,
         )
 
-    async def post(self, path: str, headers: dict[str, Any] | None = None, **kwargs: Any) -> Any:
+    async def post(
+        self, path: str, headers: dict[str, Any] | None = None, **kwargs: Any
+    ) -> Any:
         """Make get request using the underlying aiohttp.ClientSession.
 
         Args:

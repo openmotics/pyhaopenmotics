@@ -62,10 +62,14 @@ class Location:
         _room_id: int
 
         if data is not None:
-            _room_id = data.get("room_id", 0) if "room_id" in data else data.get("room", 0)
+            _room_id = (
+                data.get("room_id", 0) if "room_id" in data else data.get("room", 0)
+            )
 
             if "floor_coordinates" in data:
-                _floor_coordinates = FloorCoordinates.from_dict(data.get("floor_coordinates", {}))
+                _floor_coordinates = FloorCoordinates.from_dict(
+                    data.get("floor_coordinates", {})
+                )
             else:
                 _floor_coordinates = None
 

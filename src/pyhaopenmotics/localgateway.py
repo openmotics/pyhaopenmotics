@@ -129,7 +129,9 @@ class LocalGateway:
             AuthenticationException: raised when token is expired.
 
         """
-        url = URL.build(scheme="https", host=self.localgw, port=self.port, path="/").join(URL(path))
+        url = URL.build(
+            scheme="https", host=self.localgw, port=self.port, path="/"
+        ).join(URL(path))
 
         if self.session is None:
             self.session = aiohttp.ClientSession()
@@ -267,7 +269,10 @@ class LocalGateway:
             headers
 
         """
-        if self.token is None or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC:
+        if (
+            self.token is None
+            or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC
+        ):
             await self.get_token()
 
         if headers is None:

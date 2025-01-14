@@ -8,7 +8,9 @@ from typing import TYPE_CHECKING, Any
 from pyhaopenmotics.cloud.models.light import Light
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.client.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
+    from pyhaopenmotics.client.openmoticscloud import (
+        OpenMoticsCloud,  # pylint: disable=R0401
+    )
 
 
 @dataclass
@@ -138,7 +140,9 @@ class OpenMoticsLights:
         """
         if light_id is None:
             # Turn off all lights
-            path = f"/base/installations/{self._omcloud.installation_id}/lights/turn_off"
+            path = (
+                f"/base/installations/{self._omcloud.installation_id}/lights/turn_off"
+            )
         else:
             # Turn off light with id
             path = (

@@ -76,7 +76,9 @@ class BaseClient(abc.ABC):
 
         self.token_refresh_method = token_refresh_method
 
-    @backoff.on_exception(backoff.expo, OpenMoticsConnectionError, max_tries=3, logger=None)
+    @backoff.on_exception(
+        backoff.expo, OpenMoticsConnectionError, max_tries=3, logger=None
+    )
     async def _request(
         self,
         path: str,

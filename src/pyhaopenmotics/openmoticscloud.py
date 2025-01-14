@@ -93,7 +93,9 @@ class OpenMoticsCloud:
         """
         self._installation_id = installation_id
 
-    @backoff.on_exception(backoff.expo, OpenMoticsConnectionError, max_tries=3, logger=None)
+    @backoff.on_exception(
+        backoff.expo, OpenMoticsConnectionError, max_tries=3, logger=None
+    )
     async def _request(
         self,
         path: str,

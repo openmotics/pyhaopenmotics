@@ -8,12 +8,13 @@ from typing import TYPE_CHECKING, Any
 from pyhaopenmotics.cloud.models.thermostat import ThermostatGroup, ThermostatUnit
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.client.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
+    from pyhaopenmotics.client.openmoticscloud import (
+        OpenMoticsCloud,  # pylint: disable=R0401
+    )
 
 
 @dataclass
 class OpenMoticsThermostats:
-
     """Object holding information of the OpenMotics thermostats.
 
     All actions related to thermostats or a specific thermostat.
@@ -73,7 +74,6 @@ class OpenMoticsThermostats:
 
 @dataclass
 class OpenMoticsThermostatGroups:
-
     """Object holding information of the OpenMotics thermostats.
 
     All actions related to thermostats or a specific thermostat.
@@ -107,7 +107,10 @@ class OpenMoticsThermostatGroups:
 
         body = await self._omcloud.get(path)
 
-        return [ThermostatGroup.from_dict(thermostatgroup) for thermostatgroup in body["data"]]
+        return [
+            ThermostatGroup.from_dict(thermostatgroup)
+            for thermostatgroup in body["data"]
+        ]
 
     async def get_by_id(
         self,
@@ -158,7 +161,6 @@ class OpenMoticsThermostatGroups:
 
 
 class OpenMoticsThermostatUnits:
-
     """Object holding information of the OpenMotics thermostats.
 
     All actions related to thermostats or a specific thermostat.
@@ -192,7 +194,9 @@ class OpenMoticsThermostatUnits:
 
         body = await self._omcloud.get(path)
 
-        return [ThermostatUnit.from_dict(thermostatunit) for thermostatunit in body["data"]]
+        return [
+            ThermostatUnit.from_dict(thermostatunit) for thermostatunit in body["data"]
+        ]
 
     async def get_by_id(
         self,
