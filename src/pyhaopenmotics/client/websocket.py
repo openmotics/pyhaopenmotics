@@ -105,7 +105,7 @@ class WebsocketClient:
     #     await self._websocket.close(code=1000, reason="Handle disconnect request")
 
     # async def consumer_handler(self, websocket, on_data: Callable):
-    #     """Used when data is transmited using the websocket."""
+    #     """Used when data is transmitted using the websocket."""
     #     async for message in websocket:
     #         try:
     #             event_data = LivisiEvent.parse_raw(message)

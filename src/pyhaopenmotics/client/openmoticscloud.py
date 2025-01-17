@@ -11,13 +11,6 @@ import aiohttp
 # from websockets import connect
 from yarl import URL
 
-if TYPE_CHECKING:
-    from collections.abc import Awaitable, Callable
-
-    from typing_extensions import Self
-
-    from pyhaopenmotics.cloud.models.installation import Installation
-
 from pyhaopenmotics.client.baseclient import BaseClient
 from pyhaopenmotics.cloud.groupactions import OpenMoticsGroupActions
 from pyhaopenmotics.cloud.inputs import OpenMoticsInputs
@@ -28,6 +21,14 @@ from pyhaopenmotics.cloud.sensors import OpenMoticsSensors
 from pyhaopenmotics.cloud.shutters import OpenMoticsShutters
 from pyhaopenmotics.cloud.thermostats import OpenMoticsThermostats
 from pyhaopenmotics.const import CLOUD_API_URL
+
+if TYPE_CHECKING:
+    from collections.abc import Awaitable, Callable
+
+    from typing_extensions import Self
+
+    from pyhaopenmotics.cloud.models.installation import Installation
+
 
 # from .helpers import base64_encode
 
@@ -146,7 +147,8 @@ class OpenMoticsCloud(BaseClient):
             headers
 
         """
-        # if self.token is None or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC:
+        # if self.token is None or \
+        # self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC:
 
         if headers is None:
             headers = {}

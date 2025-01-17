@@ -13,12 +13,6 @@ import backoff
 from yarl import URL
 
 from .__version__ import __version__
-
-if TYPE_CHECKING:
-    from collections.abc import Awaitable, Callable
-
-    from .cloud.models.installation import Installation
-
 from .cloud.groupactions import OpenMoticsGroupActions
 from .cloud.inputs import OpenMoticsInputs
 from .cloud.installations import OpenMoticsInstallations
@@ -29,6 +23,12 @@ from .cloud.shutters import OpenMoticsShutters
 from .cloud.thermostats import OpenMoticsThermostats
 from .const import CLOUD_API_URL
 from .errors import OpenMoticsConnectionError, OpenMoticsConnectionTimeoutError
+
+if TYPE_CHECKING:
+    from collections.abc import Awaitable, Callable
+
+    from .cloud.models.installation import Installation
+
 
 _LOGGER = logging.getLogger(__name__)
 

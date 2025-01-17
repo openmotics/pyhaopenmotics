@@ -8,12 +8,6 @@ import logging
 import socket
 from typing import TYPE_CHECKING, Any, Union
 
-if TYPE_CHECKING:
-    import ssl
-    from collections.abc import Awaitable, Callable
-
-    from typing_extensions import Self
-
 import aiohttp
 import async_timeout
 import backoff
@@ -28,6 +22,12 @@ from pyhaopenmotics.client.errors import (
     OpenMoticsConnectionSslError,
     OpenMoticsConnectionTimeoutError,
 )
+
+if TYPE_CHECKING:
+    import ssl
+    from collections.abc import Awaitable, Callable
+
+    from typing_extensions import Self
 
 _LOGGER = logging.getLogger(__name__)
 

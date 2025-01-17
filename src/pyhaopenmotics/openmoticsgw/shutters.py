@@ -88,7 +88,7 @@ class OpenMoticsShutters:
             # implemented later
             pass
 
-        return shutters
+        return shutters  # type: ignore
 
     async def get_by_id(
         self,

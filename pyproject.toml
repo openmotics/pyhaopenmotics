@@ -104,7 +104,7 @@ warn_unused_configs = true
 warn_unused_ignores = true
 
 [tool.pylint.MASTER]
-ignore = ["tests"]
+ignore = ["tests", "examples"]
 
 [tool.pylint.BASIC]
 good-names = ["_", "ex", "fp", "i", "id", "j", "k", "on", "Run", "T", "wv"]
@@ -132,8 +132,6 @@ asyncio_mode = "auto"
 
 [tool.ruff.lint]
 ignore = [
-  "ANN101",  # Self... explanatory
-  "ANN102",  # cls... just as useless
   "ANN401",  # Opinioated warning on disallowing dynamically typed expressions
   "D203",    # Conflicts with other rules
   "D213",    # Conflicts with other rules
@@ -144,6 +142,7 @@ ignore = [
   "SLOT000", # Has a bug with enums: https://github.com/astral-sh/ruff/issues/5748
 
   # Conflicts with the Ruff formatter
+  "E501",  #  Line too long
   "COM812",
   "ISC001",
 ]
@@ -164,7 +163,11 @@ runtime-evaluated-base-classes = [
 [tool.ruff.lint.mccabe]
 max-complexity = 25
 
-# [tool.ruff.lint.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
+"examples/*.py" = ["ALL"]
+"src/pyhaopenmotics/client/websocket.py" = ["ALL"]
+"src/pyhaopenmotics/client/openmoticscloud.py" = ["ERA001"] # Websockets code
+"src/pyhaopenmotics/client/localgateway.py" = ["ERA001"] # Websockets code
 # "src/pyhaopenmotics/cloud/models/*.py" = ["TCH002", "TCH003"]
 
 [build-system]

@@ -5,12 +5,8 @@ from __future__ import annotations
 import asyncio
 import logging
 import socket
-from typing import TYPE_CHECKING, Any
-
-if TYPE_CHECKING:
-    import ssl
-
 import time
+from typing import TYPE_CHECKING, Any
 
 import aiohttp
 import async_timeout
@@ -32,6 +28,10 @@ from .openmoticsgw.outputs import OpenMoticsOutputs
 from .openmoticsgw.sensors import OpenMoticsSensors
 from .openmoticsgw.shutters import OpenMoticsShutters
 from .openmoticsgw.thermostats import OpenMoticsThermostats
+
+if TYPE_CHECKING:
+    import ssl
+
 
 _LOGGER = logging.getLogger(__name__)
 
