@@ -6,7 +6,10 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
 
 from pyhaopenmotics.helpers import merge_dicts
-from pyhaopenmotics.openmoticsgw.models.thermostat import ThermostatGroup, ThermostatUnit
+from pyhaopenmotics.openmoticsgw.models.thermostat import (
+    ThermostatGroup,
+    ThermostatUnit,
+)
 
 if TYPE_CHECKING:
     from pyhaopenmotics.localgateway import LocalGateway  # pylint: disable=R0401
@@ -129,7 +132,9 @@ class OpenMoticsThermostatGroups:
             if goc["success"] is True:
                 self.thermostatgroup_configs = goc["config"]
 
-        thermostatgroup_status = await self._omcloud.exec_action("get_thermostat_group_status")
+        thermostatgroup_status = await self._omcloud.exec_action(
+            "get_thermostat_group_status"
+        )
         status = thermostatgroup_status["status"]
 
         data = merge_dicts(self.thermostatgroup_configs, "status", status)
@@ -250,8 +255,7 @@ class OpenMoticsThermostatUnits:
                 "name": "None",
             },
         ]
-        thermostatunits = [ThermostatUnit.from_dict(device) for device in empty_device]
-        return thermostatunits
+        return [ThermostatUnit.from_dict(device) for device in empty_device]  # type: ignore
 
         # TO BE FIXED
         #

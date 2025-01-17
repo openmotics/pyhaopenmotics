@@ -5,12 +5,8 @@ from __future__ import annotations
 import asyncio
 import logging
 import socket
-from typing import TYPE_CHECKING, Any
-
-if TYPE_CHECKING:
-    import ssl
-
 import time
+from typing import TYPE_CHECKING, Any
 
 import aiohttp
 import async_timeout
@@ -32,6 +28,10 @@ from .openmoticsgw.outputs import OpenMoticsOutputs
 from .openmoticsgw.sensors import OpenMoticsSensors
 from .openmoticsgw.shutters import OpenMoticsShutters
 from .openmoticsgw.thermostats import OpenMoticsThermostats
+
+if TYPE_CHECKING:
+    import ssl
+
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -129,7 +129,9 @@ class LocalGateway:
             AuthenticationException: raised when token is expired.
 
         """
-        url = URL.build(scheme="https", host=self.localgw, port=self.port, path="/").join(URL(path))
+        url = URL.build(
+            scheme="https", host=self.localgw, port=self.port, path="/"
+        ).join(URL(path))
 
         if self.session is None:
             self.session = aiohttp.ClientSession()
@@ -174,8 +176,7 @@ class LocalGateway:
             raise OpenMoticsConnectionError(msg) from exception
 
         if "application/json" in resp.headers.get("Content-Type", ""):
-            response_data = await resp.json()
-            return response_data
+            return await resp.json()
 
         return await resp.text()
 
@@ -267,7 +268,10 @@ class LocalGateway:
             headers
 
         """
-        if self.token is None or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC:
+        if (
+            self.token is None
+            or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC
+        ):
             await self.get_token()
 
         if headers is None:

@@ -8,10 +8,6 @@ import logging
 import socket
 from typing import TYPE_CHECKING, Any, Union
 
-if TYPE_CHECKING:
-    import ssl
-    from collections.abc import Awaitable, Callable
-
 import aiohttp
 import async_timeout
 import backoff
@@ -26,6 +22,12 @@ from pyhaopenmotics.client.errors import (
     OpenMoticsConnectionSslError,
     OpenMoticsConnectionTimeoutError,
 )
+
+if TYPE_CHECKING:
+    import ssl
+    from collections.abc import Awaitable, Callable
+
+    from typing_extensions import Self
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -76,7 +78,9 @@ class BaseClient(abc.ABC):
 
         self.token_refresh_method = token_refresh_method
 
-    @backoff.on_exception(backoff.expo, OpenMoticsConnectionError, max_tries=3, logger=None)
+    @backoff.on_exception(
+        backoff.expo, OpenMoticsConnectionError, max_tries=3, logger=None
+    )
     async def _request(
         self,
         path: str,
@@ -166,8 +170,7 @@ class BaseClient(abc.ABC):
             raise OpenMoticsConnectionError(msg) from exception
 
         if "application/json" in resp.headers.get("Content-Type", ""):
-            response_data = await resp.json()
-            return response_data
+            return await resp.json()
 
         return await resp.text()
 
@@ -225,7 +228,7 @@ class BaseClient(abc.ABC):
         if self.session and self._close_session:
             await self.session.close()
 
-    async def __aenter__(self) -> BaseClient:
+    async def __aenter__(self) -> Self:
         """Async enter.
 
         Returns

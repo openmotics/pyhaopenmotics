@@ -3,9 +3,8 @@
 from __future__ import annotations
 
 import logging
-import ssl
 import time
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import aiohttp
 from yarl import URL
@@ -20,6 +19,11 @@ from pyhaopenmotics.openmoticsgw.outputs import OpenMoticsOutputs
 from pyhaopenmotics.openmoticsgw.sensors import OpenMoticsSensors
 from pyhaopenmotics.openmoticsgw.shutters import OpenMoticsShutters
 from pyhaopenmotics.openmoticsgw.thermostats import OpenMoticsThermostats
+
+if TYPE_CHECKING:
+    import ssl
+
+    from typing_extensions import Self
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -130,10 +134,11 @@ class LocalGateway(BaseClient):
             url: str
 
         """
-        url = str(
-            URL.build(scheme=scheme, host=self.localgw, port=self.port, path="/").join(URL(path)),
+        return str(
+            URL.build(scheme=scheme, host=self.localgw, port=self.port, path="/").join(
+                URL(path)
+            ),
         )
-        return url
 
     # async def subscribe_webhook(self, installation_id: str) -> None:
     #     """Register a webhook with OpenMotics for live updates.
@@ -173,7 +178,10 @@ class LocalGateway(BaseClient):
             headers
 
         """
-        if self.token is None or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC:
+        if (
+            self.token is None
+            or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC
+        ):
             await self.get_token()
 
         if headers is None:
@@ -189,11 +197,10 @@ class LocalGateway(BaseClient):
         return headers
 
     async def _get_ws_connection_url(self) -> str:
-        url = await self._get_url(
+        return await self._get_url(
             path="/ws_events",
             scheme="wss",
         )
-        return url
 
     async def _get_ws_headers(
         self,
@@ -210,7 +217,10 @@ class LocalGateway(BaseClient):
             headers
 
         """
-        if self.token is None or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC:
+        if (
+            self.token is None
+            or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC
+        ):
             await self.get_token()
 
         if headers is None:
@@ -433,7 +443,7 @@ class LocalGateway(BaseClient):
         if self.session and self._close_session:
             await self.session.close()
 
-    async def __aenter__(self) -> LocalGateway:
+    async def __aenter__(self) -> Self:
         """Async enter.
 
         Returns

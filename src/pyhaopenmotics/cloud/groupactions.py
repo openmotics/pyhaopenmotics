@@ -8,7 +8,9 @@ from typing import TYPE_CHECKING, Any
 from pyhaopenmotics.cloud.models.groupaction import GroupAction
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.client.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
+    from pyhaopenmotics.client.openmoticscloud import (
+        OpenMoticsCloud,  # pylint: disable=R0401
+    )
 
 
 @dataclass
@@ -89,7 +91,10 @@ class OpenMoticsGroupActions:
             Returns a groupaction with id
 
         """
-        path = f"/base/installations/{self._omcloud.installation_id}/groupactions/{groupaction_id}"
+        path = (
+            f"/base/installations/{self._omcloud.installation_id}"
+            f"/groupactions/{groupaction_id}"
+        )
 
         body = await self._omcloud.get(path)
 

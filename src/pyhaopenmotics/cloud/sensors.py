@@ -8,7 +8,9 @@ from typing import TYPE_CHECKING
 from pyhaopenmotics.cloud.models.sensor import Sensor
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.client.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
+    from pyhaopenmotics.client.openmoticscloud import (
+        OpenMoticsCloud,  # pylint: disable=R0401
+    )
 
 
 @dataclass
@@ -71,7 +73,9 @@ class OpenMoticsSensors:
             Returns a sensor with id
 
         """
-        path = f"/base/installations/{self._omcloud.installation_id}/sensors/{sensor_id}"
+        path = (
+            f"/base/installations/{self._omcloud.installation_id}/sensors/{sensor_id}"
+        )
         body = await self._omcloud.get(path)
 
         return Sensor.from_dict(body["data"])

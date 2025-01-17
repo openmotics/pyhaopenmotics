@@ -8,7 +8,9 @@ from typing import TYPE_CHECKING
 from pyhaopenmotics.cloud.models.input import OMInput
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.client.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
+    from pyhaopenmotics.client.openmoticscloud import (
+        OpenMoticsCloud,  # pylint: disable=R0401
+    )
 
 
 @dataclass

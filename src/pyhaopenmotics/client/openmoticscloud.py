@@ -11,20 +11,24 @@ import aiohttp
 # from websockets import connect
 from yarl import URL
 
-if TYPE_CHECKING:
-    from collections.abc import Awaitable, Callable
-
 from pyhaopenmotics.client.baseclient import BaseClient
 from pyhaopenmotics.cloud.groupactions import OpenMoticsGroupActions
 from pyhaopenmotics.cloud.inputs import OpenMoticsInputs
 from pyhaopenmotics.cloud.installations import OpenMoticsInstallations
 from pyhaopenmotics.cloud.lights import OpenMoticsLights
-from pyhaopenmotics.cloud.models.installation import Installation
 from pyhaopenmotics.cloud.outputs import OpenMoticsOutputs
 from pyhaopenmotics.cloud.sensors import OpenMoticsSensors
 from pyhaopenmotics.cloud.shutters import OpenMoticsShutters
 from pyhaopenmotics.cloud.thermostats import OpenMoticsThermostats
 from pyhaopenmotics.const import CLOUD_API_URL
+
+if TYPE_CHECKING:
+    from collections.abc import Awaitable, Callable
+
+    from typing_extensions import Self
+
+    from pyhaopenmotics.cloud.models.installation import Installation
+
 
 # from .helpers import base64_encode
 
@@ -143,7 +147,8 @@ class OpenMoticsCloud(BaseClient):
             headers
 
         """
-        # if self.token is None or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC:
+        # if self.token is None or \
+        # self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC:
 
         if headers is None:
             headers = {}
@@ -168,11 +173,10 @@ class OpenMoticsCloud(BaseClient):
         return headers
 
     async def _get_ws_connection_url(self) -> str:
-        uri = await self._get_url(
+        return await self._get_url(
             path="/ws/events",
             scheme="wss",
         )
-        return uri
 
     async def _get_ws_headers(
         self,
@@ -508,7 +512,9 @@ class OpenMoticsCloud(BaseClient):
         """
         return OpenMoticsThermostats(self)
 
-    async def get(self, path: str, headers: dict[str, Any] | None = None, **kwargs: Any) -> Any:
+    async def get(
+        self, path: str, headers: dict[str, Any] | None = None, **kwargs: Any
+    ) -> Any:
         """Make get request using the underlying aiohttp.ClientSession.
 
         Args:
@@ -529,7 +535,9 @@ class OpenMoticsCloud(BaseClient):
             **kwargs,
         )
 
-    async def post(self, path: str, headers: dict[str, Any] | None = None, **kwargs: Any) -> Any:
+    async def post(
+        self, path: str, headers: dict[str, Any] | None = None, **kwargs: Any
+    ) -> Any:
         """Make get request using the underlying aiohttp.ClientSession.
 
         Args:
@@ -554,7 +562,7 @@ class OpenMoticsCloud(BaseClient):
         if self.session and self._close_session:
             await self.session.close()
 
-    async def __aenter__(self) -> OpenMoticsCloud:
+    async def __aenter__(self) -> Self:
         """Async enter.
 
         Returns

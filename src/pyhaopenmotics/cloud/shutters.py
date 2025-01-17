@@ -9,7 +9,9 @@ from typing import TYPE_CHECKING, Any
 from .models.shutter import Shutter
 
 if TYPE_CHECKING:
-    from pyhaopenmotics.client.openmoticscloud import OpenMoticsCloud  # pylint: disable=R0401
+    from pyhaopenmotics.client.openmoticscloud import (
+        OpenMoticsCloud,  # pylint: disable=R0401
+    )
 
 
 @dataclass
@@ -76,7 +78,9 @@ class OpenMoticsShutters:
             Returns a shutter with id
 
         """
-        path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}"
+        path = (
+            f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}"
+        )
         body = await self._omcloud.get(path)
 
         return Shutter.from_dict(body["data"])
