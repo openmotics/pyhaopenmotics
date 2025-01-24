@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import asyncio
 import logging
 import socket
 import time
@@ -92,7 +91,8 @@ class LocalGateway:
             _LOGGER.debug("LocalGateway setting self.auth")
             self.auth = {"username": self.username, "password": self.password}
 
-    # @backoff.on_exception(backoff.expo, OpenMoticsConnectionError, max_tries=3, logger=None)
+    # @backoff.on_exception(
+    #   backoff.expo, OpenMoticsConnectionError, max_tries=3, logger=None)
     async def _request(
         self,
         path: str,
@@ -129,9 +129,7 @@ class LocalGateway:
             AuthenticationException: raised when token is expired.
 
         """
-        url = URL.build(
-            scheme="https", host=self.localgw, port=self.port, path="/"
-        ).join(URL(path))
+        url = URL.build(scheme="https", host=self.localgw, port=self.port, path="/").join(URL(path))
 
         if self.session is None:
             self.session = aiohttp.ClientSession()
@@ -158,10 +156,10 @@ class LocalGateway:
 
             resp.raise_for_status()
 
-        except asyncio.TimeoutError as exception:
+        except TimeoutError as exception:
             msg = "Timeout occurred while connecting to OpenMotics API."
             raise OpenMoticsConnectionTimeoutError(msg) from exception
-        except aiohttp.ClientConnectorSSLError as exception:  # pyright: ignore
+        except aiohttp.ClientConnectorSSLError as exception:
             # Expired certificate / Date ISSUE
             # pylint: disable=bad-exception-context
             msg = "Error with SSL certificate."
@@ -268,10 +266,7 @@ class LocalGateway:
             headers
 
         """
-        if (
-            self.token is None
-            or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC
-        ):
+        if self.token is None or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC:
             await self.get_token()
 
         if headers is None:

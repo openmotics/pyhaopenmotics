@@ -107,10 +107,7 @@ class OpenMoticsThermostatGroups:
 
         body = await self._omcloud.get(path)
 
-        return [
-            ThermostatGroup.from_dict(thermostatgroup)
-            for thermostatgroup in body["data"]
-        ]
+        return [ThermostatGroup.from_dict(thermostatgroup) for thermostatgroup in body["data"]]
 
     async def get_by_id(
         self,
@@ -127,10 +124,7 @@ class OpenMoticsThermostatGroups:
             Returns a thermostatgroup_id with id
 
         """
-        path = (
-            f"/base/installations/{self._omcloud.installation_id}"
-            f"/thermostats/groups/{thermostatgroup_id}"
-        )
+        path = f"/base/installations/{self._omcloud.installation_id}/thermostats/groups/{thermostatgroup_id}"
         body = await self._omcloud.get(path)
 
         return ThermostatGroup.from_dict(body["data"])
@@ -152,10 +146,7 @@ class OpenMoticsThermostatGroups:
             Returns a output with id
 
         """
-        path = (
-            f"/base/installations/{self._omcloud.installation_id}"
-            f"/thermostats/groups/{thermostatgroup_id}/mode"
-        )
+        path = f"/base/installations/{self._omcloud.installation_id}/thermostats/groups/{thermostatgroup_id}/mode"
         payload = {"mode": mode}
         return await self._omcloud.post(path, json=payload)
 
@@ -194,9 +185,7 @@ class OpenMoticsThermostatUnits:
 
         body = await self._omcloud.get(path)
 
-        return [
-            ThermostatUnit.from_dict(thermostatunit) for thermostatunit in body["data"]
-        ]
+        return [ThermostatUnit.from_dict(thermostatunit) for thermostatunit in body["data"]]
 
     async def get_by_id(
         self,
@@ -213,10 +202,7 @@ class OpenMoticsThermostatUnits:
             Returns a thermostatunit with id
 
         """
-        path = (
-            f"/base/installations/{self._omcloud.installation_id}"
-            f"/thermostats/units/{thermostatunit_id}"
-        )
+        path = f"/base/installations/{self._omcloud.installation_id}/thermostats/units/{thermostatunit_id}"
         body = await self._omcloud.get(path)
 
         return ThermostatUnit.from_dict(body["data"])
@@ -238,10 +224,7 @@ class OpenMoticsThermostatUnits:
             Returns a thermostatunit with id
 
         """
-        path = (
-            f"/base/installations/{self._omcloud.installation_id}"
-            f"/thermostats/units/{thermostatunit_id}/state"
-        )
+        path = f"/base/installations/{self._omcloud.installation_id}/thermostats/units/{thermostatunit_id}/state"
         payload = {"state": state}
         return await self._omcloud.post(path, json=payload)
 
@@ -262,10 +245,7 @@ class OpenMoticsThermostatUnits:
             Returns a thermostatunit with id
 
         """
-        path = (
-            f"/base/installations/{self._omcloud.installation_id}"
-            f"/thermostats/units/{thermostatunit_id}/setpoint"
-        )
+        path = f"/base/installations/{self._omcloud.installation_id}/thermostats/units/{thermostatunit_id}/setpoint"
         payload = {"temperature": temperature}
         return await self._omcloud.post(path, json=payload)
 
@@ -286,10 +266,7 @@ class OpenMoticsThermostatUnits:
             Returns a thermostatunit with id
 
         """
-        path = (
-            f"/base/installations/{self._omcloud.installation_id}"
-            f"/thermostats/units/{thermostatunit_id}/preset"
-        )
+        path = f"/base/installations/{self._omcloud.installation_id}/thermostats/units/{thermostatunit_id}/preset"
         payload = {"preset": preset}
         return await self._omcloud.post(path, json=payload)
 
@@ -320,10 +297,7 @@ class OpenMoticsThermostatUnits:
             Returns a thermostatunit with id
 
         """
-        path = (
-            f"/base/installations/{self._omcloud.installation_id}"
-            f"/thermostats/units/{thermostatunit_id}/preset/config"
-        )
+        path = f"/base/installations/{self._omcloud.installation_id}/thermostats/units/{thermostatunit_id}/preset/config"
         payload = {
             "heating": {
                 "AWAY": heating_away_temp,

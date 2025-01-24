@@ -75,7 +75,7 @@ class OpenMoticsEnergySensors:
         total_idx = 0
         for module in self.sensor_configs:
             module_id = str(module.get("id"))
-            if module_id is None:  # pylint: disable=consider-using-assignment-expr
+            if module_id is None:
                 continue
             for idx, status in enumerate(sensors_status[module_id]):
                 data.append(
@@ -92,7 +92,7 @@ class OpenMoticsEnergySensors:
             # implemented later
             pass
 
-        return [EnergySensor.from_dict(device) for device in data]
+        return [EnergySensor.from_dict(device) for device in data]  # pyright: ignore[reportReturnType]
 
     async def get_by_id(
         self,

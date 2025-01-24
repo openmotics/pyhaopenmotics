@@ -88,7 +88,7 @@ class OpenMoticsShutters:
             # implemented later
             pass
 
-        return shutters  # type: ignore
+        return shutters  # pyright: ignore[reportReturnType]
 
     async def get_by_id(
         self,

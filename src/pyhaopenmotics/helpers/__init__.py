@@ -22,12 +22,12 @@ def get_key_for_word(dictionary: dict[str, Any], word: str) -> Any:
         for key, value in dictionary.items():
             if value == word:
                 return key
-        return None
 
     except KeyError as err:
         msg = f"Key Error: {err}"
         logging.exception(msg)
-        return None
+
+    return None
 
 
 def merge_dicts(list_a: list[Any], dkey: str, list_b: list[Any]) -> list[Any]:
@@ -52,9 +52,11 @@ def merge_dicts(list_a: list[Any], dkey: str, list_b: list[Any]) -> list[Any]:
     The dictionaries in list_b are merged under the key 'dkey' into the
     dictionaries of list_a
     result = [{'name': 'Vijver', 'room': 255, 'module_type': 'O', 'id': 0,
-                'status': {'status': 0, 'dimmer': 100, 'ctimer': 0, 'id': 0, 'locked': False}},
+                'status': {'status': 0, 'dimmer': 100, 'ctimer': 0, 'id': 0,
+                locked': False}},
               {'name': 'Boom', 'room': 255, 'module_type': 'O', 'id': 1,
-              status': {'status': 0, 'dimmer': 100, 'ctimer': 0, 'id': 1, 'locked': False}}]
+              status': {'status': 0, 'dimmer': 100, 'ctimer': 0, 'id': 1,
+              'locked': False}}]
 
     """
     if len(list_a) == 0:
@@ -64,7 +66,7 @@ def merge_dicts(list_a: list[Any], dkey: str, list_b: list[Any]) -> list[Any]:
     return [d1 | {dkey: d2} for d1, d2 in zip(list_a, list_b, strict=False)]
 
 
-def get_ssl_context(verify_ssl: bool = True) -> ssl.SSLContext:
+def get_ssl_context(*, verify_ssl: bool = True) -> ssl.SSLContext:
     """Get ssl_context for local gateway.
 
     Args:

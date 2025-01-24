@@ -82,7 +82,7 @@ class OpenMoticsInputs:
             # implemented later
             pass
 
-        return [OMInput.from_dict(device) for device in data]
+        return [OMInput.from_dict(device) for device in data]  # pyright: ignore[reportReturnType]
 
     async def get_by_id(
         self,

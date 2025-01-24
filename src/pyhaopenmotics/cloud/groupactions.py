@@ -91,10 +91,7 @@ class OpenMoticsGroupActions:
             Returns a groupaction with id
 
         """
-        path = (
-            f"/base/installations/{self._omcloud.installation_id}"
-            f"/groupactions/{groupaction_id}"
-        )
+        path = f"/base/installations/{self._omcloud.installation_id}/groupactions/{groupaction_id}"
 
         body = await self._omcloud.get(path)
 
@@ -116,10 +113,7 @@ class OpenMoticsGroupActions:
 
         """
         # E501 line too long
-        path = (
-            f"/base/installations/{self._omcloud.installation_id}"
-            f"/groupactions/{groupaction_id}/trigger"
-        )
+        path = f"/base/installations/{self._omcloud.installation_id}/groupactions/{groupaction_id}/trigger"
         return await self._omcloud.post(path)
 
     async def by_usage(

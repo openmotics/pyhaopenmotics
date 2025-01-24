@@ -88,7 +88,7 @@ class OpenMoticsSensors:
             # implemented later
             pass
 
-        return sensors  # type: ignore
+        return sensors  # pyright: ignore[reportReturnType]
 
     async def get_by_id(
         self,

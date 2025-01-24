@@ -73,9 +73,7 @@ class OpenMoticsOutputs:
             Returns a output with id
 
         """
-        path = (
-            f"/base/installations/{self._omcloud.installation_id}/outputs/{output_id}"
-        )
+        path = f"/base/installations/{self._omcloud.installation_id}/outputs/{output_id}"
         body = await self._omcloud.get(path)
 
         return Output.from_dict(body["data"])
@@ -95,10 +93,7 @@ class OpenMoticsOutputs:
             Returns a output with id
 
         """
-        path = (
-            f"/base/installations/{self._omcloud.installation_id}/outputs/"
-            f"{output_id}/toggle"
-        )
+        path = f"/base/installations/{self._omcloud.installation_id}/outputs/{output_id}/toggle"
         return await self._omcloud.post(path)
 
     async def turn_on(
@@ -126,10 +121,7 @@ class OpenMoticsOutputs:
             value = max(0, value)
             payload = {"value": value}
 
-        path = (
-            f"/base/installations/{self._omcloud.installation_id}/outputs/"
-            f"{output_id}/turn_on"
-        )
+        path = f"/base/installations/{self._omcloud.installation_id}/outputs/{output_id}/turn_on"
         return await self._omcloud.post(path, json=payload)
 
     async def turn_off(
@@ -149,13 +141,8 @@ class OpenMoticsOutputs:
         """
         if output_id is None:
             # Turn off all lights
-            path = (
-                f"/base/installations/{self._omcloud.installation_id}/outputs/turn_off"
-            )
+            path = f"/base/installations/{self._omcloud.installation_id}/outputs/turn_off"
         else:
             # Turn off light with id
-            path = (
-                f"/base/installations/{self._omcloud.installation_id}"
-                f"/outputs/{output_id}/turn_off"
-            )
+            path = f"/base/installations/{self._omcloud.installation_id}/outputs/{output_id}/turn_off"
         return await self._omcloud.post(path)

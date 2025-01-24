@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import base64
 import logging
 import time
 from typing import TYPE_CHECKING, Any
@@ -22,8 +23,7 @@ from pyhaopenmotics.openmoticsgw.thermostats import OpenMoticsThermostats
 
 if TYPE_CHECKING:
     import ssl
-
-    from typing_extensions import Self
+    from typing import Self
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -135,9 +135,7 @@ class LocalGateway(BaseClient):
 
         """
         return str(
-            URL.build(scheme=scheme, host=self.localgw, port=self.port, path="/").join(
-                URL(path)
-            ),
+            URL.build(scheme=scheme, host=self.localgw, port=self.port, path="/").join(URL(path)),
         )
 
     # async def subscribe_webhook(self, installation_id: str) -> None:
@@ -178,10 +176,7 @@ class LocalGateway(BaseClient):
             headers
 
         """
-        if (
-            self.token is None
-            or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC
-        ):
+        if self.token is None or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC:
             await self.get_token()
 
         if headers is None:
@@ -217,16 +212,13 @@ class LocalGateway(BaseClient):
             headers
 
         """
-        if (
-            self.token is None
-            or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC
-        ):
+        if self.token is None or self.token_expires_at < time.time() + CLOCK_OUT_OF_SYNC_MAX_SEC:
             await self.get_token()
 
         if headers is None:
             headers = {}
 
-        base64_message = base64_encode(self.token)
+        base64_message = str(base64.b64encode(self.token))
 
         headers.update(
             {
@@ -243,7 +235,9 @@ class LocalGateway(BaseClient):
                 # # "Sec-Fetch-Dest": "websocket",
                 # "Sec-Fetch-Mode": "websocket",
                 # "Sec-Fetch-site": "same-site",
-                # "user-agent": "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
+                # "user-agent": "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+                #    AppleWebKit/537.36 (KHTML, like Gecko)
+                #    Chrome/109.0.0.0 Safari/537.36",
             },
         )
         return headers

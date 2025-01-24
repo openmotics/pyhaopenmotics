@@ -45,7 +45,7 @@ class WebsocketClient:
             self.ssl_context = get_ssl_context(verify_ssl=self.verify_ssl)
 
     # https://websockets.readthedocs.io/en/stable/reference/client.html#opening-a-connection
-    async def connect(
+    async def connect(  # type: ignore[no-untyped-def]
         self,
         # processor:
         #     # Callable[[List[WebSocketMessage]], Awaitable],
@@ -87,7 +87,7 @@ class WebsocketClient:
                 # _LOGGER.info(json.loads(await websocket.recv()))
                 # _LOGGER.info("websocket client connected. looping...")
 
-                while self.loop:
+                while self.loop:  # type: ignore[attr-defined]
                     data = json.loads(await websocket.recv())
                     if "event" not in data:
                         continue
@@ -99,6 +99,8 @@ class WebsocketClient:
 
         except websockets.WebSocketException:
             pass
+
+        return None
 
     # async def disconnect(self) -> None:
     #     """Close the websocket."""

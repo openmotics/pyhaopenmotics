@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import asyncio
 import logging
 import socket
 from typing import TYPE_CHECKING, Any
@@ -93,9 +92,7 @@ class OpenMoticsCloud:
         """
         self._installation_id = installation_id
 
-    @backoff.on_exception(
-        backoff.expo, OpenMoticsConnectionError, max_tries=3, logger=None
-    )
+    @backoff.on_exception(backoff.expo, OpenMoticsConnectionError, max_tries=3, logger=None)
     async def _request(
         self,
         path: str,
@@ -168,7 +165,7 @@ class OpenMoticsCloud:
 
             resp.raise_for_status()
 
-        except asyncio.TimeoutError as exception:
+        except TimeoutError as exception:
             msg = "Timeout occurred while connecting to OpenMotics API"
             raise OpenMoticsConnectionTimeoutError(msg) from exception
         except (

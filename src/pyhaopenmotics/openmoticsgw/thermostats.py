@@ -36,7 +36,7 @@ class OpenMoticsThermostats:
         self.groups = OpenMoticsThermostatGroups(self._omcloud)
         self.units = OpenMoticsThermostatUnits(self._omcloud)
 
-    async def set_mode(  # pylint:disable=W9008
+    async def set_mode(
         self,
         mode: str,
     ) -> Any:
@@ -54,7 +54,7 @@ class OpenMoticsThermostats:
         if mode:
             pass
 
-    async def set_state(  # pylint:disable=W9008
+    async def set_state(
         self,
         state: str,
     ) -> Any:
@@ -132,9 +132,7 @@ class OpenMoticsThermostatGroups:
             if goc["success"] is True:
                 self.thermostatgroup_configs = goc["config"]
 
-        thermostatgroup_status = await self._omcloud.exec_action(
-            "get_thermostat_group_status"
-        )
+        thermostatgroup_status = await self._omcloud.exec_action("get_thermostat_group_status")
         status = thermostatgroup_status["status"]
 
         data = merge_dicts(self.thermostatgroup_configs, "status", status)
@@ -145,7 +143,7 @@ class OpenMoticsThermostatGroups:
             # implemented later
             pass
 
-        return thermostatgroups  # type: ignore
+        return thermostatgroups  # pyright: ignore[reportReturnType]
 
     async def get_by_id(
         self,
@@ -167,7 +165,7 @@ class OpenMoticsThermostatGroups:
                 return thermostatgroup
         return None
 
-    async def set_mode(  # pylint:disable=W9008
+    async def set_mode(
         self,
         thermostatgroup_id: int,
         mode: str,
@@ -255,7 +253,7 @@ class OpenMoticsThermostatUnits:
                 "name": "None",
             },
         ]
-        return [ThermostatUnit.from_dict(device) for device in empty_device]  # type: ignore
+        return [ThermostatUnit.from_dict(device) for device in empty_device]  # pyright: ignore[reportReturnType]
 
         # TO BE FIXED
         #
@@ -276,7 +274,7 @@ class OpenMoticsThermostatUnits:
             # implemented later
             pass
 
-        return thermostatunits  # type: ignore
+        return thermostatunits
 
     async def get_by_id(
         self,
@@ -298,7 +296,7 @@ class OpenMoticsThermostatUnits:
                 return thermostatunit
         return None
 
-    async def set_state(  # pylint:disable=W9008
+    async def set_state(
         self,
         thermostatunit_id: int,
         state: str,
@@ -318,7 +316,7 @@ class OpenMoticsThermostatUnits:
         if thermostatunit_id or state:
             pass
 
-    async def set_temperature(  # pylint:disable=W9008
+    async def set_temperature(
         self,
         thermostatunit_id: int,
         temperature: float,
@@ -338,7 +336,7 @@ class OpenMoticsThermostatUnits:
         if thermostatunit_id or temperature:
             pass
 
-    async def set_preset(  # pylint:disable=W9008
+    async def set_preset(
         self,
         thermostatunit_id: int,
         preset: str,
@@ -358,7 +356,7 @@ class OpenMoticsThermostatUnits:
         if thermostatunit_id or preset:
             pass
 
-    async def set_preset_config(  # pylint: disable=too-many-arguments,W9008
+    async def set_preset_config(
         self,
         thermostatunit_id: int,
         heating_away_temp: float,
