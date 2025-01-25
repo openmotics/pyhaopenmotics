@@ -140,13 +140,8 @@ class OpenMoticsLights:
         """
         if light_id is None:
             # Turn off all lights
-            path = (
-                f"/base/installations/{self._omcloud.installation_id}/lights/turn_off"
-            )
+            path = f"/base/installations/{self._omcloud.installation_id}/lights/turn_off"
         else:
             # Turn off light with id
-            path = (
-                f"/base/installations/{self._omcloud.installation_id}"
-                f"/lights/{light_id}/turn_off"
-            )
+            path = f"/base/installations/{self._omcloud.installation_id}/lights/{light_id}/turn_off"
         return await self._omcloud.post(path)

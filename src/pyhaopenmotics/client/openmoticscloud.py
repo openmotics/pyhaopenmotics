@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import base64
 import logging
 from typing import TYPE_CHECKING, Any
 
@@ -24,8 +25,7 @@ from pyhaopenmotics.const import CLOUD_API_URL
 
 if TYPE_CHECKING:
     from collections.abc import Awaitable, Callable
-
-    from typing_extensions import Self
+    from typing import Self
 
     from pyhaopenmotics.cloud.models.installation import Installation
 
@@ -46,7 +46,7 @@ class OpenMoticsCloud(BaseClient):
         *,
         request_timeout: int = 8,
         session: aiohttp.client.ClientSession | None = None,
-        token_refresh_method: Callable[[], Awaitable[str]] | None = None,
+        token_refresh_method: (Callable[[], Awaitable[str]] | None) = None,  # pyright: ignore [unusedMethodArgument]
         installation_id: int | None = None,
         base_url: str = CLOUD_API_URL,
     ) -> None:
@@ -198,12 +198,13 @@ class OpenMoticsCloud(BaseClient):
         if headers is None:
             headers = {}
 
-        b64token = base64_encode(self.token)
+        b64token = str(base64.b64encode(self.token))
 
         headers.update(
             {
                 # "User-Agent": self.user_agent,
-                # "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
+                # "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
+                #   (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
                 # "Accept-Language": "en-US,en;q=0.5",
                 # "Accept-Encoding": "gzip, defalte, br",
                 "Sec-WebSocket-Protocol": f"authorization.bearer.{b64token}",
@@ -512,9 +513,7 @@ class OpenMoticsCloud(BaseClient):
         """
         return OpenMoticsThermostats(self)
 
-    async def get(
-        self, path: str, headers: dict[str, Any] | None = None, **kwargs: Any
-    ) -> Any:
+    async def get(self, path: str, headers: dict[str, Any] | None = None, **kwargs: Any) -> Any:
         """Make get request using the underlying aiohttp.ClientSession.
 
         Args:
@@ -535,9 +534,7 @@ class OpenMoticsCloud(BaseClient):
             **kwargs,
         )
 
-    async def post(
-        self, path: str, headers: dict[str, Any] | None = None, **kwargs: Any
-    ) -> Any:
+    async def post(self, path: str, headers: dict[str, Any] | None = None, **kwargs: Any) -> Any:
         """Make get request using the underlying aiohttp.ClientSession.
 
         Args:

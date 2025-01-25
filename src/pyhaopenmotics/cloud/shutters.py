@@ -78,9 +78,7 @@ class OpenMoticsShutters:
             Returns a shutter with id
 
         """
-        path = (
-            f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}"
-        )
+        path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}"
         body = await self._omcloud.get(path)
 
         return Shutter.from_dict(body["data"])
@@ -161,10 +159,7 @@ class OpenMoticsShutters:
 
         """
         # E501 line too long
-        path = (
-            f"/base/installations/{self._omcloud.installation_id}"
-            f"/shutters/{shutter_id}/change_position"
-        )
+        path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}/change_position"
         payload = json.dumps(
             {
                 "position": position,
@@ -194,10 +189,7 @@ class OpenMoticsShutters:
 
         """
         # E501 line too long
-        path = (
-            f"/base/installations/{self._omcloud.installation_id}"
-            f"/shutters/{shutter_id}/change_relative_position"
-        )
+        path = f"/base/installations/{self._omcloud.installation_id}/shutters/{shutter_id}/change_relative_position"
         payload = json.dumps(
             {
                 "offset": offset,

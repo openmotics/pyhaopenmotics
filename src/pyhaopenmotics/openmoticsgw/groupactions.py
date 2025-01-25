@@ -54,7 +54,7 @@ class OpenMoticsGroupActions:
             # implemented later
             pass
 
-        return [GroupAction.from_dict(device) for device in data["config"]]
+        return [GroupAction.from_dict(device) for device in data["config"]]  # pyright: ignore[reportReturnType]
 
     async def get_by_id(
         self,
@@ -112,11 +112,7 @@ class OpenMoticsGroupActions:
             Returns a groupaction with id
 
         """
-        return [
-            groupaction
-            for groupaction in await self.get_all()
-            if groupaction.name == groupaction_usage
-        ]
+        return [groupaction for groupaction in await self.get_all() if groupaction.name == groupaction_usage]
 
     async def scenes(self) -> Any:
         """Return all scenes object.

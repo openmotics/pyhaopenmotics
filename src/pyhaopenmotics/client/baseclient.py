@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-import abc
-import asyncio
+# import abc
 import logging
 import socket
-from typing import TYPE_CHECKING, Any, Union
+from typing import TYPE_CHECKING, Any
 
 import aiohttp
 import async_timeout
@@ -26,15 +25,14 @@ from pyhaopenmotics.client.errors import (
 if TYPE_CHECKING:
     import ssl
     from collections.abc import Awaitable, Callable
-
-    from typing_extensions import Self
+    from typing import Self
 
 _LOGGER = logging.getLogger(__name__)
 
-StrOrURL = Union[str, URL]
+StrOrURL = str | URL
 
 
-class BaseClient(abc.ABC):
+class BaseClient:
     """Docstring."""
 
     _wsclient: aiohttp.ClientWebSocketResponse | None = None
@@ -78,9 +76,7 @@ class BaseClient(abc.ABC):
 
         self.token_refresh_method = token_refresh_method
 
-    @backoff.on_exception(
-        backoff.expo, OpenMoticsConnectionError, max_tries=3, logger=None
-    )
+    @backoff.on_exception(backoff.expo, OpenMoticsConnectionError, max_tries=3, logger=None)
     async def _request(
         self,
         path: str,
@@ -137,7 +133,7 @@ class BaseClient(abc.ABC):
                     method,
                     url,
                     data=data,
-                    ssl=self.ssl_context,
+                    ssl=self.ssl_context,  # pyright: ignore [reportArgumentType]
                     headers=headers,
                     **kwargs,
                 )
@@ -152,11 +148,10 @@ class BaseClient(abc.ABC):
 
             resp.raise_for_status()
 
-        except asyncio.TimeoutError as exception:
+        except TimeoutError as exception:
             msg = "Timeout occurred while connecting to OpenMotics API."
             raise OpenMoticsConnectionTimeoutError(msg) from exception
-        except aiohttp.ClientConnectorSSLError as exception:  # pyright: ignore
-            # Expired certificate / Date ISSUE
+        except aiohttp.ClientConnectorSSLError as exception:
             # pylint: disable=bad-exception-context
             msg = "Error with SSL certificate."
             raise OpenMoticsConnectionSslError(msg) from exception
