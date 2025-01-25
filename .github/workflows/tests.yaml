@@ -28,7 +28,7 @@ jobs:
       - name: 🏗 Install dependencies
         run: uv sync --extra cli --frozen --dev
       - name: 🚀 Run pytest
-        run: uv run pytest --cov peblar tests
+        run: uv run pytest --cov openmotics tests
       - name: ⬆️ Upload coverage artifact
         uses: actions/upload-artifact@v4.6.0
         with:
