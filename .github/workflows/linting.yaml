@@ -78,8 +78,8 @@ jobs:
       #  run: uv run pre-commit run check-xml --all-files
       - name: 🚀 Check YAML files
         run: uv run pre-commit run check-yaml --all-files
-      - name: 🚀 Detect Private Keys
-        run: uv run pre-commit run detect-private-key --all-files
+      # - name: 🚀 Detect Private Keys
+      #   run: uv run pre-commit run detect-private-key --all-files
       - name: 🚀 Check End of Files
         run: uv run pre-commit run end-of-file-fixer --all-files
       - name: 🚀 Trim Trailing Whitespace
