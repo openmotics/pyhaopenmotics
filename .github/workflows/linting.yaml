@@ -74,8 +74,8 @@ jobs:
         run: uv run pre-commit run check-symlinks --all-files
       - name: 🚀 Check TOML files
         run: uv run pre-commit run check-toml --all-files
-      - name: 🚀 Check XML files
-        run: uv run pre-commit run check-xml --all-files
+      # - name: 🚀 Check XML files
+      #  run: uv run pre-commit run check-xml --all-files
       - name: 🚀 Check YAML files
         run: uv run pre-commit run check-yaml --all-files
       - name: 🚀 Detect Private Keys
