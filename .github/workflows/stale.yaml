@@ -11,13 +11,16 @@ jobs:
   stale:
     name: 🧹 Clean up stale issues and PRs
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
     steps:
       - name: 🚀 Run stale
-        uses: actions/stale@v9
+        uses: actions/stale@v9.1.0
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          days-before-stale: 30
-          days-before-close: 7
+          days-before-stale: 60
+          days-before-close: 30
           remove-stale-when-updated: true
           stale-issue-label: "stale"
           exempt-issue-labels: "no-stale,help-wanted"
@@ -36,5 +39,5 @@ jobs:
           stale-pr-message: >
             There hasn't been any activity on this pull request recently. This
             pull request has been automatically marked as stale because of that
-            and will be closed if no further activity occurs within 7 days.
+            and will be closed if no further activity occurs within 30 days.
             Thank you for your contributions.
