@@ -95,7 +95,7 @@ ENV/
 dmypy.json
 
 # Visual Studio Code
-.vscode
+# .vscode
 
 # IntelliJ Idea family of suites
 .idea
