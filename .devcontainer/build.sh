@@ -24,8 +24,8 @@ npm install
 # Install Python dependencies
 python3 -m  pip install --upgrade pip
 
-/usr/local/bin/uv sync --extra cli
-/usr/local/bin/uv run pre-commit install
+uv sync --extra cli
+uv run pre-commit install
 
 # required for some local testing
 # python3 -m pip install python-dotenv
