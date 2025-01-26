@@ -24,9 +24,9 @@ npm install
 # Install Python dependencies
 python3 -m  pip install --upgrade pip
 
-/usr/local/bin/uv install
+/usr/local/bin/uv sync --extra cli
 /usr/local/bin/uv run pre-commit install
 
 # required for some local testing
-python3 -m pip install python-dotenv
-python3 -m pip install httpx authlib
+# python3 -m pip install python-dotenv
+# python3 -m pip install httpx authlib
