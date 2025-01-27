@@ -19,9 +19,7 @@
   "python.linting.mypyEnabled": true,
   "python.linting.pylintEnabled": true,
   "python.testing.cwd": "${workspaceFolder}",
-  "python.testing.pytestArgs": [
-    "--cov-report=xml"
-  ],
+  "python.testing.pytestArgs": ["--cov-report=xml"],
   "ruff.nativeServer": "on",
   "python.testing.pytestEnabled": true,
   "ruff.configuration": "${workspaceFolder}/pyproject.toml",
@@ -32,7 +30,5 @@
   "editor.formatOnSave": true,
   "editor.formatOnType": true,
   "files.trimTrailingWhitespace": true,
-  "editor.rulers": [
-    88
-  ]
+  "editor.rulers": [88]
 }
