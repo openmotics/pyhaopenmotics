@@ -127,3 +127,6 @@ crates/ruff/resources/test/cpython
 docs/
 mkdocs.yml
 .overrides
+
+# uv
+uv.lock
